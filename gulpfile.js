@@ -16,7 +16,7 @@ var customOpts = {
   extensions: ['.jsx']
 }
 
-var watchOpts = assign({}, watchify.args, customOpts, {plugin: [liveReactLoad]})
+var watchOpts = assign({}, watchify.args, customOpts)
 var opts = assign({}, customOpts)
 
 gulp.task('babel', babel)
@@ -24,6 +24,7 @@ gulp.task('watch', watch)
 
 function watch () {
   var b = watchify(browserify(watchOpts))
+  b.plugin(liveReactLoad, {})
   b.transform(babelify.configure({stage: 0}))
   b.on('update', bundle.bind(null, b))
   b.on('log', gutil.log)
