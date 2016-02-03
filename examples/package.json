@@ -44,6 +44,6 @@
     "react-tap-event-plugin": "^0.2.1",
     "redux": "^3.0.2",
     "redux-thunk": "^1.0.0",
-    "safe-framework": "0.0.3"
+    "safe-framework": "0.0.4"
   }
 }
