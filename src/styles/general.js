@@ -1,4 +1,4 @@
-import {medium} from './mediaQueries'
+import {medium} from './media-queries'
 
 export const wrapper = {
   width: '100%',

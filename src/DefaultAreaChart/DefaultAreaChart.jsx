@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {Tabs, Tab} from 'material-ui'
-import AreaChart from '../AreaChart/index'
-import DataTable from '../DataTable/index'
+import AreaChart from '../AreaChart'
+import DataTable from '../DataTable'
 
 export class DefaultAreaChart extends Component {
   static propTypes = {

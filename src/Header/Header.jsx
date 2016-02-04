@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import Radium from 'radium'
-import Nav from './Nav'
+import Nav from '../Nav'
 import {fadedBody} from '../styles/colors'
 
 let style = {

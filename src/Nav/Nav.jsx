@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import Radium from 'radium'
 // import NavItem from '../NavItem'
 import {accentColor, fadedBody} from '../styles/colors'
-import {large} from '../styles/mediaQueries'
+import {large} from '../styles/media-queries'
 
 let style = {
   button: {

@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {Tabs, Tab} from 'material-ui'
-import ColumnChart from '../ColumnChart/index'
-import DataTable from '../DataTable/index'
+import ColumnChart from '../ColumnChart'
+import DataTable from '../DataTable'
 
 export class DefaultColumnChart extends Component {
   static propTypes = {
