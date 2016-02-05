@@ -57,13 +57,17 @@ export class AreaChart extends Component {
     title: PropTypes.string.isRequired
   };
 
+  static defaultProps = {
+    drilldown: {}
+  };
+
   render () {
     const {drilldown, series, title} = this.props
     const config = {
       ...baseConfig,
       drilldown,
       series,
-      title: {title}
+      title: {text: title}
     }
 
     console.log(config)
