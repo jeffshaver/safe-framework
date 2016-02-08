@@ -1,4 +1,5 @@
 var express = require('express')
+var config = require('./config.js')
 var app = express()
 
 app.use(express.static('dist'))
@@ -10,6 +11,6 @@ app.get('/*', function (req, res) {
   res.sendFile(__dirname + '/html/index.html')
 })
 
-app.listen(5000, function () {
-  console.log('Listening on port 5000')
+app.listen(config.port, function () {
+  console.log('Listening on port ' + config.port)
 })

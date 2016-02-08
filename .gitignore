@@ -1,2 +1,4 @@
 node_modules/
-examples/dist/
+lib/
+examples/dist/bundle.js*
+examples/config.js
