@@ -32,6 +32,7 @@
     "rimraf": "^2.4.3"
   },
   "dependencies": {
+    "color": "^0.10.1",
     "flexboxgrid": "^6.3.0",
     "highcharts": "^4.2.3",
     "color": "^0.10.1"

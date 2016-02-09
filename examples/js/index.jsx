@@ -1,23 +1,27 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import thunk from 'redux-thunk'
-import {combineReducers, createStore, applyMiddleware} from 'redux'
-import {Provider} from 'react-redux'
+import {Router, Route, Link, hashHistory} from 'react-router'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-//import {} from './reducers'
 import App from './components/App'
-import {fetchEvents} from './actionCreators'
+import Area from './components/Area'
+import Column from './components/Column'
+import Line from './components/Line'
+import Map from './components/Map'
+import Pie from './components/Pie'
+import Table from './components/Table'
 
 injectTapEventPlugin()
 
-// const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
-//
-// const store = createStoreWithMiddleware(combineReducers({
-//
-// }))
-
-ReactDOM.render(
-  //<Provider store={store}>
-    <App />
-  //</Provider>
-, document.querySelector('.app'))
+ReactDOM.render((
+  <Router history={hashHistory}>
+    <Route path="/" component={App}>
+      <Route path="components/area" component={Area}/>
+      <Route path="components/column" component={Column}/>
+      <Route path="components/line" component={Line}/>
+      <Route path="components/map" component={Map}/>
+      <Route path="components/pie" component={Pie}/>
+      <Route path="components/table" component={Table}/>
+    </Route>
+    <Route path="*" component={App}/>
+  </Router>
+), document.querySelector('.app'))
