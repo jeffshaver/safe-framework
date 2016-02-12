@@ -70,7 +70,6 @@ export class AreaChart extends Component {
       title: {text: title}
     }
 
-    console.log(config)
     return (
       <ReactHighcharts
         config={config}

@@ -59,7 +59,6 @@ export class ColumnChart extends Component {
       title: {text: title}
     }
 
-    console.log(config)
     return (
       <ReactHighcharts
         config={config}

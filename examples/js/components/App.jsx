@@ -20,8 +20,7 @@ const style = {
   }
 }
 
-@
-Radium
+@Radium
 class App extends Component {
   render() {
     return (

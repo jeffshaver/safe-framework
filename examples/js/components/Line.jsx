@@ -1,50 +1,26 @@
 import React, {Component, PropTypes} from 'react'
 import {Card, CardTitle, Paper} from 'material-ui'
 import {DefaultLineChart} from 'safe-framework'
-
-const columns = [
-  {title: 'Dessert', data: 'dessert'},
-  {title: 'Calories', data: 'calories'}
-]
-
-const data = [
-  {dessert: 'Cupcake', calories: 305},
-  {dessert: 'Cake', calories: 405},
-  {dessert: 'Nerds', calories: 505}
-]
-
-const lineSeries = [{
-  name: 'Tokyo',
-  data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-}, {
-  name: 'New York',
-  data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-}, {
-  name: 'Berlin',
-  data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-}, {
-  name: 'London',
-  data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-}]
+import {lineSeries, tableColumns, tableData} from '../fixtures'
 
 class Line extends Component {
     render () {
        return (
          <Paper zDepth={1}>
            <Card>
-             <CardTitle 
-               title="Line + Table" 
-               subtitle="Tab Layout" 
+             <CardTitle
+               title="Line + Table"
+               subtitle="Tab Layout"
              />
              <DefaultLineChart
-               columns={columns}
-               data={data}
+               columns={tableColumns}
+               data={tableData}
                series={lineSeries}
                size={'col-xs-12 col-sm-12'}
                title={'Default Line Chart'}
              />
-           </Card>  
-         </Paper> 
+           </Card>
+         </Paper>
       )}
 }
 
