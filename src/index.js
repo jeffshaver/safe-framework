@@ -4,10 +4,12 @@ import DataTable from './data-table'
 import DefaultAreaChart from './default-area-chart'
 import DefaultColumnChart from './default-column-chart'
 import DefaultLineChart from './default-line-chart'
+import DefaultMap from './default-map'
 import DefaultPieChart from './default-pie-chart'
 import Footer from './footer'
 import Header from './header'
 import LineChart from './line-chart'
+import Map from './map'
 import Nav from './nav'
 import NavItem from './nav-item'
 import PieChart from './pie-chart'
@@ -21,10 +23,12 @@ export {DataTable}
 export {DefaultAreaChart}
 export {DefaultColumnChart}
 export {DefaultLineChart}
+export {DefaultMap}
 export {DefaultPieChart}
 export {Footer}
 export {Header}
 export {LineChart}
+export {Map}
 export {Nav}
 export {NavItem}
 export {PieChart}
@@ -39,10 +43,12 @@ export default {
   DefaultAreaChart,
   DefaultColumnChart,
   DefaultLineChart,
+  DefaultMap,
   DefaultPieChart,
   Footer,
   Header,
   LineChart,
+  Map,
   Nav,
   NavItem,
   PieChart,

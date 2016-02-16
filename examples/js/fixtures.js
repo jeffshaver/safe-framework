@@ -277,6 +277,15 @@ export const lineSeries = [{
 
 // MAP
 
+export const mapCenter = [39.73, -104.99]
+export const mapMarkers = [
+  {key: 'Littleton', position: [39.61, -105.02], children: 'This is Littleton, CO'},
+  {key: 'Denver', position: [39.74, -104.99], children: 'This is Denver, CO'},
+  {key: 'Aurora', position: [39.73, -104.81], children: 'This is Aurora, CO'},
+  {key: 'Golden', position: [39.77, -105.23], children: 'This is Golden, CO'}
+]
+export const mapTitle = 'Cities'
+
 // PIE
 
 export const pieDrilldown = {
