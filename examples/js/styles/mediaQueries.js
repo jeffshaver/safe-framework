@@ -1,6 +1,4 @@
-export default {
-  small: '@media only screen and (min-width: 400px)',
-  medium: '@media only screen and (min-width: 600px)',
-  large: '@media only screen and (min-width: 850px)',
-  xLarge: '@media only screen and (min-width: 1000px)'
-}
+export const small = '@media only screen and (min-width: 400px)'
+export const medium = '@media only screen and (min-width: 600px)'
+export const large = '@media only screen and (min-width: 850px)'
+export const xLarge = '@media only screen and (min-width: 1000px)'

@@ -45,7 +45,7 @@ let style = {
 @Radium
 export class Section extends Component {
   static propTypes = {
-    children: PropTypes.array,
+    children: PropTypes.node,
     className: PropTypes.string,
     isOdd: PropTypes.bool.isRequired,
     overlay: PropTypes.bool.isRequired,
@@ -55,7 +55,6 @@ export class Section extends Component {
   };
 
   static defaultProps = {
-    children: [],
     className: '',
     isOdd: false,
     overlay: false,

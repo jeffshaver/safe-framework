@@ -5,7 +5,7 @@ import {wrapper} from '../styles/general'
 @Radium
 export class Wrapper extends Component {
   static propTypes = {
-    children: PropTypes.array
+    children: PropTypes.node
   };
 
   render () {

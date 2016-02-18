@@ -22,7 +22,7 @@ const style = {
 @Radium
 class App extends Component {
   static propTypes = {
-    children: PropTypes.array
+    children: PropTypes.node
   };
 
   render () {
