@@ -23,7 +23,7 @@ const style = {
 class App extends Component {
   static propTypes = {
     children: PropTypes.node
-  };
+  }
 
   render () {
     return (

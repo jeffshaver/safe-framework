@@ -12,7 +12,7 @@ export class DataTable extends Component {
   static propTypes = {
     columns: PropTypes.array.isRequired,
     data: PropTypes.array.isRequired
-  };
+  }
 
   render () {
     return (

@@ -44,11 +44,11 @@ export class ColumnChart extends Component {
     drilldown: PropTypes.object,
     series: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired
-  };
+  }
 
   static defaultProps = {
     drilldown: {}
-  };
+  }
 
   render () {
     const {drilldown, series, title} = this.props

@@ -39,7 +39,7 @@ export class Header extends Component {
   static propTypes = {
     navIsOpen: PropTypes.bool.isRequired,
     pageIsScrolled: PropTypes.bool.isRequired
-  };
+  }
 
   render () {
     return (

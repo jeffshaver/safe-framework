@@ -52,7 +52,7 @@ export class Section extends Component {
     skewBottom: PropTypes.bool.isRequired,
     skewTop: PropTypes.bool.isRequired,
     styles: PropTypes.object
-  };
+  }
 
   static defaultProps = {
     className: '',
@@ -61,7 +61,7 @@ export class Section extends Component {
     skewBottom: true,
     skewTop: true,
     styles: {}
-  };
+  }
 
   getOverlay () {
     return this.props.overlay ? <div style={[style.overlay]}></div> : undefined

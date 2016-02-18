@@ -21,11 +21,11 @@ export class Map extends Component {
     markers: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired,
     zoomControlPosition: PropTypes.string
-  };
+  }
 
   static defaultProps = {
     zoomControlPosition: 'topright'
-  };
+  }
 
   render () {
     const {center, /* title, */zoomControlPosition} = this.props

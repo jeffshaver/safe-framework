@@ -12,12 +12,12 @@ export class DefaultMap extends Component {
     size: PropTypes.string,
     title: PropTypes.string.isRequired,
     zoomControlPosition: PropTypes.string
-  };
+  }
 
   static defaultProps = {
     size: 'col-xs-12 col-sm-12',
     zoomControlPosition: 'topright'
-  };
+  }
 
   render () {
     const {

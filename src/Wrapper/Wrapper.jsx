@@ -6,7 +6,7 @@ import {wrapper} from '../styles/general'
 export class Wrapper extends Component {
   static propTypes = {
     children: PropTypes.node
-  };
+  }
 
   render () {
     return (

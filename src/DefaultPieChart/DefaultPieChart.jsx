@@ -11,7 +11,7 @@ export class DefaultPieChart extends Component {
     series: PropTypes.array.isRequired,
     size: PropTypes.string,
     title: PropTypes.string.isRequired
-  };
+  }
 
   render () {
     return (

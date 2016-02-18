@@ -44,7 +44,7 @@ export class NavItem extends Component {
     handleClick: PropTypes.func.isRequired,
     navIsOpen: PropTypes.bool.isRequired,
     section: PropTypes.object
-  };
+  }
 
   handleClick (event) {
     this.props.handleClick(event)

@@ -59,7 +59,7 @@ export class Nav extends Component {
     navIsOpen: PropTypes.bool.isRequired,
     sections: PropTypes.array.isRequired,
     toggleNav: PropTypes.func.isRequired
-  };
+  }
 
   handleNavButtonClick (event) {
     this.props.toggleNav()
