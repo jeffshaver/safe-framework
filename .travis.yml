@@ -1,0 +1,9 @@
+language: node_js
+install: true
+node_js:
+  - "5.5.0"
+before_script:
+  - "npm -g install eslint eslint-config-standard eslint-plugin-promise eslint-plugin-react eslint-plugin-standard babel-eslint"
+script:
+  - "eslint `find src/ -type f -name '*.js*'`"
+  - "eslint `find examples/js/ -type f -name '*.js*'`"
