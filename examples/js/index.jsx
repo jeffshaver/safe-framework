@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Router, Route, Link, hashHistory} from 'react-router'
+import {Router, Route, hashHistory} from 'react-router'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './components/App'
 import Area from './components/Area'
@@ -14,14 +14,38 @@ injectTapEventPlugin()
 
 ReactDOM.render((
   <Router history={hashHistory}>
-    <Route path="/" component={App}>
-      <Route path="components/area" component={Area}/>
-      <Route path="components/column" component={Column}/>
-      <Route path="components/line" component={Line}/>
-      <Route path="components/map" component={Map}/>
-      <Route path="components/pie" component={Pie}/>
-      <Route path="components/table" component={Table}/>
+    <Route
+      component={App}
+      path='/'
+    >
+      <Route
+        component={Area}
+        path='components/area'
+      />
+      <Route
+        component={Column}
+        path='components/column'
+      />
+      <Route
+        component={Line}
+        path='components/line'
+      />
+      <Route
+        component={Map}
+        path='components/map'
+      />
+      <Route
+        component={Pie}
+        path='components/pie'
+      />
+      <Route
+        component={Table}
+        path='components/table'
+      />
     </Route>
-    <Route path="*" component={App}/>
+    <Route
+      component={App}
+      path='*'
+    />
   </Router>
 ), document.querySelector('.app'))

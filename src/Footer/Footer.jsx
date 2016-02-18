@@ -11,7 +11,7 @@ export class Footer extends Component {
   render () {
     return (
       <footer style={[style]}>
-        © 2015 
+        © 2015
       </footer>
     )
   }

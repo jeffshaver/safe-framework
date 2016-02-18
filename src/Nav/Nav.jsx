@@ -64,11 +64,11 @@ export class Nav extends Component {
   handleNavButtonClick (event) {
     this.props.toggleNav()
   }
-  
+
   render () {
     return (
       <div>
-        /*<a href="#"
+        /*<a href='#'
           style={[
             style.button.base
           ]}

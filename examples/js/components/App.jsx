@@ -1,9 +1,8 @@
 import Radium, {Style} from 'radium'
 import React, {Component, PropTypes} from 'react'
-import {AppBar, AppCanvas, Avatar, LeftNav, List, ListItem} from 'material-ui'
-import {DefaultAreaChart, DefaultColumnChart, DefaultLineChart, DefaultPieChart} from 'safe-framework'
-import {mediaQueries, large} from '../styles/mediaQueries'
-//SVG
+import {AppBar, AppCanvas, Avatar, LeftNav, ListItem} from 'material-ui'
+import {large} from '../styles/mediaQueries'
+// SVG
 import ActionAssessment from 'material-ui/lib/svg-icons/action/assessment'
 
 const style = {
@@ -22,7 +21,11 @@ const style = {
 
 @Radium
 class App extends Component {
-  render() {
+  static propTypes = {
+    children: PropTypes.array
+  };
+
+  render () {
     return (
       <AppCanvas>
         <Style rules={{
@@ -33,20 +36,18 @@ class App extends Component {
             fontFamily: 'inherit'
           }
         }}/>
-
         <AppBar
           showMenuIconButton = {false}
-          title = "SAFE - Framework"
+          title = 'SAFE - Framework'
           zDepth = {1}
         />
-          <LeftNav
-            ref='leftNav'
-            style={style.nav}
-          >
+        <LeftNav
+          ref='leftNav'
+          style={style.nav}
+        >
           <ListItem
-            key={0}
             initiallyOpen = {true}
-            primaryText="Components"
+            key={0}
             leftAvatar={
               <Avatar
                 icon={<ActionAssessment />}
@@ -55,49 +56,50 @@ class App extends Component {
             nestedItems={[
               <ListItem
                 key={1}
-                primaryText="Area"
                 leftAvatar={<Avatar>A</Avatar>}
-                onTouchTap={() => window.location = '#/components/area'}
+                primaryText='Area'
+                onTouchTap={() => (window.location = '#/components/area')}
               />,
-                <ListItem
+              <ListItem
                 key={2}
-                primaryText="Column"
                 leftAvatar={<Avatar>C</Avatar>}
-                onTouchTap={() => window.location = '#/components/column'}
+                primaryText='Column'
+                onTouchTap={() => (window.location = '#/components/column')}
               />,
               <ListItem
                 key={3}
-                primaryText="Line"
                 leftAvatar={<Avatar>L</Avatar>}
-                onTouchTap={() => window.location = '#/components/line'}
+                primaryText='Line'
+                onTouchTap={() => (window.location = '#/components/line')}
               />,
               <ListItem
                 key={4}
-                primaryText="Map"
                 leftAvatar={<Avatar>M</Avatar>}
-                onTouchTap={() => window.location = '#/components/map'}
+                primaryText='Map'
+                onTouchTap={() => (window.location = '#/components/map')}
               />,
               <ListItem
                 key={5}
-                primaryText="Pie"
                 leftAvatar={<Avatar>P</Avatar>}
-                onTouchTap={() => window.location = '#/components/pie'}
+                primaryText='Pie'
+                onTouchTap={() => (window.location = '#/components/pie')}
               />,
               <ListItem
                 key={6}
-                primaryText="Table"
                 leftAvatar={<Avatar>T</Avatar>}
-                onTouchTap={() => window.location = '#/components/table'}
+                primaryText='Table'
+                onTouchTap={() => (window.location = '#/components/table')}
               />
             ]}
+            primaryText='Components'
           />
-          </LeftNav>
-          <div style={style.wrapper}>
-            {this.props.children}
-          </div>
+        </LeftNav>
+        <div style={style.wrapper}>
+          {this.props.children}
+        </div>
       </AppCanvas>
     )
   }
 }
 
-export default /* connect() */ (App)
+export default App

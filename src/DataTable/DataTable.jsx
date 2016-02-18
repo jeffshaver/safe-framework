@@ -37,8 +37,8 @@ export class DataTable extends Component {
           showRowHover={true}
           stripedRows={true}
         >
-          {this.props.data.map((row) => (
-            <TableRow>
+          {this.props.data.map((row, i) => (
+            <TableRow key={i}>
               {this.props.columns.map((column) => (
                 <TableRowColumn key={row[column.data]}>{row[column.data]}</TableRowColumn>
               ))}

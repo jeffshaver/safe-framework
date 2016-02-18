@@ -277,8 +277,6 @@ export const lineSeries = [{
 
 // MAP
 
-
-
 // PIE
 
 export const pieDrilldown = {
