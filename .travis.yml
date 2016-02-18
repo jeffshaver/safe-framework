@@ -7,3 +7,5 @@ before_script:
 script:
   - "eslint `find src/ -type f -name '*.js*'`"
   - "eslint `find examples/js/ -type f -name '*.js*'`"
+notifications:
+  slack: safe-framework:T16U0obIrMOaKlGWuHXaJeij
