@@ -44,9 +44,7 @@ export class Header extends Component {
   render () {
     return (
       <nav style={[
-        style.nav.base// ,
-        // this.props.navIsOpen && style.nav.open,
-        // this.props.pageIsScrolled && style.nav.scrolled
+        style.nav.base
       ]}>
         <div style={[
           style.wrapper.base

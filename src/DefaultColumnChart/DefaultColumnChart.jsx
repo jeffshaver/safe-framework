@@ -14,20 +14,22 @@ export class DefaultColumnChart extends Component {
   }
 
   render () {
+    const {columns, data, drilldown, series, size, title} = this.props
+
     return (
-      <div className={this.props.size}>
+      <div className={size}>
         <Tabs>
           <Tab label='Chart'>
             <ColumnChart
-              drilldown={this.props.drilldown}
-              series={this.props.series}
-              title={this.props.title}
+              drilldown={drilldown}
+              series={series}
+              title={title}
             />
           </Tab>
           <Tab label='Data'>
             <DataTable
-              columns={this.props.columns}
-              data={this.props.data}
+              columns={columns}
+              data={data}
             />
           </Tab>
         </Tabs>

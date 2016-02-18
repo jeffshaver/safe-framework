@@ -62,10 +62,14 @@ export class Nav extends Component {
   }
 
   handleNavButtonClick (event) {
-    this.props.toggleNav()
+    const {toggleNav} = this.props
+
+    toggleNav()
   }
 
   render () {
+    const {navIsOpen} = this.props
+
     return (
       <div>
         /*<a href='#'
@@ -80,10 +84,10 @@ export class Nav extends Component {
         </a>*/
         <ul style={[
           style.ul.base,
-          this.props.navIsOpen && style.ul.open
+          navIsOpen && style.ul.open
         ]}>
           {
-            /* this.props.sections.map((section) => {
+            /* sections.map((section) => {
               return (
                 <NavItem section={section} key={section.title} />
               )

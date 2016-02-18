@@ -15,6 +15,8 @@ export class DataTable extends Component {
   }
 
   render () {
+    const {columns, data} = this.props
+
     return (
       <Table
         fixedHeader={false}
@@ -25,7 +27,7 @@ export class DataTable extends Component {
           displaySelectAll={false}
         >
           <TableRow>
-            {this.props.columns.map((column) => (
+            {columns.map((column) => (
               <TableHeaderColumn key={column.title}>{column.title}</TableHeaderColumn>
             ))}
           </TableRow>
@@ -37,9 +39,9 @@ export class DataTable extends Component {
           showRowHover={true}
           stripedRows={true}
         >
-          {this.props.data.map((row, i) => (
+          {data.map((row, i) => (
             <TableRow key={i}>
-              {this.props.columns.map((column) => (
+              {columns.map((column) => (
                 <TableRowColumn key={row[column.data]}>{row[column.data]}</TableRowColumn>
               ))}
             </TableRow>

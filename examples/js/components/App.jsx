@@ -26,6 +26,8 @@ class App extends Component {
   }
 
   render () {
+    const {children} = this.props
+
     return (
       <AppCanvas>
         <Style rules={{
@@ -95,7 +97,7 @@ class App extends Component {
           />
         </LeftNav>
         <div style={style.wrapper}>
-          {this.props.children}
+          {children}
         </div>
       </AppCanvas>
     )

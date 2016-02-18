@@ -47,29 +47,25 @@ export class NavItem extends Component {
   }
 
   handleClick (event) {
-    this.props.handleClick(event)
-    /* let href = event.target.getAttribute('href')
-    let {dispatch} = this.props
+    const {handleClick} = this.props
 
-    dispatch(toggleNav(false))
-
-    event.preventDefault()
-    scrollToElementForPath(href, 750)
-    setTitle(getTitleFromPath(href))
-    setPath(href)*/
+    handleClick(event)
   }
+
   render () {
+    const {navIsOpen, section} = this.props
+
     return (
       <li style={[
         style.base,
-        this.props.navIsOpen && style.open
+        navIsOpen && style.open
       ]}>
-        <a href={'/' + this.props.section.title.toLowerCase()}
+        <a href={'/' + section.title.toLowerCase()}
           style={[
             style.a.base
           ]}
           onClick={::this.handleClick}
-        >{this.props.section.navTitle}</a>
+        >{section.navTitle}</a>
       </li>
     )
   }

@@ -59,7 +59,7 @@ export class AreaChart extends Component {
 
   static defaultProps = {
     drilldown: {}
-  };
+  }
 
   render () {
     const {drilldown, series, title} = this.props
@@ -73,8 +73,8 @@ export class AreaChart extends Component {
     return (
       <ReactHighcharts
         config={config}
-        drilldown={this.props.drilldown}
-        series={this.props.series}
+        drilldown={drilldown}
+        series={series}
       />
     )
   }

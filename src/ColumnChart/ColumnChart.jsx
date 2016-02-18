@@ -62,8 +62,8 @@ export class ColumnChart extends Component {
     return (
       <ReactHighcharts
         config={config}
-        drilldown={this.props.drilldown}
-        series={this.props.series}
+        drilldown={drilldown}
+        series={series}
       />
     )
   }

@@ -9,9 +9,11 @@ export class Wrapper extends Component {
   }
 
   render () {
+    const {children} = this.props
+
     return (
       <div style={[wrapper]}>
-        {this.props.children}
+        {children}
       </div>
     )
   }
