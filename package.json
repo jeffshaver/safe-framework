@@ -5,11 +5,14 @@
   "repository": "https://github.com/jeffshaver/safe-framework",
   "main": "./lib",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run build && npm run lint-all",
+    "lint": "eslint `find src/ -type f -name '*.js*'`",
+    "lint-examples": "eslint `find examples/js/ -type f -name '*.js*'`",
+    "lint-all": "npm run lint && npm run lint-examples",
     "build": "babel ./src --out-dir ./lib",
     "build-examples": "npm run build && cp -R lib/* examples/node_modules/safe-framework/lib/",
     "prebuild": "rimraf lib",
-    "prepublish": "npm run build"
+    "prepublish": "npm run test"
   },
   "author": "Jeff Shaver <jeff.e.shaver@gmail.com> (http://jeffshaver.me)",
   "license": "MIT",
