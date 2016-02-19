@@ -8,6 +8,7 @@ import DefaultColumnChart from './default-column-chart'
 import DefaultLineChart from './default-line-chart'
 import DefaultMap from './default-map'
 import DefaultPieChart from './default-pie-chart'
+import DefaultScatterPlot from './default-scatter-plot'
 import Footer from './footer'
 import Header from './header'
 import LineChart from './line-chart'
@@ -15,6 +16,7 @@ import Map from './map'
 import Nav from './nav'
 import NavItem from './nav-item'
 import PieChart from './pie-chart'
+import ScatterPlot from './scatter-plot'
 import Section from './section'
 import Sections from './sections'
 import Wrapper from './wrapper'
@@ -29,6 +31,7 @@ export {DefaultColumnChart}
 export {DefaultLineChart}
 export {DefaultMap}
 export {DefaultPieChart}
+export {DefaultScatterPlot}
 export {Footer}
 export {Header}
 export {LineChart}
@@ -36,6 +39,7 @@ export {Map}
 export {Nav}
 export {NavItem}
 export {PieChart}
+export {ScatterPlot}
 export {Section}
 export {Sections}
 export {Wrapper}
@@ -50,6 +54,7 @@ export default {
   DefaultLineChart,
   DefaultMap,
   DefaultPieChart,
+  DefaultScatterPlot,
   Footer,
   Header,
   LineChart,
@@ -57,6 +62,7 @@ export default {
   Nav,
   NavItem,
   PieChart,
+  ScatterPlot,
   Section,
   Sections,
   Wrapper

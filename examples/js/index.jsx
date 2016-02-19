@@ -9,6 +9,7 @@ import Column from './components/Column'
 import Line from './components/Line'
 import Map from './components/Map'
 import Pie from './components/Pie'
+import Scatter from './components/Scatter'
 import Table from './components/Table'
 
 injectTapEventPlugin()
@@ -43,6 +44,10 @@ ReactDOM.render((
       <Route
         component={Pie}
         path='components/pie'
+      />
+      <Scatter
+        component={Scatter}
+        path='components/scatter'
       />
       <Route
         component={Table}

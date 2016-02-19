@@ -94,6 +94,12 @@ class App extends Component {
               />,
               <ListItem
                 key={7}
+                leftAvatar={<Avatar>S</Avatar>}
+                primaryText='Scatter'
+                onTouchTap={() => (window.location = '#/components/scatter')}
+              />,
+              <ListItem
+                key={8}
                 leftAvatar={<Avatar>T</Avatar>}
                 primaryText='Table'
                 onTouchTap={() => (window.location = '#/components/table')}
