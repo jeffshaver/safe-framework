@@ -16,7 +16,7 @@ export class DefaultMap extends Component {
 
   static defaultProps = {
     size: 'col-xs-12 col-sm-12',
-    zoomControlPosition: 'topright'
+    zoomControlPosition: 'topleft'
   }
 
   render () {

@@ -19,7 +19,7 @@ class Map extends Component {
             markers={mapMarkers}
             size={'col-xs-12 col-sm-12'}
             title={mapTitle}
-            zoomControlPosition={'topright'}
+            zoomControlPosition={'topleft'}
           />
         </Card>
       </Paper>

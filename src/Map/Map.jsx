@@ -24,7 +24,7 @@ export class Map extends Component {
   }
 
   static defaultProps = {
-    zoomControlPosition: 'topright'
+    zoomControlPosition: 'topleft'
   }
 
   render () {
@@ -45,11 +45,12 @@ export class Map extends Component {
         center={center}
         minZoom={3}
         zoom={5}
+        zoomControl={false}
       >
         {baseLayer}
         {layerGroup}
         {/* <LayersControl baseLayers={base} overlays={overlay}>
-        </LayersControl> */}
+        </LayersControl>*/}
         <ZoomControl position={zoomControlPosition} />
       </LeafletMap>
     )
