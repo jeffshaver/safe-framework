@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import {PopupMarker} from './PopupMarker'
 
 export const MarkersList = ({map, markers}) => (
@@ -14,3 +14,8 @@ export const MarkersList = ({map, markers}) => (
     }
   </div>
 )
+
+MarkersList.propTypes = {
+  map: PropTypes.object,
+  markers: PropTypes.array.isRequired
+}
