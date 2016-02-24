@@ -4,6 +4,7 @@ import {Router, Route, hashHistory} from 'react-router'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './components/App'
 import Area from './components/Area'
+import Bar from './components/Bar'
 import Column from './components/Column'
 import Line from './components/Line'
 import Map from './components/Map'
@@ -22,6 +23,11 @@ ReactDOM.render((
         component={Area}
         path='components/area'
       />
+      <Route
+        component={Bar}
+        path='components/bar'
+      />
+
       <Route
         component={Column}
         path='components/column'

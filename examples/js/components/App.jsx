@@ -64,30 +64,36 @@ class App extends Component {
               />,
               <ListItem
                 key={2}
+                leftAvatar={<Avatar>B</Avatar>}
+                primaryText='Bar'
+                onTouchTap={() => (window.location = '#/components/bar')}
+              />,
+              <ListItem
+                key={3}
                 leftAvatar={<Avatar>C</Avatar>}
                 primaryText='Column'
                 onTouchTap={() => (window.location = '#/components/column')}
               />,
               <ListItem
-                key={3}
+                key={4}
                 leftAvatar={<Avatar>L</Avatar>}
                 primaryText='Line'
                 onTouchTap={() => (window.location = '#/components/line')}
               />,
               <ListItem
-                key={4}
+                key={5}
                 leftAvatar={<Avatar>M</Avatar>}
                 primaryText='Map'
                 onTouchTap={() => (window.location = '#/components/map')}
               />,
               <ListItem
-                key={5}
+                key={6}
                 leftAvatar={<Avatar>P</Avatar>}
                 primaryText='Pie'
                 onTouchTap={() => (window.location = '#/components/pie')}
               />,
               <ListItem
-                key={6}
+                key={7}
                 leftAvatar={<Avatar>T</Avatar>}
                 primaryText='Table'
                 onTouchTap={() => (window.location = '#/components/table')}
