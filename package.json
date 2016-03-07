@@ -5,6 +5,9 @@
   "repository": "https://github.com/jeffshaver/safe-framework",
   "main": "./lib",
   "scripts": {
+    "bump-major": "node ./bin/bump.js major --commit --tag",
+    "bump-minor": "node ./bin/bump.js minor --commit --tag",
+    "bump-patch": "node ./bin/bump.js patch --commit --tag",
     "test": "npm run build && npm run lint-all",
     "lint": "eslint `find src/ -type f -name '*.js*'`",
     "lint-examples": "eslint `find examples/js/ -type f -name '*.js*'`",
