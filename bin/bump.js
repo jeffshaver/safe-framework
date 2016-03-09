@@ -1,4 +1,4 @@
-var exec = require('child_process').exec
+var exec = require('child_process').execSync
 var path = require('path')
 var semver = require('semver')
 var jsonFile = require('json-file-plus')

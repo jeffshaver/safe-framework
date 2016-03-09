@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {FlatButton, TextField} from 'material-ui'
+import {TextField} from 'material-ui'
 
 export class FileInput extends Component {
   static propTypes = {
