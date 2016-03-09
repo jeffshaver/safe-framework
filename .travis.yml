@@ -3,9 +3,8 @@ install: true
 node_js:
   - "5.5.0"
 before_script:
-  - "npm -g install eslint eslint-config-standard eslint-plugin-promise eslint-plugin-react eslint-plugin-standard babel-eslint"
+  - "npm install"
 script:
-  - "eslint `find src/ -type f -name '*.js*'`"
-  - "eslint `find examples/js/ -type f -name '*.js*'`"
+  - "npm run lint-all"
 notifications:
   slack: safe-framework:T16U0obIrMOaKlGWuHXaJeij
