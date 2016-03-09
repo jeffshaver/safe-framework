@@ -9,6 +9,7 @@ import DefaultLineChart from './default-line-chart'
 import DefaultMap from './default-map'
 import DefaultPieChart from './default-pie-chart'
 import DefaultScatterPlot from './default-scatter-plot'
+import FileInput from './file-input'
 import Footer from './footer'
 import Header from './header'
 import LineChart from './line-chart'
@@ -32,6 +33,7 @@ export {DefaultLineChart}
 export {DefaultMap}
 export {DefaultPieChart}
 export {DefaultScatterPlot}
+export {FileInput}
 export {Footer}
 export {Header}
 export {LineChart}
@@ -55,6 +57,7 @@ export default {
   DefaultMap,
   DefaultPieChart,
   DefaultScatterPlot,
+  FileInput,
   Footer,
   Header,
   LineChart,

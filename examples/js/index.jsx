@@ -6,6 +6,7 @@ import App from './components/App'
 import Area from './components/Area'
 import Bar from './components/Bar'
 import Column from './components/Column'
+import FileInput from './components/FileInput'
 import Line from './components/Line'
 import Map from './components/Map'
 import Pie from './components/Pie'
@@ -34,6 +35,10 @@ ReactDOM.render((
         path='components/column'
       />
       <Route
+        component={FileInput}
+        path='components/file-input'
+      />
+      <Route
         component={Line}
         path='components/line'
       />
@@ -45,7 +50,7 @@ ReactDOM.render((
         component={Pie}
         path='components/pie'
       />
-      <Scatter
+      <Route
         component={Scatter}
         path='components/scatter'
       />

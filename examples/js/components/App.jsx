@@ -2,6 +2,7 @@ import Radium, {Style} from 'radium'
 import React, {Component, PropTypes} from 'react'
 import {AppBar, AppCanvas, Avatar, LeftNav, ListItem} from 'material-ui'
 import {large} from '../styles/mediaQueries'
+import {pascalToSnakeCase} from '../utils'
 // SVG
 import ActionAssessment from 'material-ui/lib/svg-icons/action/assessment'
 
@@ -18,6 +19,21 @@ const style = {
     }
   }
 }
+
+const visualizations = [
+  'Area',
+  'Bar',
+  'Column',
+  'Line',
+  'Map',
+  'Pie',
+  'Scatter',
+  'Table'
+]
+
+const components = [
+  'FileInput'
+]
 
 @Radium
 class App extends Component {
@@ -55,56 +71,36 @@ class App extends Component {
                 icon={<ActionAssessment />}
               />
             }
-            nestedItems={[
-              <ListItem
-                key={1}
-                leftAvatar={<Avatar>A</Avatar>}
-                primaryText='Area'
-                onTouchTap={() => (window.location = '#/components/area')}
-              />,
-              <ListItem
-                key={2}
-                leftAvatar={<Avatar>B</Avatar>}
-                primaryText='Bar'
-                onTouchTap={() => (window.location = '#/components/bar')}
-              />,
-              <ListItem
-                key={3}
-                leftAvatar={<Avatar>C</Avatar>}
-                primaryText='Column'
-                onTouchTap={() => (window.location = '#/components/column')}
-              />,
-              <ListItem
-                key={4}
-                leftAvatar={<Avatar>L</Avatar>}
-                primaryText='Line'
-                onTouchTap={() => (window.location = '#/components/line')}
-              />,
-              <ListItem
-                key={5}
-                leftAvatar={<Avatar>M</Avatar>}
-                primaryText='Map'
-                onTouchTap={() => (window.location = '#/components/map')}
-              />,
-              <ListItem
-                key={6}
-                leftAvatar={<Avatar>P</Avatar>}
-                primaryText='Pie'
-                onTouchTap={() => (window.location = '#/components/pie')}
-              />,
-              <ListItem
-                key={7}
-                leftAvatar={<Avatar>S</Avatar>}
-                primaryText='Scatter'
-                onTouchTap={() => (window.location = '#/components/scatter')}
-              />,
-              <ListItem
-                key={8}
-                leftAvatar={<Avatar>T</Avatar>}
-                primaryText='Table'
-                onTouchTap={() => (window.location = '#/components/table')}
+            nestedItems={
+              visualizations.map((visualization, i) => (
+                <ListItem
+                  key={i}
+                  leftAvatar={<Avatar>{visualization[0]}</Avatar>}
+                  primaryText={visualization}
+                  onTouchTap={() => (window.location = `#/components/${pascalToSnakeCase(visualization)}`)}
+                />
+              ))
+            }
+            primaryText='Visualizations'
+          />
+          <ListItem
+            initiallyOpen = {true}
+            key={1}
+            leftAvatar={
+              <Avatar
+                icon={<ActionAssessment />}
               />
-            ]}
+            }
+            nestedItems={
+              components.map((component, i) => (
+                <ListItem
+                  key={i}
+                  leftAvatar={<Avatar>{component[0]}</Avatar>}
+                  primaryText={component}
+                  onTouchTap={() => (window.location = `#/components/${pascalToSnakeCase(component)}`)}
+                />
+              ))
+            }
             primaryText='Components'
           />
         </LeftNav>
