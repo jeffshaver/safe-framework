@@ -1,11 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import 'highcharts'
 import ReactHighcharts from 'react-highcharts'
-import HighchartsData from 'highcharts-data'
-import HighchartsDrilldown from 'highcharts-drilldown'
-
-HighchartsData(ReactHighcharts.Highcharts)
-HighchartsDrilldown(ReactHighcharts.Highcharts)
 
 const baseConfig = {
   chart: {

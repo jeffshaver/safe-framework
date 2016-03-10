@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import 'highcharts'
 import ReactHighcharts from 'react-highcharts'
 
 const baseConfig = {
