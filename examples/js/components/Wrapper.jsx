@@ -14,3 +14,7 @@ export const Wrapper = Radium(({children}) => (
     {children}
   </div>
 ))
+
+Wrapper.propTypes = {
+  children: PropTypes.node
+}
