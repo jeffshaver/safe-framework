@@ -3,8 +3,13 @@ import {Card, CardText, CardTitle, Paper} from 'material-ui'
 import {FileInput} from 'safe-framework'
 
 class Area extends Component {
-  onChange (value) {
-    window.alert(value)
+  onChange (file) {
+    let alertText = ''
+
+    for (let key in file) {
+      alertText += `${key}: ${file[key]}\n`
+    }
+    window.alert(alertText)
   }
 
   render () {

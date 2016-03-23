@@ -16,9 +16,10 @@ export class FileInput extends Component {
 
   onChange ({target}) {
     const value = target.value
+    const file = target.files[0]
 
     this.updateText(value)
-    this.props.onChange(value)
+    this.props.onChange(file)
   }
 
   openFileBrowser () {
