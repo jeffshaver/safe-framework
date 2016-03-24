@@ -1,5 +1,6 @@
 import AreaChart from './area-chart'
 import BarChart from './bar-chart'
+import BasicDataTable from './basic-data-table'
 import ColumnChart from './column-chart'
 import DataTable from './data-table'
 import DefaultAreaChart from './default-area-chart'
@@ -24,6 +25,7 @@ import Wrapper from './wrapper'
 
 export {AreaChart}
 export {BarChart}
+export {BasicDataTable}
 export {ColumnChart}
 export {DataTable}
 export {DefaultAreaChart}
@@ -49,6 +51,7 @@ export {Wrapper}
 export default {
   AreaChart,
   BarChart,
+  BasicDataTable,
   ColumnChart,
   DataTable,
   DefaultAreaChart,

@@ -13,7 +13,9 @@
     "lint-examples": "eslint `find examples/js/ -type f -name '*.js*'`",
     "lint-all": "npm run lint && npm run lint-examples",
     "build": "babel ./src --out-dir ./lib",
-    "build-examples": "npm run build && cp -R lib/* examples/node_modules/safe-framework/lib/",
+    "copy-dist": "mkdir -p examples/node_modules/safe-framework/dist && cp -R dist/* examples/node_modules/safe-framework/dist/",
+    "copy-lib": "cp -R lib/* examples/node_modules/safe-framework/lib/",
+    "build-examples": "npm run build && npm run copy-lib && npm run copy-dist",
     "prebuild": "rimraf lib",
     "prepublish": "npm run test"
   },
@@ -42,6 +44,8 @@
     "rimraf": "^2.4.3"
   },
   "dependencies": {
+    "ag-grid": "^4.0.0",
+    "ag-grid-react": "^4.0.0",
     "color": "^0.11.1",
     "flexboxgrid": "^6.3.0",
     "highcharts": "^4.2.3"
