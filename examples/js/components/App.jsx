@@ -23,6 +23,7 @@ const style = {
 const visualizations = [
   'Area',
   'Bar',
+  'BasicTable',
   'Column',
   'Line',
   'Map',

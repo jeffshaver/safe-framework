@@ -7,13 +7,18 @@ class Table extends Component {
   render () {
     return (
       <Paper zDepth={1}>
-        <Card>
+        <Card
+          style={{height: '500px'}}>
           <CardTitle
             title='Table'
           />
-          <DataTable
-            columns={tableColumns}
-            data={tableData}
+           <DataTable
+             checkboxSelection='true'
+             columnDefs={tableColumns}
+             enableSorting='true'
+             rowData={tableData}
+             rowSelection='multiple'
+             showCheckboxColumn={true}
           />
         </Card>
       </Paper>

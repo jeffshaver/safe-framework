@@ -239,7 +239,31 @@ export const columnSeries = [{
 
 // DATATABLE
 
-export const tableColumns = [
+export const tableColumns = [{
+  headerName: 'Text',
+  field: 'text'
+}, {
+  headerName: 'Number',
+  field: 'number'
+}, {
+  headerName: 'Decimal',
+  field: 'decimal'
+}, {
+  headerName: 'Date',
+  field: 'date'
+}, {
+  headerName: 'Percent',
+  field: 'percent',
+  filter: 'number',
+  width: 120,
+  cellRenderer: customCellRenderer
+}]
+
+function customCellRenderer (params) {
+  return (params.value * 100).toFixed(2) + '%'
+}
+
+export const basicTableColumns = [
   {title: 'a', data: 'a'},
   {title: 'b', data: 'b'},
   {title: 'c', data: 'c'},
@@ -247,15 +271,26 @@ export const tableColumns = [
   {title: 'e', data: 'e'}
 ]
 
+export let basicTableData = []
 export let tableData = []
 
 for (let i = 0; i < 100; i++) {
-  tableData.push({
+  basicTableData.push({
     a: i,
     b: i,
     c: i,
     d: i,
     e: i
+  })
+}
+
+for (let i = 0; i < 1000; i++) {
+  tableData.push({
+    text: 'Text ' + i,
+    number: i,
+    decimal: Math.random(1, 100),
+    date: new Date(Date.now() * Math.random()),
+    percent: Math.random()
   })
 }
 

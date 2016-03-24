@@ -5,6 +5,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './components/App'
 import Area from './components/Area'
 import Bar from './components/Bar'
+import BasicTable from './components/BasicTable'
 import Column from './components/Column'
 import FileInput from './components/FileInput'
 import Line from './components/Line'
@@ -29,7 +30,10 @@ ReactDOM.render((
         component={Bar}
         path='components/bar'
       />
-
+      <Route
+        component={BasicTable}
+        path='components/basic-table'
+      />
       <Route
         component={Column}
         path='components/column'

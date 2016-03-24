@@ -1,53 +1,60 @@
 import React, {Component, PropTypes} from 'react'
-import {
-  Table,
-  TableHeader,
-  TableHeaderColumn,
-  TableBody,
-  TableRow,
-  TableRowColumn
-} from 'material-ui'
+import {AgGridReact} from 'ag-grid-react'
+
+/* global document */
 
 export class DataTable extends Component {
   static propTypes = {
-    columns: PropTypes.array.isRequired,
-    data: PropTypes.array.isRequired
+    columnDefs: PropTypes.array.isRequired,
+    rowData: PropTypes.array.isRequired,
+    showCheckboxColumn: PropTypes.bool
+  }
+
+  headerCellRendererFunc (params) {
+    const api = params.api
+    const cb = document.createElement('input')
+    cb.setAttribute('type', 'checkbox')
+    cb.setAttribute('class', 'ag-selection-checkbox')
+
+    const eHeader = document.createElement('label')
+    const eTitle = document.createTextNode(params.colDef.headerName)
+    eHeader.appendChild(cb)
+    eHeader.appendChild(eTitle)
+
+    cb.addEventListener('change', function (e) {
+      if (this.checked) {
+        api.selectAll()
+      } else {
+        api.deselectAll()
+      }
+    })
+    return eHeader
   }
 
   render () {
-    const {columns, data} = this.props
-
+    const {columnDefs, showCheckboxColumn} = this.props
+    let newColumnDefs = columnDefs
+    
+    if (showCheckboxColumn === true) {
+      newColumnDefs = [{
+        checkboxSelection: true,
+        headerCellRenderer: this.headerCellRendererFunc,
+        headerName: '',
+        suppressSorting: true
+      }, ...columnDefs]
+    }
+    
     return (
-      <Table
-        fixedHeader={false}
-        height={'343px'}
-      >
-        <TableHeader
-          adjustForCheckbox={false}
-          displaySelectAll={false}
-        >
-          <TableRow>
-            {columns.map((column) => (
-              <TableHeaderColumn key={column.title}>{column.title}</TableHeaderColumn>
-            ))}
-          </TableRow>
-        </TableHeader>
-        <TableBody
-          deselectOnClickaway={false}
-          displayRowCheckbox={false}
-          preScanRows={false}
-          showRowHover={true}
-          stripedRows={true}
-        >
-          {data.map((row, i) => (
-            <TableRow key={i}>
-              {columns.map((column) => (
-                <TableRowColumn key={row[column.data]}>{row[column.data]}</TableRowColumn>
-              ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+        <div className='ag-material'>
+          <AgGridReact
+            {...Object.assign({
+              headerHeight: '48',
+              rowHeight: '48'
+            }, this.props, {
+              columnDefs: newColumnDefs
+            })}
+          />
+        </div>
     )
   }
 }
