@@ -39,7 +39,6 @@
     "gulp": "^3.9.0",
     "gulp-shell": "0.5.2",
     "json-file-plus": "^3.2.0",
-    "npm-css" : "^0.2.0",
     "rimraf": "^2.4.3"
   },
   "dependencies": {
