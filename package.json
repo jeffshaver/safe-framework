@@ -42,6 +42,8 @@
     "rimraf": "^2.4.3"
   },
   "dependencies": {
+    "ag-grid": "^4.0.0",
+    "ag-grid-react": "^4.0.0",
     "color": "^0.11.1",
     "flexboxgrid": "^6.3.0",
     "highcharts": "^4.2.3"
