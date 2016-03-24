@@ -1,4 +1,4 @@
-import {Component} from 'react'
+import React, {Component} from 'react'
 import {Card, CardTitle, Paper} from 'material-ui'
 import {BasicDataTable} from 'safe-framework'
 import {basicTableColumns, basicTableData} from '../fixtures'

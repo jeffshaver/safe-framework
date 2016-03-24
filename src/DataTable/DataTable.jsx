@@ -5,8 +5,8 @@ import {AgGridReact} from 'ag-grid-react'
 
 export class DataTable extends Component {
   static propTypes = {
-    columnDefs: PropTypes.array.isRequired,
-    rowData: PropTypes.array.isRequired,
+    columns: PropTypes.array.isRequired,
+    data: PropTypes.array.isRequired,
     showCheckboxColumn: PropTypes.bool
   }
 
@@ -32,16 +32,16 @@ export class DataTable extends Component {
   }
 
   render () {
-    const {columnDefs, showCheckboxColumn} = this.props
-    let newColumnDefs = columnDefs
+    const {columns, data, showCheckboxColumn} = this.props
+    let newColumns = columns
     
     if (showCheckboxColumn === true) {
-      newColumnDefs = [{
+      newColumns = [{
         checkboxSelection: true,
         headerCellRenderer: this.headerCellRendererFunc,
         headerName: '',
         suppressSorting: true
-      }, ...columnDefs]
+      }, ...columns]
     }
     
     return (
@@ -51,7 +51,8 @@ export class DataTable extends Component {
               headerHeight: '48',
               rowHeight: '48'
             }, this.props, {
-              columnDefs: newColumnDefs
+              columnDefs: newColumns,
+              rowData : data
             })}
           />
         </div>

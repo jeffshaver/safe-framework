@@ -14,9 +14,9 @@ class Table extends Component {
           />
            <DataTable
              checkboxSelection='true'
-             columnDefs={tableColumns}
+             columns={tableColumns}
+             data={tableData}
              enableSorting='true'
-             rowData={tableData}
              rowSelection='multiple'
              showCheckboxColumn={true}
           />
