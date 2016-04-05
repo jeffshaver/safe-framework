@@ -21,6 +21,7 @@ class Area extends Component {
           />
           <CardText>
             <FileInput
+              accept={'.csv,.woff2'}
               onChange={::this.onChange}
             />
           </CardText>

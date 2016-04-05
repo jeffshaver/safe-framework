@@ -3,7 +3,12 @@ import {TextField} from 'material-ui'
 
 export class FileInput extends Component {
   static propTypes = {
+    accept: PropTypes.string,
     onChange: PropTypes.func
+  }
+
+  static defaultProps = {
+    accept: ''
   }
 
   constructor (props) {
@@ -33,6 +38,8 @@ export class FileInput extends Component {
   }
 
   render () {
+    const {accept} = this.props
+
     return (
       <span>
         <TextField
@@ -41,6 +48,7 @@ export class FileInput extends Component {
           onTouchTap={::this.openFileBrowser}
         />
         <input
+          accept={accept}
           ref='input'
           style={{display: 'none'}}
           type='file'
