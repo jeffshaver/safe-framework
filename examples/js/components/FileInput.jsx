@@ -1,8 +1,12 @@
 import React, {Component} from 'react'
 import {Card, CardText, CardTitle, Paper} from 'material-ui'
-import {FileInput} from 'safe-framework'
+import {FileInput as SafeFileInput} from 'safe-framework'
 
-class Area extends Component {
+class FileInput extends Component {
+  shouldReject (file) {
+    return !/\.csv$/.test(file.name)
+  }
+
   onChange (file) {
     let alertText = ''
 
@@ -10,6 +14,10 @@ class Area extends Component {
       alertText += `${key}: ${file[key]}\n`
     }
     window.alert(alertText)
+  }
+
+  onReject (file) {
+    window.alert(`${file.name} is not a csv file. We only accept csv's`)
   }
 
   render () {
@@ -20,9 +28,13 @@ class Area extends Component {
             title='File Input'
           />
           <CardText>
-            <FileInput
-              accept={'.csv,.woff2'}
+            <SafeFileInput
               onChange={::this.onChange}
+            />
+            <SafeFileInput
+              shouldReject={::this.shouldReject}
+              onChange={::this.onChange}
+              onReject={::this.onReject}
             />
           </CardText>
         </Card>
@@ -31,4 +43,4 @@ class Area extends Component {
   }
 }
 
-export default Area
+export default FileInput
