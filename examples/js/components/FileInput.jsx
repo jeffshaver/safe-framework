@@ -32,6 +32,7 @@ class FileInput extends Component {
               onChange={::this.onChange}
             />
             <SafeFileInput
+              accept={'.csv'}
               shouldReject={::this.shouldReject}
               onChange={::this.onChange}
               onReject={::this.onReject}
