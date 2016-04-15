@@ -13,13 +13,11 @@ class Table extends Component {
             title='Table'
           />
            <DataTable
-             autoResize={true}
              checkboxColumn={true}
              columns={tableColumns}
              data={tableData}
              enableColResize='true'
              enableSorting='true'
-             stripeRows={true}
           />
         </Card>
       </Paper>
