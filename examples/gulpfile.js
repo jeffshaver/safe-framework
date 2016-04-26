@@ -11,6 +11,7 @@ var gutil = require('gulp-util')
 var gulpif = require('gulp-if')
 var assign = require('lodash').assign
 var config = require('./config.js')
+var argv = require('yargs').argv;
 
 var customOpts = {
   entries: 'js/index.jsx',
@@ -25,7 +26,11 @@ gulp.task('watch', watch)
 
 function watch () {
   var b = watchify(browserify(watchOpts))
-  b.plugin(liveReactLoad, {port: 8081, host: config.hotModuleReloadUri})
+  
+  if (!argv.disableLiveLoad) {
+    b.plugin(liveReactLoad, {port: 8081, host: config.hotModuleReloadUri})
+  }
+  
   b.transform('babelify', {presets: ['es2015', 'stage-0', 'react'], plugins: [['transform-decorators-legacy']]})
   b.on('update', bundle.bind(null, b))
   b.on('log', gutil.log)

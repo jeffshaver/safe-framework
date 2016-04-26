@@ -1,3 +1,4 @@
-import {PieChart} from './PieChart'
+import PieChart, {DefaultPieChart} from './PieChart'
 
 export default PieChart
+export {DefaultPieChart}

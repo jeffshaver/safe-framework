@@ -1,35 +1,44 @@
 import React, {Component, PropTypes} from 'react'
 import {Tabs, Tab} from 'material-ui'
-import AreaChart from '../AreaChart'
 import DataTable from '../DataTable'
 
-export class DefaultAreaChart extends Component {
+export default (ChartElement) => class DefaultChart extends Component {
   static propTypes = {
+    chartData: PropTypes.any.isRequired,
+    chartOptions: PropTypes.object,
     columns: PropTypes.array.isRequired,
-    data: PropTypes.array.isRequired,
     drilldown: PropTypes.object,
-    series: PropTypes.array.isRequired,
     size: PropTypes.string,
+    tableData: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired
+  }
+  
+  static defaultProps = {
+    drilldown: {},
+    size: '',
+    title: null
   }
 
   render () {
-    const {columns, data, drilldown, series, size, title} = this.props
+    const {
+      chartData, chartOptions, columns, drilldown, size, tableData, title
+    } = this.props
 
     return (
       <div className={size}>
         <Tabs>
           <Tab label='Chart'>
-            <AreaChart
+            <ChartElement
+              data={chartData}
               drilldown={drilldown}
-              series={series}
+              options={chartOptions}
               title={title}
             />
           </Tab>
           <Tab label='Data'>
             <DataTable
               columns={columns}
-              data={data}
+              data={tableData}
             />
           </Tab>
         </Tabs>

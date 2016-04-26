@@ -5,12 +5,8 @@ import {Wrapper} from './Wrapper'
 import {pascalToSnakeCase} from '../utils'
 // SVG
 import ActionAssessment from 'material-ui/lib/svg-icons/action/assessment'
-import ReactHighcharts from 'react-highcharts'
-import HighchartsData from 'highcharts-data'
-import HighchartsDrilldown from 'highcharts-drilldown'
 
-HighchartsData(ReactHighcharts.Highcharts)
-HighchartsDrilldown(ReactHighcharts.Highcharts)
+/* global window */
 
 const style = {
   nav: {

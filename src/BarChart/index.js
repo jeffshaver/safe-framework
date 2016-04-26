@@ -1,3 +1,4 @@
-import {BarChart} from './BarChart'
+import BarChart, {DefaultBarChart} from './BarChart'
 
 export default BarChart
+export {DefaultBarChart}

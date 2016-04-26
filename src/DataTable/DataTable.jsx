@@ -42,6 +42,10 @@ export class DataTable extends Component {
 
     window.addEventListener('resize', this.handleResize)
   }
+  
+  componentDidUpdate () {
+    this.handleResize(this.refs.grid)
+  }
 
   componentWillUnmount () {
     const {grid} = this.refs
