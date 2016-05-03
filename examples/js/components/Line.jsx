@@ -4,12 +4,6 @@ import {DefaultLineChart} from 'safe-framework'
 import {lineSeries, tableColumns, tableData} from '../fixtures'
 
 const chartConfig = {
-  title: {
-    text: 'Monthly Average Temperature'
-  },
-  subtitle: {
-    text: 'Source: WorldClimate.com'
-  },
   scales: {
     xAxes: [{}],
     yAxes: [{
@@ -18,9 +12,6 @@ const chartConfig = {
         labelString: 'Temperature (°C)'
       }
     }]
-  },
-  tooltip: {
-    valueSuffix: '°C'
   },
   legend: {
     layout: 'vertical',
@@ -46,7 +37,7 @@ class Line extends Component {
             series={lineSeries}
             size={'col-xs-12 col-sm-12'}
             tableData={tableData}
-            title={'Default Line Chart'}
+            title={'Monthly Average Temperature'}
           />
         </Card>
       </Paper>

@@ -4,10 +4,6 @@ import {DefaultScatterPlot} from 'safe-framework'
 import {scatterSeries, tableColumns, tableData} from '../fixtures'
 
 const chartOptions = {
-  showLines: false,
-  subtitle: {
-    text: 'Source: Heinz  2003'
-  },
   scales: {
     xAxes: [{
       scaleLabel: {
@@ -21,27 +17,10 @@ const chartOptions = {
       }
     }]
   },
-  plotOptions: {
-    scatter: {
-      marker: {
-        radius: 5,
-        states: {
-          hover: {
-            enabled: true,
-            lineColor: 'rgb(100,100,100)'
-          }
-        }
-      },
-      states: {
-        hover: {
-          marker: {
-            enabled: false
-          }
-        }
-      },
-      tooltip: {
-        headerFormat: '<b>{series.name}</b><br>',
-        pointFormat: '{point.x} cm, {point.y} kg'
+  tooltips: {
+    callbacks: {
+      label: (tooltipItem, data) => {
+        return `${tooltipItem.xLabel} cm, ${tooltipItem.yLabel} kg`
       }
     }
   }

@@ -4,10 +4,8 @@ import {Bar} from 'safe-framework-react-chartjs'
 
 @Chart
 export default class BarChart extends Component {
-  static propTypes = {
-    ...Chart.propTypes
-  }
-  
+  static propTypes = {}
+
   render () {
     return (
       <Bar

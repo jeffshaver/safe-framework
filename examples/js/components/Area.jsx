@@ -4,10 +4,6 @@ import {DefaultAreaChart} from 'safe-framework'
 import {areaSeries, tableColumns, tableData} from '../fixtures'
 
 const chartConfig = {
-  subtitle: {
-    text: 'Source: <a href="http://thebulletin.metapress.com/content/c4120650912x74k7/fulltext.pdf">' +
-      'thebulletin.metapress.com</a>'
-  },
   scales: {
     xAxes: [{
       scaleLabel: {
@@ -21,14 +17,21 @@ const chartConfig = {
         labelString: 'Nuclear weapon states'
       },
       ticks: {
-        beginAtZero: true,
-        callback: (value) => {
-          return value / 1000 + 'k'
+        callback: (tickValue, index, ticks) => {
+          return tickValue / 1000 + 'k'
         }
       }
     }]
+  },
+  tooltips: {
+    callbacks: {
+      label: (tooltipItem, data) => {
+        const dataLabel = data.datasets[tooltipItem.datasetIndex].label
+        
+        return `${dataLabel} produced ${tooltipItem.yLabel} warheads`
+      }
+    }
   }
-  // '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
 }
   
 class Area extends Component {

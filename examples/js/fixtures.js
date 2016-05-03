@@ -326,14 +326,6 @@ export const pieSeries = {
     dataProperty: 'name'
   }],
   yAxis: [{
-    backgroundColor: [
-      '#F7464A',
-      '#46BFBD',
-      '#FDB45C',
-      '#949FB1',
-      '#4D5360',
-      '#FFFFFF'
-    ],
     dataProperty: 'y'
   }],
   data: [{

@@ -4,10 +4,8 @@ import {Line} from 'safe-framework-react-chartjs'
 
 @Chart
 class AreaChart extends Component {
-  static propTypes = {
-    ...Chart.propTypes
-  }
-  
+  static propTypes = {}
+
   render () {
     return (
       <Line

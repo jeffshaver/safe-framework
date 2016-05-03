@@ -7,7 +7,6 @@ const chartConfig = {
   legend: {
     display: false
   },
-
   scales: {
     xAxis: [{}],
     yAxes: [{
@@ -16,11 +15,6 @@ const chartConfig = {
         labelString: 'Total percent market share'
       }
     }]
-  },
-
-  tooltip: {
-    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
   }
 }
 
