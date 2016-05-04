@@ -31,6 +31,8 @@ export default (ChartElement) => class ChartComponent extends Component {
     legend: {
       position: 'bottom'
     },
+    maintainAspectRatio: false,
+    responsive: true,
     title: {
       display: true,
       fontSize: 18,

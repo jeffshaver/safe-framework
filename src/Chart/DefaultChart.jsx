@@ -6,6 +6,7 @@ export default (ChartElement) => class DefaultChart extends Component {
   static propTypes = {
     chartData: PropTypes.any.isRequired,
     chartOptions: PropTypes.object,
+    chartStyle: PropTypes.object,
     columns: PropTypes.array.isRequired,
     drilldown: PropTypes.object,
     size: PropTypes.string,
@@ -14,6 +15,9 @@ export default (ChartElement) => class DefaultChart extends Component {
   }
   
   static defaultProps = {
+    chartStyle: {
+      height: '75%'
+    },
     drilldown: {},
     size: '',
     title: null
@@ -21,25 +25,29 @@ export default (ChartElement) => class DefaultChart extends Component {
 
   render () {
     const {
-      chartData, chartOptions, columns, drilldown, size, tableData, title
+      chartData, chartOptions, chartStyle, columns, drilldown, size, tableData, title
     } = this.props
 
     return (
       <div className={size}>
         <Tabs>
           <Tab label='Chart'>
-            <ChartElement
-              data={chartData}
-              drilldown={drilldown}
-              options={chartOptions}
-              title={title}
-            />
+            <div style={chartStyle}>
+              <ChartElement
+                data={chartData}
+                drilldown={drilldown}
+                options={chartOptions}
+                title={title}
+              />
+            </div>
           </Tab>
           <Tab label='Data'>
-            <DataTable
-              columns={columns}
-              data={tableData}
-            />
+            <div style={chartStyle}>
+              <DataTable
+                columns={columns}
+                data={tableData}
+              />
+            </div>
           </Tab>
         </Tabs>
       </div>

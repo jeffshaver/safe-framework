@@ -7,8 +7,7 @@ class Table extends Component {
   render () {
     return (
       <Paper zDepth={1}>
-        <Card
-          style={{height: '500px'}}>
+        <Card>
           <CardTitle
             title='Table'
           />
