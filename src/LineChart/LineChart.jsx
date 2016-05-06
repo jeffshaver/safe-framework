@@ -3,7 +3,7 @@ import Chart, {DefaultChart} from '../Chart'
 import {Line} from 'safe-framework-react-chartjs'
 
 @Chart
-class LineChart extends Component {
+export default class LineChart extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired
   }

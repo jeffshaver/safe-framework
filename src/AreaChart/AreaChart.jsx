@@ -3,7 +3,7 @@ import Chart, {DefaultChart} from '../Chart'
 import {Line} from 'safe-framework-react-chartjs'
 
 @Chart
-class AreaChart extends Component {
+export default class AreaChart extends Component {
   static propTypes = {}
 
   render () {

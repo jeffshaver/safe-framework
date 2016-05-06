@@ -3,7 +3,7 @@ import Chart, {DefaultChart} from '../Chart'
 import {Pie} from 'safe-framework-react-chartjs'
 
 @Chart
-class PieChart extends Component {
+export default class PieChart extends Component {
   static propTypes = {
     colorPalette: PropTypes.func,
     colorScale: PropTypes.string,

@@ -3,8 +3,12 @@ import Chart, {DefaultChart} from '../Chart'
 import {Bar} from 'safe-framework-react-chartjs'
 
 @Chart
-class ColumnChart extends Component {
+export default class ColumnChart extends Component {
   static propTypes = {}
+  
+  static defaultProps = {
+    backgroundColorAlpha: 1
+  }
 
   render () {
     return (

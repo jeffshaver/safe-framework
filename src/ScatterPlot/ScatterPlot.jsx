@@ -3,7 +3,7 @@ import Chart, {DefaultChart} from '../Chart'
 import {Scatter} from 'safe-framework-react-chartjs'
 
 @Chart
-class ScatterPlot extends Component {
+export default class ScatterPlot extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     options: PropTypes.object

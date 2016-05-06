@@ -46,12 +46,13 @@
   "dependencies": {
     "ag-grid": "^4.1.5",
     "ag-grid-react": "^4.0.0",
-    "chart.js": "^2.0.0",
+    "chart.js": "^2.1.0",
     "chroma-js": "^1.1.1",
     "color": "^0.11.1",
     "flexboxgrid": "^6.3.0",
     "lodash.debounce": "^4.0.0",
-    "safe-framework-react-chartjs": "^2.0.0"
+    "safe-framework-react-chartjs": "^2.0.0",
+    "title-case": "^1.1.2"
   },
   "peerDependencies": {
     "material-ui": "^0.14.4",

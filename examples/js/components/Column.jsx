@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import {Card, CardTitle, Paper} from 'material-ui'
 import {DefaultColumnChart} from 'safe-framework'
-import {columnDrilldown, columnSeries, tableColumns, tableData} from '../fixtures'
+import {columnSeriesFromData, tableColumns, tableData} from '../fixtures'
 
 const chartConfig = {
   legend: {
-    display: false
+    display: true
   },
   scales: {
     xAxes: [{}],
@@ -28,10 +28,9 @@ class Column extends Component {
             title='Column + Table'
           />
           <DefaultColumnChart
-            chartData={columnSeries}
+            chartData={columnSeriesFromData}
             chartOptions={chartConfig}
             columns={tableColumns}
-            drilldown={columnDrilldown}
             size={'col-xs-12 col-sm-12'}
             tableData={tableData}
             title={'Browser market shares. January, 2015 to May, 2015'}

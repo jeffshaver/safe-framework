@@ -107,12 +107,8 @@ export const columnDrilldown = {
 export const columnSeries = {
   label: 'Brands',
   colorByPoint: true,
-  xAxis: [{
-    dataProperty: 'name'
-  }],
-  yAxis: [{
-    dataProperty: 'y'
-  }],
+  xAxis: ['name'],
+  yAxis: ['y'],
   data: [{
     name: 'Microsoft Internet Explorer',
     y: 56.33,
@@ -137,6 +133,59 @@ export const columnSeries = {
     name: 'Proprietary or Undetectable',
     y: 0.2,
     drilldown: null
+  }]
+}
+
+// Gettin Series Info From Data
+export const columnSeriesFromData = {
+  label: 'Internet Browser Use By Gender',
+  colorByPoint: true,
+  xAxis: ['name'],
+  ySeriesField: 'series',
+  data: [{
+    name: 'Microsoft Internet Explorer',
+    y: 56.33,
+    series: [
+      {name: 'male', value: 30.33},
+      {name: 'female', value: 26}
+    ]
+  }, {
+    name: 'Chrome',
+    y: 24.03,
+    series: {
+      male: 15,
+      female: 4.03,
+      someUnknown: 5
+    }
+  }, {
+    name: 'Firefox',
+    y: 10.38,
+    series: {
+      male: 3,
+      female: 7.38
+    }
+  }, {
+    name: 'Safari',
+    y: 4.77,
+    series: {
+      male: 2,
+      female: 1.77,
+      someUnknown: 1
+    }
+  }, {
+    name: 'Opera',
+    y: 0.91,
+    series: {
+      male: 0,
+      female: 0.91
+    }
+  }, {
+    name: 'Proprietary or Undetectable',
+    y: 0.2,
+    series: {
+      male: 0.1,
+      female: 0.1
+    }
   }]
 }
 
