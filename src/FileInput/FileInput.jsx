@@ -4,13 +4,15 @@ import {TextField} from 'material-ui'
 export class FileInput extends Component {
   static propTypes = {
     accept: PropTypes.string,
+    disabled: PropTypes.bool,
     shouldReject: PropTypes.func,
     onChange: PropTypes.func,
     onReject: PropTypes.func
   }
 
   static defaultProps = {
-    accept: ''
+    accept: '',
+    disabled: false
   }
 
   constructor (props) {
@@ -55,16 +57,18 @@ export class FileInput extends Component {
   }
 
   render () {
-    const {accept} = this.props
+    const {accept, disabled} = this.props
     return (
       <span>
         <TextField
+          disabled={disabled}
           hintText={'Click to browse'}
           value={this.state.text}
           onTouchTap={this.openFileBrowser}
         />
         <input
           accept={accept}
+          disabled={disabled}
           ref='input'
           style={{display: 'none'}}
           type='file'

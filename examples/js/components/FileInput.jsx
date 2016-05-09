@@ -1,12 +1,23 @@
 import React, {Component} from 'react'
-import {Card, CardText, CardTitle, Paper} from 'material-ui'
+import {Card, CardText, CardTitle, Paper, RaisedButton} from 'material-ui'
 import {FileInput as SafeFileInput} from 'safe-framework'
 
 class FileInput extends Component {
+  constructor () {
+    super()
+    this.state = {
+      disabled: false
+    }
+  }
+
   shouldReject (file) {
     return !/\.csv$/.test(file.name)
   }
 
+  onButtonClick () {
+    this.setState({disabled: !this.state.disabled})
+  }
+  
   onChange (file) {
     let alertText = ''
 
@@ -29,13 +40,20 @@ class FileInput extends Component {
           />
           <CardText>
             <SafeFileInput
+              disabled={this.state.disabled}
               onChange={::this.onChange}
             />
             <SafeFileInput
               accept={'.csv'}
+              disabled={this.state.disabled}
               shouldReject={::this.shouldReject}
               onChange={::this.onChange}
               onReject={::this.onReject}
+            />
+            <RaisedButton
+              label='Toggle Fields'
+              style={{margin: 12}}
+              onTouchTap={::this.onButtonClick}
             />
           </CardText>
         </Card>
