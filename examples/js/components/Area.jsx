@@ -31,6 +31,15 @@ const chartConfig = {
         return `${dataLabel} produced ${tooltipItem.yLabel} warheads`
       }
     }
+  },
+ // Container for pan options
+  pan: {
+    enabled: true,
+    mode: 'xy'
+  },
+  zoom: {
+    enabled: true,
+    mode: 'xy'
   }
 }
   

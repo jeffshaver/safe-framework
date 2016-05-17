@@ -5,17 +5,24 @@ import Map from '../Map'
 
 export class DefaultMap extends Component {
   static propTypes = {
-    center: PropTypes.array.isRequired,
+    center: PropTypes.array,
     columns: PropTypes.array.isRequired,
     data: PropTypes.array.isRequired,
-    markers: PropTypes.array.isRequired,
+    mapDataOptions: PropTypes.object,
+    mapOptions: PropTypes.object.isRequired,
     size: PropTypes.string,
+    tileLayerOptions: PropTypes.object,
     title: PropTypes.string.isRequired,
+    wms: PropTypes.bool,
     zoomControlPosition: PropTypes.string
   }
 
   static defaultProps = {
+    center: null,
+    mapDataOptions: {},
     size: 'col-xs-12 col-sm-12',
+    tileLayerOptions: {},
+    wms: false,
     zoomControlPosition: 'topleft'
   }
 
@@ -24,9 +31,12 @@ export class DefaultMap extends Component {
       center,
       columns,
       data,
-      markers,
+      mapDataOptions,
+      mapOptions,
       size,
+      tileLayerOptions,
       title,
+      wms,
       zoomControlPosition
     } = this.props
 
@@ -35,9 +45,12 @@ export class DefaultMap extends Component {
         <Tabs>
           <Tab label='Map'>
             <Map
+              {...mapOptions}
               center={center}
-              markers={markers}
+              dataOptions={mapDataOptions}
+              tileLayerOptions={tileLayerOptions}
               title={title}
+              wms={wms}
               zoomControlPosition={zoomControlPosition}
             />
           </Tab>

@@ -7,4 +7,4 @@ function watch () {
 }
 
 gulp.task('watch', watch)
-gulp.task('build', shell.task(['npm run build-examples']))
+gulp.task('build', shell.task(['npm run build:examples']))

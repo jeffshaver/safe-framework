@@ -15,7 +15,7 @@ import PieChart, {DefaultPieChart} from './PieChart'
 import ScatterPlot, {DefaultScatterPlot} from './ScatterPlot'
 import Section from './section'
 import Sections from './sections'
-import Wrapper from './wrapper'
+import Wrapper, {IconWrapper} from './wrapper'
 
 export {AreaChart}
 export {BarChart}
@@ -32,6 +32,7 @@ export {DefaultScatterPlot}
 export {FileInput}
 export {Footer}
 export {Header}
+export {IconWrapper}
 export {LineChart}
 export {Map}
 export {Nav}
@@ -57,6 +58,7 @@ export default {
   FileInput,
   Footer,
   Header,
+  IconWrapper,
   LineChart,
   Map,
   Nav,
