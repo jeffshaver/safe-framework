@@ -32,6 +32,20 @@ export class DataTable extends Component {
     grid.api.sizeColumnsToFit()
   }
 
+  shouldComponentUpdate (nextProps) {
+    let shouldUpdate = false
+
+    Object.keys(this.props).forEach((key) => {
+      if (this.props[key] === nextProps[key]) {
+        return
+      }
+
+      shouldUpdate = true
+    })
+
+    return shouldUpdate
+  }
+
   componentDidMount () {
     const {grid} = this.refs
     const {resizeDelay} = this.props
@@ -42,7 +56,7 @@ export class DataTable extends Component {
 
     window.addEventListener('resize', this.handleResize)
   }
-  
+
   componentDidUpdate () {
     this.handleResize(this.refs.grid)
   }
