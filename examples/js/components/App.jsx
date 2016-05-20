@@ -1,19 +1,19 @@
+import ActionAssessment from 'material-ui/svg-icons/action/assessment'
+import AppBar from 'material-ui/AppBar'
+import Avatar from 'material-ui/Avatar'
+import Drawer from 'material-ui/Drawer'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import ListItem from 'material-ui/List/ListItem'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Radium, {Style, StyleRoot} from 'radium'
 import React, {Component, PropTypes} from 'react'
-import {AppBar, AppCanvas, Avatar, LeftNav, ListItem} from 'material-ui'
 import {Wrapper} from './Wrapper'
 import {pascalToSnakeCase} from '../utils'
-// SVG
-import ActionAssessment from 'material-ui/lib/svg-icons/action/assessment'
-
-/* global window */
 
 const style = {
-  nav: {
-    margin: '64px 0 0px 0',
-    padding: '10px 0 0 0'
-  },
-  padding: '74px 0 0 0'
+  appBar: {
+    paddingLeft: '272px'
+  }
 }
 
 const visualizations = [
@@ -43,69 +43,71 @@ class App extends Component {
 
     return (
       <StyleRoot>
-        <AppCanvas>
-          <Style rules={{
-            body: {
-              fontFamily: 'Roboto, sans-serif'
-            },
-            'body *': {
-              fontFamily: 'inherit'
-            }
-          }}/>
-          <AppBar
-            showMenuIconButton = {false}
-            title = 'SAFE - Framework'
-            zDepth = {1}
-          />
-          <LeftNav
-            ref='leftNav'
-            style={style.nav}
-          >
-            <ListItem
-              initiallyOpen = {true}
-              key={0}
-              leftAvatar={
-                <Avatar
-                  icon={<ActionAssessment />}
-                />
+        <MuiThemeProvider muiTheme={getMuiTheme()}>
+          <div>
+            <Style rules={{
+              body: {
+                fontFamily: 'Roboto, sans-serif'
+              },
+              'body *': {
+                fontFamily: 'inherit'
               }
-              nestedItems={
-                visualizations.map((visualization, i) => (
-                  <ListItem
-                    key={i}
-                    leftAvatar={<Avatar>{visualization[0]}</Avatar>}
-                    primaryText={visualization}
-                    onTouchTap={() => (window.location = `#/components/${pascalToSnakeCase(visualization)}`)}
-                  />
-                ))
-              }
-              primaryText='Visualizations'
+            }}/>
+            <AppBar
+              showMenuIconButton={false}
+              style={style.appBar}
+              title='SAFE - Framework'
+              zDepth={1}
             />
-            <ListItem
-              initiallyOpen = {true}
-              key={1}
-              leftAvatar={
-                <Avatar
-                  icon={<ActionAssessment />}
-                />
-              }
-              nestedItems={
-                components.map((component, i) => (
-                  <ListItem
-                    key={i}
-                    leftAvatar={<Avatar>{component[0]}</Avatar>}
-                    primaryText={component}
-                    onTouchTap={() => (window.location = `#/components/${pascalToSnakeCase(component)}`)}
+            <Drawer
+              ref='leftNav'
+            >
+              <ListItem
+                initiallyOpen = {true}
+                key={0}
+                leftAvatar={
+                  <Avatar
+                    icon={<ActionAssessment />}
                   />
-                ))
-              }
-              primaryText='Components'
-            />
-          </LeftNav>
-          <Wrapper>
-            {children}
-          </Wrapper>
-        </AppCanvas>
+                }
+                nestedItems={
+                  visualizations.map((visualization, i) => (
+                    <ListItem
+                      key={i}
+                      leftAvatar={<Avatar>{visualization[0]}</Avatar>}
+                      primaryText={visualization}
+                      onTouchTap={() => (window.location = `#/components/${pascalToSnakeCase(visualization)}`)}
+                    />
+                  ))
+                }
+                primaryText='Visualizations'
+              />
+              <ListItem
+                initiallyOpen = {true}
+                key={1}
+                leftAvatar={
+                  <Avatar
+                    icon={<ActionAssessment />}
+                  />
+                }
+                nestedItems={
+                  components.map((component, i) => (
+                    <ListItem
+                      key={i}
+                      leftAvatar={<Avatar>{component[0]}</Avatar>}
+                      primaryText={component}
+                      onTouchTap={() => (window.location = `#/components/${pascalToSnakeCase(component)}`)}
+                    />
+                  ))
+                }
+                primaryText='Components'
+              />
+            </Drawer>
+            <Wrapper>
+              {children}
+            </Wrapper>
+          </div>
+        </MuiThemeProvider>
       </StyleRoot>
     )
   }
