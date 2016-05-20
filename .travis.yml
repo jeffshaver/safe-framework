@@ -1,10 +1,10 @@
 language: node_js
 install: true
 node_js:
-  - "5.5.0"
+  - "6.2.0"
 before_script:
   - "npm install"
 script:
-  - "npm run lint-all"
+  - "npm run lint"
 notifications:
   slack: safe-framework:T16U0obIrMOaKlGWuHXaJeij

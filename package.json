@@ -17,7 +17,7 @@
     "lint": "npm run lint:src && npm run lint:examples",
     "prebuild": "rimraf lib",
     "prepublish": "npm run test",
-    "test": "npm run build && npm run lint-all"
+    "test": "npm run build && npm run lint"
   },
   "author": "Jeff Shaver <jeff.e.shaver@gmail.com> (http://jeffshaver.me)",
   "license": "MIT",
