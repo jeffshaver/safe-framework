@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import 'chart.js'
+import 'Chart.Zoom.js'
 import chroma from 'chroma-js'
 import titleCase from 'title-case'
 

@@ -279,24 +279,149 @@ export const lineSeries = {
 // MAP
 
 export const mapCenter = [39.73, -104.99]
-export const mapMarkers = [{
-  key: 'Littleton',
-  position: [39.61, -105.02],
-  children: 'This is Littleton, CO'
+export const mapBaseLayer = {
+  markers: [{
+    key: 'Houston',
+    position: [29.97, -95.35],
+    labels: ['This is Houston, TX']
+  }, {
+    key: 'Denver',
+    position: [39.74, -104.99],
+    labels: ['This is Denver, CO']
+  }, {
+    key: 'DC',
+    position: [38.85, -77.04],
+    labels: ['This is Washington, DC']
+  }, {
+    key: 'Milwaukee',
+    position: [43.12, -88.05],
+    labels: ['This is Milwaukee, WI']
+  }],
+  lines: [{
+    positions: [[29.97, -95.35], [39.74, -104.99]]
+  }, {
+    positions: [[39.74, -104.99], [38.85, -77.04]]
+  }, {
+    positions: [[38.85, -77.04], [43.12, -88.05]]
+  }, {
+    positions: [[43.12, -88.05], [29.97, -95.35]]
+  }]
+}
+
+export const mapOtherLayers = [{
+  name: 'Marker Layer',
+  markers: [{
+    key: 'Seattle',
+    position: [47.45, -122.30],
+    labels: ['This is Seattle, WA']
+  }, {
+    key: 'Tallahassee',
+    position: [30.38, -84.37],
+    labels: ['This is Tallahassee, FL']
+  }, {
+    key: 'NewYork',
+    position: [40.77, -73.98],
+    labels: ['This is New York, NY']
+  }]
 }, {
-  key: 'Denver',
-  position: [39.74, -104.99],
-  children: 'This is Denver, CO'
-}, {
-  key: 'Aurora',
-  position: [39.73, -104.81],
-  children: 'This is Aurora, CO'
-}, {
-  key: 'Golden',
-  position: [39.77, -105.23],
-  children: 'This is Golden, CO'
+  name: 'Line Layer',
+  lines: [{
+    positions: [[47.45, -122.30], [40.77, -73.98]],
+    labels: ['Seattle, WA', 'Tallahassee, FL']
+  }, {
+    positions: [[40.77, -73.98], [30.38, -84.37]],
+    labels: ['Tallahassee, FL', 'New York, NY']
+  }, {
+    positions: [[30.38, -84.37], [47.45, -122.30]],
+    labels: ['New York, NY', 'Seattle, WA']
+  }]
 }]
 export const mapTitle = 'Cities'
+
+export const mapData = {
+  baseLayer: {
+    data: [{
+      latitude: 29.97,
+      longitude: -95.35,
+      label: 'This is Houston, TX'
+    }, {
+      latitude: 39.74,
+      longitude: -104.99,
+      label: 'This is Denver, CO'
+    }, {
+      latitude: 38.85,
+      longitude: -77.04,
+      label: 'This is Washington, DC'
+    }, {
+      latitude: 43.12,
+      longitude: -88.05,
+      label: 'This is Milwaukee, WI'
+    }, {
+      fromLatitude: 29.97,
+      fromLongitude: -95.35,
+      toLatitude: 39.74,
+      toLongitude: -104.99
+    }, {
+      fromLatitude: 39.74,
+      fromLongitude: -104.99,
+      toLatitude: 38.85,
+      toLongitude: -77.04
+    }, {
+      fromLatitude: 38.85,
+      fromLongitude: -77.04,
+      toLatitude: 43.12,
+      toLongitude: -88.05
+    }, {
+      fromLatitude: 43.12,
+      fromLongitude: -88.05,
+      toLatitude: 29.97,
+      toLongitude: -95.35
+    }]
+  },
+  layers: [{
+    name: 'Marker Layer',
+    data: [{
+      latitude: 47.45,
+      longitude: -122.30,
+      label: 'This is Seattle, WA'
+    }, {
+      latitude: 30.38,
+      longitude: -84.37,
+      label: 'This is Tallahassee, FL'
+    }, {
+      latitude: 40.77,
+      longitude: -73.98,
+      label: 'This is New York, NY'
+    }]
+  }, {
+    name: 'Line Layer',
+    data: [{
+      positions: [[47.45, -122.30], [40.77, -73.98]],
+      fromLabel: 'Seattle, WA',
+      toLabel: 'Tallahassee, FL',
+      fromLatitude: 47.45,
+      fromLongitude: -122.30,
+      toLatitude: 40.77,
+      toLongitude: -73.98
+    }, {
+      positions: [[40.77, -73.98], [30.38, -84.37]],
+      fromLabel: 'Tallahassee, FL',
+      toLabel: 'New York, NY',
+      fromLatitude: 40.77,
+      fromLongitude: -73.98,
+      toLatitude: 30.38,
+      toLongitude: -84.37
+    }, {
+      positions: [[30.38, -84.37], [47.45, -122.30]],
+      fromLabel: 'New York, NY',
+      toLabel: 'Seattle, WA',
+      fromLatitude: 30.38,
+      fromLongitude: -84.37,
+      toLatitude: 47.45,
+      toLongitude: -122.30
+    }]
+  }]
+}
 
 // PIE
 
