@@ -12,6 +12,7 @@ export class DataTable extends Component {
     checkboxColumnConfig: PropTypes.object,
     columns: PropTypes.array.isRequired,
     data: PropTypes.array.isRequired,
+    exportFileName: PropTypes.string,
     resizeDelay: PropTypes.number,
     stripeRows: PropTypes.bool
   }
@@ -20,6 +21,7 @@ export class DataTable extends Component {
     autoResize: true,
     checkboxColumn: false,
     checkboxColumnConfig: {},
+    exportFileName: 'table_export.csv',
     resizeDelay: 100,
     stripeRows: true
   }
@@ -66,6 +68,24 @@ export class DataTable extends Component {
 
     window.removeEventListener('resize', this.handleResize)
     grid.api.destroy()
+  }
+  
+  exportToCSV () {
+    const {exportFileName} = this.props
+    const {grid} = this.refs
+    
+    const params = {
+      skipHeader: false,
+      skipFooters: false,
+      skipGroups: false,
+      allColumns: true,
+      onlySelected: false,
+      fileName: exportFileName
+    }
+    
+    console.log('export called')
+    
+    grid.api.exportDataAsCsv(params)
   }
 
   headerCellRendererFunc (params) {
