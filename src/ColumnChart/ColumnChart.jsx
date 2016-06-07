@@ -9,10 +9,11 @@ export default class ColumnChart extends Component {
   static defaultProps = {
     backgroundColorAlpha: 1
   }
-
+  
   render () {
     return (
       <Bar
+        ref='chart'
         {...this.props}
       />
     )

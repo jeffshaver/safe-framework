@@ -9,6 +9,7 @@ export default class AreaChart extends Component {
   render () {
     return (
       <Line
+        ref='chart'
         {...this.props}
       />
     )

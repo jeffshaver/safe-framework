@@ -15,6 +15,7 @@ export default class BarChart extends Component {
   render () {
     return (
       <Bar
+        ref='chart'
         {...this.props}
       />
     )

@@ -25,6 +25,7 @@ export default class PieChart extends Component {
 
     return (
       <Pie
+        ref='chart'
         {...this.props}
       />
     )

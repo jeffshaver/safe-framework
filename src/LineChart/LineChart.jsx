@@ -21,6 +21,7 @@ export default class LineChart extends Component {
 
     return (
       <Line
+        ref='chart'
         {...this.props}
       />
     )
