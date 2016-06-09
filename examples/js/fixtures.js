@@ -189,6 +189,58 @@ export const columnSeriesFromData = {
   }]
 }
 
+export const columnSeriesUpdateData = {
+  label: 'Internet Browser Use By Gender',
+  colorByPoint: true,
+  xAxis: ['name'],
+  ySeriesField: 'series',
+  data: [{
+    name: 'Microsoft Internet Explorer',
+    y: 76.33,
+    series: [
+      {name: 'male', value: 20.33},
+      {name: 'female', value: 26}
+    ]
+  }, {
+    name: 'Chrome',
+    y: 14.03,
+    series: {
+      male: 5,
+      female: 4.03,
+      someUnknown: 5
+    }
+  }, {
+    name: 'Firefox',
+    y: 20.38,
+    series: {
+      male: 13,
+      female: 7.38
+    }
+  }, {
+    name: 'Safari',
+    y: 14.77,
+    series: {
+      male: 2,
+      female: 11.77,
+      someUnknown: 1
+    }
+  }, {
+    name: 'Opera',
+    y: 2.91,
+    series: {
+      male: 0,
+      female: 2.91
+    }
+  }, {
+    name: 'Proprietary or Undetectable',
+    y: 5.2,
+    series: {
+      male: 2.1,
+      female: 3.1
+    }
+  }]
+}
+
 // DATATABLE
 
 export const tableColumns = [{

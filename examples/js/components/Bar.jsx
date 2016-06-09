@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Card, CardTitle, Paper} from 'material-ui'
-import {DefaultBarChart} from 'safe-framework'
-import {columnDrilldown, columnSeries, tableColumns, tableData} from '../fixtures'
+import {BarChart} from 'safe-framework'
+import {columnSeries, columnSeriesUpdateData} from '../fixtures'
 
 const chartConfig = {
   legend: {
@@ -19,22 +19,30 @@ const chartConfig = {
 }
 
 class Bar extends Component {
+  onClick (dataItem, series, datasetIndex) {
+    const {chart} = this.refs
+    
+    chart.drilldown(columnSeriesUpdateData)
+  }
+  
   render () {
     return (
       <Paper zDepth={1}>
-        <Card>
+        <Card
+          style={{
+            height: '500px'
+          }}
+        >
           <CardTitle
-            subtitle='Tab Layout'
-            title='Bar + Table'
+            title='Bar'
           />
-          <DefaultBarChart
-            chartData={columnSeries}
-            chartOptions={chartConfig}
-            columns={tableColumns}
-            drilldown={columnDrilldown}
-            size={'col-xs-12 col-sm-12'}
-            tableData={tableData}
+          <BarChart
+            data={columnSeries}
+            drilldown={true}
+            options={chartConfig}
+            ref='chart'
             title={'Browser market shares. January, 2015 to May, 2015'}
+            onClick={::this.onClick}
           />
         </Card>
       </Paper>

@@ -24,6 +24,7 @@ export default class ScatterPlot extends Component {
 
     return (
       <Scatter
+        ref='chart'
         {...this.props}
       />
     )

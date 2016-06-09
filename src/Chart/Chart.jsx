@@ -2,11 +2,25 @@ import React, {Component, PropTypes} from 'react'
 import 'chart.js'
 import 'Chart.Zoom.js'
 import chroma from 'chroma-js'
+import {RaisedButton} from 'material-ui'
 import titleCase from 'title-case'
 
 /* global Chart */
 
 Chart.defaults.global.defaultFontFamily = 'Roboto'
+
+const styles = {
+  container: {
+    position: 'relative',
+    height: '100%'
+  },
+  drillDownButton: {
+    position: 'absolute',
+    right: '32px',
+    top: 0,
+    width: '64px'
+  }
+}
 
 export default (ChartElement) => class ChartComponent extends Component {
   static propTypes = {
@@ -14,9 +28,10 @@ export default (ChartElement) => class ChartComponent extends Component {
     colorPalette: PropTypes.func,
     colorScale: PropTypes.string,
     data: PropTypes.object.isRequired,
-    drilldown: PropTypes.object,
+    drilldown: PropTypes.bool,
     options: PropTypes.object,
-    title: PropTypes.string
+    title: PropTypes.string,
+    onClick: PropTypes.func
   }
 
   static defaultProps = {
@@ -26,9 +41,10 @@ export default (ChartElement) => class ChartComponent extends Component {
         .colors(Math.max(numDataSets, 2))
     },
     colorScale: 'Paired',
-    drilldown: {},
+    drilldown: false,
     options: {},
     title: null,
+    onClick: null,
     ...ChartElement.defaultProps
   }
 
@@ -43,6 +59,118 @@ export default (ChartElement) => class ChartComponent extends Component {
       fontSize: 18,
       text: 'Default Chart'
     }
+  }
+  
+  constructor (props) {
+    super(props)
+    
+    this.state = {inDrillDown: false}
+    
+    this.onClick = ::this.onClick
+    this.onMouseMove = ::this.onMouseMove
+  }
+  
+  getChart () {
+    const {chart} = this.refs
+    const {chart: internalChart} = chart.refs
+    
+    return internalChart ? internalChart.getChart() : {}
+  }
+  
+  getChartData () {
+    return this.getChart().data
+  }
+  
+  getChartCanvas () {
+    const chart = this.getChart()
+    const {chart: canvasChart = {}} = chart
+    
+    return canvasChart.canvas
+  }
+  
+  onClick (event) {
+    const {onClick: onClickFn} = this.props
+    const {inDrillDown} = this.state
+    
+    if (inDrillDown) {
+      return
+    }
+    
+    const chart = this.getChart()
+    const [clickedElement] = chart.getElementAtEvent(event) || []
+    
+    if (clickedElement) {
+      const {data, datasets, ySeriesField} = chart.data
+      const {_datasetIndex: datasetIndex, _index: index} = clickedElement
+      const canvas = this.getChartCanvas()
+      
+      if (data) {
+        const dataItem = data[index]
+        
+        onClickFn(dataItem, dataItem[ySeriesField], datasetIndex)
+      } else {
+        const dataset = datasets[datasetIndex]
+        
+        onClickFn(dataset.data[index], dataset)
+      }
+    
+      // Reset the cursor after clicking.
+      canvas.style.cursor = null
+    }
+  }
+  
+  drilldown (newData) {
+    const chartData = this.getChartData()
+    
+    this.setState({
+      inDrillDown: true,
+      previousData: {
+        ...chartData
+      }
+    })
+    
+    this.updateChart(newData)
+  }
+  
+  returnFromDrilldown () {
+    const {previousData} = this.state
+    
+    this.updateChart(previousData)
+    
+    this.setState({
+      inDrillDown: false,
+      previousData: null
+    })
+  }
+  
+  onMouseMove (event) {
+    const {drilldown} = this.props
+    const {inDrillDown} = this.state
+    
+    if (!drilldown || inDrillDown) {
+      return
+    }
+    
+    const chart = this.getChart()
+    const [clickedElement] = chart.getElementAtEvent(event) || []
+    const canvas = this.getChartCanvas()
+    
+    if (clickedElement) {
+      canvas.style.cursor = 'pointer'
+    } else {
+      canvas.style.cursor = null
+    }
+  }
+  
+  updateChart (newData) {
+    const chart = this.getChart()
+    const chartData = this.getChartData()
+    const newChartData = this.parseObjectsFromData(newData)
+     
+    chartData.labels = newChartData.labels
+    chartData.datasets = newChartData.datasets
+     
+    chart.update()
   }
   
   parseObjectsFromData (data, scales) {
@@ -190,8 +318,9 @@ export default (ChartElement) => class ChartComponent extends Component {
   
   render () {
     const {
-      colorPalette, colorScale, data, drilldown, options, title
+      colorPalette, colorScale, data, options, title
     } = this.props
+    const {inDrillDown} = this.state
         
     if (title) {
       this.baseConfig.title = {
@@ -209,13 +338,26 @@ export default (ChartElement) => class ChartComponent extends Component {
     const parsedData = this.parseObjectsFromData({...data}, options.scales)
 
     return (
-      <ChartElement
-        colorPalette={colorPalette}
-        colorScale={colorScale}
-        data={parsedData}
-        drilldown={drilldown}
-        options={combinedOptions}
-      />
+      <div style={styles.container}>
+        <ChartElement
+          colorPalette={colorPalette}
+          colorScale={colorScale}
+          data={parsedData}
+          options={combinedOptions}
+          ref='chart'
+          onClick={this.onClick}
+          onMouseMove={this.onMouseMove}
+        />
+        <RaisedButton
+          label='Return'
+          primary={true}
+          style={{
+            ...styles.drillDownButton,
+            display: inDrillDown ? 'block' : 'none'
+          }}
+          onMouseUp={::this.returnFromDrilldown}
+        />
+      </div>
     )
   }
   
