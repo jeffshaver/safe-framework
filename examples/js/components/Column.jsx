@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Card, CardTitle, Paper} from 'material-ui'
 import {DefaultColumnChart} from 'safe-framework'
-import {columnSeriesFromData, tableColumns, tableData} from '../fixtures'
+import {columnSeriesFromData, columnSeries, tableColumns, tableData} from '../fixtures'
 
 const chartConfig = {
   legend: {
@@ -19,6 +19,12 @@ const chartConfig = {
 }
 
 class Column extends Component {
+  onClick (dataItem, seriesItem) {
+    const {chart} = this.refs
+    
+    chart.getChart().drilldown(columnSeries)
+  }
+  
   render () {
     return (
       <Paper zDepth={1}>
@@ -30,7 +36,12 @@ class Column extends Component {
           <DefaultColumnChart
             chartData={columnSeriesFromData}
             chartOptions={chartConfig}
+            chartProperties={{
+              drilldown: true,
+              onClick: ::this.onClick
+            }}
             columns={tableColumns}
+            ref='chart'
             size={'col-xs-12 col-sm-12'}
             tableData={tableData}
             title={'Browser market shares. January, 2015 to May, 2015'}

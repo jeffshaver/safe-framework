@@ -19,7 +19,7 @@ const chartConfig = {
 }
 
 class Bar extends Component {
-  onClick (dataItem, series, datasetIndex) {
+  onClick (dataItem, seriesItem) {
     const {chart} = this.refs
     
     chart.drilldown(columnSeriesUpdateData)

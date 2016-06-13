@@ -25,7 +25,7 @@ const chartConfig = {
   },
   tooltips: {
     callbacks: {
-      label: (tooltipItem, data) => {
+      afterLabel: (tooltipItem, data) => {
         const dataLabel = data.datasets[tooltipItem.datasetIndex].label
         
         return `${dataLabel} produced ${tooltipItem.yLabel} warheads`
