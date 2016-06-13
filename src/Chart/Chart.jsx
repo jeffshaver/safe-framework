@@ -64,7 +64,13 @@ export default (ChartElement) => class ChartComponent extends Component {
   constructor (props) {
     super(props)
     
-    this.state = {inDrillDown: false}
+    const {data, options} = this.props
+    const parsedData = this.parseObjectsFromData({...data}, options.scales)
+    
+    this.state = {
+      inDrillDown: false,
+      data: parsedData
+    }
     
     this.onClick = ::this.onClick
     this.onMouseMove = ::this.onMouseMove
@@ -92,7 +98,7 @@ export default (ChartElement) => class ChartComponent extends Component {
     const {onClick: onClickFn} = this.props
     const {inDrillDown} = this.state
     
-    if (inDrillDown) {
+    if (inDrillDown || !onClickFn) {
       return
     }
     
@@ -106,8 +112,9 @@ export default (ChartElement) => class ChartComponent extends Component {
       
       if (data) {
         const dataItem = data[index]
+        const series = dataItem[ySeriesField] || []
         
-        onClickFn(dataItem, dataItem[ySeriesField], datasetIndex)
+        onClickFn(dataItem, series[datasetIndex], series, datasetIndex)
       } else {
         const dataset = datasets[datasetIndex]
         
@@ -120,26 +127,18 @@ export default (ChartElement) => class ChartComponent extends Component {
   }
   
   drilldown (newData) {
-    const chartData = this.getChartData()
-    
     this.setState({
-      inDrillDown: true,
-      previousData: {
-        ...chartData
-      }
+      data: this.parseObjectsFromData({...newData}),
+      inDrillDown: true
     })
-    
-    this.updateChart(newData)
   }
   
   returnFromDrilldown () {
-    const {previousData} = this.state
-    
-    this.updateChart(previousData)
+    const {data} = this.props
     
     this.setState({
-      inDrillDown: false,
-      previousData: null
+      data: this.parseObjectsFromData({...data}),
+      inDrillDown: false
     })
   }
   
@@ -160,17 +159,6 @@ export default (ChartElement) => class ChartComponent extends Component {
     } else {
       canvas.style.cursor = null
     }
-  }
-  
-  updateChart (newData) {
-    const chart = this.getChart()
-    const chartData = this.getChartData()
-    const newChartData = this.parseObjectsFromData(newData)
-     
-    chartData.labels = newChartData.labels
-    chartData.datasets = newChartData.datasets
-     
-    chart.update()
   }
   
   parseObjectsFromData (data, scales) {
@@ -263,10 +251,21 @@ export default (ChartElement) => class ChartComponent extends Component {
             ySeriesMap, newSeries[ySeriesFieldName], newSeries[ySeriesFieldValue], dataIndex)
         }
       } else if (typeof datasetYSeries === 'object') {
-        for (const seriesName of Object.keys(datasetYSeries)) {
+        const dataKeys = Object.keys(datasetYSeries)
+        
+        for (const seriesName of dataKeys) {
           this.createNewYSeries(
             ySeriesMap, seriesName, datasetYSeries[seriesName], dataIndex)
         }
+        
+        // Fill in any fields that were no present in the
+        // object, but need empty values for its dataset.
+        ySeriesMap.forEach((value, key) => {
+          if (datasetYSeries[key] === undefined) {
+            this.createNewYSeries(
+              ySeriesMap, key, null, dataIndex)
+          }
+        })
       }
     }
     
@@ -318,9 +317,9 @@ export default (ChartElement) => class ChartComponent extends Component {
   
   render () {
     const {
-      colorPalette, colorScale, data, options, title
+      colorPalette, colorScale, options, title
     } = this.props
-    const {inDrillDown} = this.state
+    const {inDrillDown, data} = this.state
         
     if (title) {
       this.baseConfig.title = {
@@ -335,14 +334,12 @@ export default (ChartElement) => class ChartComponent extends Component {
       ...options
     }
 
-    const parsedData = this.parseObjectsFromData({...data}, options.scales)
-
     return (
       <div style={styles.container}>
         <ChartElement
           colorPalette={colorPalette}
           colorScale={colorScale}
-          data={parsedData}
+          data={data}
           options={combinedOptions}
           ref='chart'
           onClick={this.onClick}

@@ -198,7 +198,7 @@ export const columnSeriesUpdateData = {
     name: 'Microsoft Internet Explorer',
     y: 76.33,
     series: [
-      {name: 'male', value: 20.33},
+      {name: 'male', value: 50.33},
       {name: 'female', value: 26}
     ]
   }, {
