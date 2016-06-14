@@ -224,6 +224,18 @@ export default (ChartElement) => class ChartComponent extends Component {
 
     // After creating all the datasets, populate with data.
     for (const [dataIndex, dataObject] of dataset.entries()) {
+      const datasetYSeries = dataObject[ySeriesField]
+      
+      // If ySeriesField was not found in the data and
+      // no datasets were provided, create a datset.
+      if (ySeriesField && !datasetYSeries && data.datasets === 0) {
+        data.datasets.push({
+          data: [],
+          dataProperty: ySeriesFieldValue,
+          label: titleCase(ySeriesFieldName)
+        })
+      }
+      
       // Create the set of labels from the first dataset
       // to conform to the chartjs framework.
       data.labels.push(dataObject[firstXAxis.dataProperty])
@@ -240,8 +252,6 @@ export default (ChartElement) => class ChartComponent extends Component {
         dataset.data.push(dataObject[dataset.dataProperty])
       }
       
-      const datasetYSeries = dataObject[ySeriesField]
-        
       // If the ySeriesField was provided, we want to traverse
       // through each of these fields and construct a new series from that
       // field if needed.
@@ -285,6 +295,7 @@ export default (ChartElement) => class ChartComponent extends Component {
         label: titleCase(seriesName),
         data: Array(dataIndex).fill(0)
       }
+      
       ySeriesMap.set(seriesName, ySeriesDataset)
     }
     
