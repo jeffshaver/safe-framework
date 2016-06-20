@@ -5,6 +5,14 @@ import debounce from 'lodash.debounce'
 /* global document */
 /* global window */
 
+const csvDefaults = {
+  skipHeader: false,
+  skipFooters: false,
+  skipGroups: false,
+  allColumns: true,
+  onlySelected: false
+}
+
 export class DataTable extends Component {
   static propTypes = {
     autoResize: PropTypes.bool,
@@ -70,24 +78,26 @@ export class DataTable extends Component {
     grid.api.destroy()
   }
   
-  exportToCSV () {
+  exportToCSV (exportParams = {}) {
     const {exportFileName} = this.props
     const {grid} = this.refs
     
-    const params = {
-      skipHeader: false,
-      skipFooters: false,
-      skipGroups: false,
-      allColumns: true,
-      onlySelected: false,
-      fileName: exportFileName
-    }
-    
-    console.log('export called')
-    
-    grid.api.exportDataAsCsv(params)
+    grid.api.exportDataAsCsv({
+      fileName: exportFileName,
+      ...csvDefaults,
+      ...exportParams
+    })
   }
-
+  
+  getCSV (copyParams = {}) {
+    const {grid} = this.refs
+    
+    return grid.api.getDataAsCsv({
+      ...csvDefaults,
+      ...copyParams
+    })
+  }
+  
   headerCellRendererFunc (params) {
     const {api} = params
     const cb = document.createElement('input')
