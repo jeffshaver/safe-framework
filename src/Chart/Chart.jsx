@@ -30,6 +30,7 @@ export default (ChartElement) => class ChartComponent extends Component {
     data: PropTypes.object.isRequired,
     drilldown: PropTypes.bool,
     options: PropTypes.object,
+    style: PropTypes.object,
     title: PropTypes.string,
     onClick: PropTypes.func
   }
@@ -43,6 +44,7 @@ export default (ChartElement) => class ChartComponent extends Component {
     colorScale: 'Paired',
     drilldown: false,
     options: {},
+    style: {},
     title: null,
     onClick: null,
     ...ChartElement.defaultProps
@@ -60,107 +62,107 @@ export default (ChartElement) => class ChartComponent extends Component {
       text: 'Default Chart'
     }
   }
-  
+
   constructor (props) {
     super(props)
-    
+
     const {data, options} = this.props
     const parsedData = this.parseObjectsFromData({...data}, options.scales)
-    
+
     this.state = {
       inDrillDown: false,
       data: parsedData
     }
-    
+
     this.onClick = ::this.onClick
     this.onMouseMove = ::this.onMouseMove
   }
-  
+
   getChart () {
     const {chart} = this.refs
     const {chart: internalChart} = chart.refs
-    
+
     return internalChart ? internalChart.getChart() : {}
   }
-  
+
   getChartData () {
     return this.getChart().data
   }
-  
+
   getChartCanvas () {
     const chart = this.getChart()
     const {chart: canvasChart = {}} = chart
-    
+
     return canvasChart.canvas
   }
-  
+
   onClick (event) {
     const {onClick: onClickFn} = this.props
     const {inDrillDown} = this.state
-    
+
     if (inDrillDown || !onClickFn) {
       return
     }
-    
+
     const chart = this.getChart()
     const [clickedElement] = chart.getElementAtEvent(event) || []
-    
+
     if (clickedElement) {
       const {data, datasets, ySeriesField} = chart.data
       const {_datasetIndex: datasetIndex, _index: index} = clickedElement
       const canvas = this.getChartCanvas()
-      
+
       if (data) {
         const dataItem = data[index]
         const series = dataItem[ySeriesField] || []
-        
+
         onClickFn(dataItem, series[datasetIndex], series, datasetIndex)
       } else {
         const dataset = datasets[datasetIndex]
-        
+
         onClickFn(dataset.data[index], dataset)
       }
-    
+
       // Reset the cursor after clicking.
       canvas.style.cursor = null
     }
   }
-  
+
   drilldown (newData) {
     this.setState({
       data: this.parseObjectsFromData({...newData}),
       inDrillDown: true
     })
   }
-  
+
   returnFromDrilldown () {
     const {data} = this.props
-    
+
     this.setState({
       data: this.parseObjectsFromData({...data}),
       inDrillDown: false
     })
   }
-  
+
   onMouseMove (event) {
     const {drilldown} = this.props
     const {inDrillDown} = this.state
-    
+
     if (!drilldown || inDrillDown) {
       return
     }
-    
+
     const chart = this.getChart()
     const [clickedElement] = chart.getElementAtEvent(event) || []
     const canvas = this.getChartCanvas()
-    
+
     if (clickedElement) {
       canvas.style.cursor = 'pointer'
     } else {
       canvas.style.cursor = null
     }
   }
-  
+
   parseObjectsFromData (data, scales) {
     const {
       data: dataset,
@@ -194,7 +196,7 @@ export default (ChartElement) => class ChartComponent extends Component {
           dataProperty: dataset
         }
       }
-      
+
       dataset = {
         ...dataset,
         data: [],
@@ -212,7 +214,7 @@ export default (ChartElement) => class ChartComponent extends Component {
           dataProperty: dataset
         }
       }
-      
+
       dataset = {
         ...dataset,
         data: [],
@@ -225,7 +227,7 @@ export default (ChartElement) => class ChartComponent extends Component {
     // After creating all the datasets, populate with data.
     for (const [dataIndex, dataObject] of dataset.entries()) {
       const datasetYSeries = dataObject[ySeriesField]
-      
+
       // If ySeriesField was not found in the data and
       // no datasets were provided, create a datset.
       if (ySeriesField && !datasetYSeries && data.datasets === 0) {
@@ -235,11 +237,11 @@ export default (ChartElement) => class ChartComponent extends Component {
           label: titleCase(ySeriesFieldName)
         })
       }
-      
+
       // Create the set of labels from the first dataset
       // to conform to the chartjs framework.
       data.labels.push(dataObject[firstXAxis.dataProperty])
-      
+
       for (let [index, dataset] of data.datasets.entries()) {
         // If data is in array format, add to corresponding
         // dataset in order of x-axes first then y-axes.
@@ -248,10 +250,10 @@ export default (ChartElement) => class ChartComponent extends Component {
 
           continue
         }
-        
+
         dataset.data.push(dataObject[dataset.dataProperty])
       }
-      
+
       // If the ySeriesField was provided, we want to traverse
       // through each of these fields and construct a new series from that
       // field if needed.
@@ -262,12 +264,12 @@ export default (ChartElement) => class ChartComponent extends Component {
         }
       } else if (typeof datasetYSeries === 'object') {
         const dataKeys = Object.keys(datasetYSeries)
-        
+
         for (const seriesName of dataKeys) {
           this.createNewYSeries(
             ySeriesMap, seriesName, datasetYSeries[seriesName], dataIndex)
         }
-        
+
         // Fill in any fields that were no present in the
         // object, but need empty values for its dataset.
         ySeriesMap.forEach((value, key) => {
@@ -278,60 +280,60 @@ export default (ChartElement) => class ChartComponent extends Component {
         })
       }
     }
-    
+
     // Add each of the new Y-Series as datasets.
     ySeriesMap.forEach((ySeries, key, map) => data.datasets.push(ySeries))
-    
+
     data.datasets = this.populateWithColors(data.datasets)
 
     return data
   }
-  
+
   createNewYSeries (ySeriesMap, seriesName, seriesValue, dataIndex = 0) {
     let ySeriesDataset = ySeriesMap.get(seriesName)
-          
+
     if (!ySeriesDataset) {
       ySeriesDataset = {
         label: titleCase(seriesName),
         data: Array(dataIndex).fill(0)
       }
-      
+
       ySeriesMap.set(seriesName, ySeriesDataset)
     }
-    
+
     ySeriesDataset.data.push(seriesValue)
-    
+
     return ySeriesDataset
   }
-  
+
   populateWithColors (datasets) {
     const {backgroundColorAlpha, colorPalette, colorScale} = this.props
-    
+
     // update the colors on the datasets.
     const datasetColors = colorPalette(datasets.length, colorScale)
-    
+
     // Make a copy of each of the datasets before passing them along
     datasets = datasets.map((dataset, index) => {
       const backgroundColor = dataset.backgroundColor ||
         chroma(datasetColors[index]).alpha(backgroundColorAlpha).css()
       const borderColor = dataset.borderColor || datasetColors[index]
-      
+
       return {
         ...dataset,
         backgroundColor,
         borderColor
       }
     })
-    
+
     return datasets
   }
-  
+
   render () {
     const {
-      colorPalette, colorScale, options, title
+      colorPalette, colorScale, options, style: canvasStyle, title
     } = this.props
     const {inDrillDown, data} = this.state
-        
+
     if (title) {
       this.baseConfig.title = {
         ...this.baseConfig.title,
@@ -339,7 +341,7 @@ export default (ChartElement) => class ChartComponent extends Component {
         text: title
       }
     }
-    
+
     const combinedOptions = {
       ...this.baseConfig,
       ...options
@@ -353,6 +355,7 @@ export default (ChartElement) => class ChartComponent extends Component {
           data={data}
           options={combinedOptions}
           ref='chart'
+          style={canvasStyle}
           onClick={this.onClick}
           onMouseMove={this.onMouseMove}
         />
@@ -368,5 +371,5 @@ export default (ChartElement) => class ChartComponent extends Component {
       </div>
     )
   }
-  
+
 }
