@@ -176,6 +176,14 @@
   position: absolute;
 }
 
+/* Grouping */
+.ag-group-child-count {
+  font-size: 14px;
+  vertical-align: middle;
+  height: 34px;
+  display: inline-block;
+}
+
 .leaflet-control-layers-overlays {
   font-family: 'Roboto';
   font-size: 14px;

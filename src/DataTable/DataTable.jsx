@@ -1,6 +1,10 @@
-import React, {Component, PropTypes} from 'react'
 import {AgGridReact} from 'ag-grid-react'
 import debounce from 'lodash.debounce'
+import {getSvgIcon} from '../utilities'
+import Plus from 'material-ui/svg-icons/content/add'
+import Minus from 'material-ui/svg-icons/content/remove'
+import titleCase from 'title-case'
+import React, {Component, PropTypes} from 'react'
 
 /* global document */
 /* global window */
@@ -18,9 +22,11 @@ export class DataTable extends Component {
     autoResize: PropTypes.bool,
     checkboxColumn: PropTypes.any,
     checkboxColumnConfig: PropTypes.object,
-    columns: PropTypes.array.isRequired,
+    childProp: PropTypes.string,
+    columns: PropTypes.array,
     data: PropTypes.array.isRequired,
     exportFileName: PropTypes.string,
+    getNodeChildDetails: PropTypes.func,
     resizeDelay: PropTypes.number,
     stripeRows: PropTypes.bool
   }
@@ -29,9 +35,17 @@ export class DataTable extends Component {
     autoResize: true,
     checkboxColumn: false,
     checkboxColumnConfig: {},
+    childProp: null,
+    columns: null,
     exportFileName: 'table_export.csv',
     resizeDelay: 100,
     stripeRows: true
+  }
+  
+  constructor (props) {
+    super(props)
+    
+    this.defaultGroupingFn = ::this.defaultGroupingFn
   }
 
   handleResize (grid) {
@@ -78,6 +92,33 @@ export class DataTable extends Component {
     grid.api.destroy()
   }
   
+  createColumns (data) {
+    const {childProp} = this.props
+    const [firstItem = {}] = data
+    
+    const dataColumnKeys =
+      Object.keys(firstItem).filter((field) => (
+        !field.startsWith('_') && field !== childProp
+      ))
+    
+    const drilldownColumnKeys =
+      Object.keys((firstItem[childProp] || [])[0] || {}).filter((field) => (
+        !field.startsWith('_')
+      ))
+    
+    // Combine the columns names from both top level and child level fields.
+    // Create a Set to eliminate duplicates.
+    return [
+      ...new Set([
+        ...dataColumnKeys,
+        ...drilldownColumnKeys
+      ])]
+      .map((field) => ({
+        headerName: titleCase(field),
+        field
+      }))
+  }
+
   exportToCSV (exportParams = {}) {
     const {exportFileName} = this.props
     const {grid} = this.refs
@@ -98,7 +139,7 @@ export class DataTable extends Component {
     })
   }
   
-  headerCellRendererFunc (params) {
+  checkboxHeaderRendererFunc (params) {
     const {api} = params
     const cb = document.createElement('input')
 
@@ -125,7 +166,7 @@ export class DataTable extends Component {
 
     return label
   }
-
+  
   tooltipRenderer (params) {
     let renderedValue = params.value
 
@@ -137,12 +178,38 @@ export class DataTable extends Component {
     return `<span title="${renderedValue}">${renderedValue}</span>`
   }
 
+  getGroupIcon (svgIcon) {
+    return getSvgIcon(svgIcon, {
+      style: {
+        cursor: 'pointer'
+      }
+    })
+  }
+  
+  defaultGroupingFn (rowItem) {
+    const {childProp} = this.props
+    
+    if (!rowItem[childProp]) {
+      return null
+    }
+    
+    return {
+      children: rowItem[childProp],
+      group: true
+    }
+  }
+
   render () {
     const {
-      checkboxColumn, checkboxColumnConfig, columns, data, stripeRows
+      checkboxColumn,
+      checkboxColumnConfig,
+      childProp,
+      columns,
+      data,
+      stripeRows
     } = this.props
 
-    let columnDefs = columns
+    let columnDefs = columns || this.createColumns(data)
     let gridProps = {
       headerHeight: '48',
       rowHeight: '48'
@@ -158,7 +225,7 @@ export class DataTable extends Component {
 
       return column
     })
-
+    
     // Add the row striping class to every other row
     if (stripeRows === true) {
       gridProps.getRowClass = (params) => {
@@ -171,7 +238,7 @@ export class DataTable extends Component {
       columnDefs = [{
         ...checkboxColumnConfig,
         checkboxSelection: true,
-        headerCellRenderer: this.headerCellRendererFunc,
+        headerCellRenderer: this.checkboxHeaderRendererFunc,
         headerName: '',
         suppressMovable: true,
         suppressResize: true,
@@ -188,6 +255,32 @@ export class DataTable extends Component {
         },
         rowSelection: 'multiple',
         suppressRowClickSelection: true
+      }
+    }
+    
+    if (childProp) {
+      gridProps.getNodeChildDetails = this.defaultGroupingFn
+      
+      // Add the cell renderer to the first column to show children.
+      if (columnDefs.length > 0) {
+        columnDefs = [{
+          cellRenderer: 'group',
+          // headerCellRenderer: this.headerCellRendererFunc,
+          headerName: '',
+          suppressMovable: true,
+          suppressResize: true,
+          suppressSorting: true,
+          width: 100
+        }, ...columnDefs]
+        
+        gridProps.icons = {
+          groupContracted: function () {
+            return this.getGroupIcon(Plus)
+          }.bind(this),
+          groupExpanded: function () {
+            return this.getGroupIcon(Minus)
+          }.bind(this)
+        }
       }
     }
 

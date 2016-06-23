@@ -1,9 +1,8 @@
-import {IconWrapper} from '../Wrapper'
+import {getSvgIcon} from '../utilities'
 import Leaflet from 'leaflet'
 import titleCase from 'title-case'
 import React, {Component, PropTypes} from 'react'
 import ReactDOM from 'react-dom'
-import ReactDOMServer from 'react-dom/server'
 import {
   LayersControl,
   LayerGroup,
@@ -63,18 +62,14 @@ export class Map extends Component {
         break
       }
       
-      const placeIcon = React.createElement(MapsPlace, {
+      checkboxLabel.insertAdjacentHTML('afterend', checkboxLabel.innerHTML)
+      checkboxLabel.insertAdjacentHTML('afterend', getSvgIcon(MapsPlace, {
         color: this.getColor(index + 1),
         style: {
           height: '16px',
           width: '16px'
         }
-      })
-      
-      const iconWrapper = React.createElement(IconWrapper, {}, placeIcon)
-      
-      checkboxLabel.insertAdjacentHTML('afterend', checkboxLabel.innerHTML)
-      checkboxLabel.insertAdjacentHTML('afterend', ReactDOMServer.renderToStaticMarkup(iconWrapper))
+      }))
       
       checkboxLabel.innerHTML = ''
     }
@@ -222,7 +217,7 @@ export class Map extends Component {
     const {dataOptions} = this.props
     // TODO: Extract these names and make them configurable to the Map.
     const {
-      label,
+      label = 'Label',
       latField = 'Latitude',
       longField = 'Longitude',
       sourcePrefix,

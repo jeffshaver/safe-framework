@@ -300,6 +300,10 @@ for (let i = 0; i < 100; i++) {
 for (let i = 0; i < 1000; i++) {
   tableData.push({
     text: 'Text ' + i,
+    children: [{
+      text: 'Child ' + i,
+      number: i
+    }],
     number: i,
     decimal: Math.random(1, 100),
     date: new Date(Date.now() * Math.random()),

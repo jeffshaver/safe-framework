@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Card, CardActions, CardTitle, Dialog, Paper} from 'material-ui'
 import {DataTable} from 'safe-framework'
 import FlatButton from 'material-ui/FlatButton'
-import {tableColumns, tableData} from '../fixtures'
+import {tableData} from '../fixtures'
 
 class Table extends Component {
   constructor (props) {
@@ -54,7 +54,7 @@ class Table extends Component {
           </CardActions>
           <DataTable
             checkboxColumn={true}
-            columns={tableColumns}
+            childProp='children'
             data={tableData}
             enableColResize='true'
             enableSorting='true'
