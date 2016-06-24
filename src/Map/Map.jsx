@@ -33,7 +33,7 @@ export class Map extends Component {
   
   static defaultProps = {
     center: null,
-    dataOptions: null,
+    dataOptions: {},
     mapOptions: {
       minZoom: 3,
       zoom: 5,
@@ -93,9 +93,9 @@ export class Map extends Component {
   createLayers () {
     const {layers = []} = this.props
     
-    return layers.map((layer, index) =>
+    return layers.map((layer, index) => (
       this.createLayer(layer, this.getColor(index + 1))
-    )
+    ))
   }
 
   createLayer (layer, overrideColor) {
@@ -114,11 +114,18 @@ export class Map extends Component {
   }
 
   createLayerData (layer, overrideColor) {
+    const {dataOptions} = this.props
+    const {layerParams = {}} = dataOptions
     const {color = overrideColor, name: key} = layer
     
     // Create Layer from data provided.
     if (layer.data) {
-      return this.createElementsFromData(layer.data, overrideColor, key)
+      return this.createElementsFromData(
+        layer.data,
+        layerParams[layer.name] || dataOptions,
+        overrideColor,
+        key
+      )
     }
     
     // Create layer from markers/lines.
@@ -178,6 +185,7 @@ export class Map extends Component {
         color={line.color || color}
         key={key}
         positions={[start, end]}
+        weight={2}
       >
         {this.createPopupLabel(labels)}
       </Polyline>,
@@ -206,15 +214,14 @@ export class Map extends Component {
       : null
   }
   
-  createElementsFromData (data = [], color, key) {
+  createElementsFromData (data = [], dataOptions, color, key) {
     return data.reduce((prev, dataItem, index, array) => (
       prev.concat(
-        this.createElementFromDataItem(dataItem, color, key, index))
+        this.createElementFromDataItem(dataItem, dataOptions, color, key, index))
     ), [])
   }
   
-  createElementFromDataItem (dataItem, color, key, index) {
-    const {dataOptions} = this.props
+  createElementFromDataItem (dataItem, dataOptions, color, key, index) {
     // TODO: Extract these names and make them configurable to the Map.
     const {
       label = 'Label',
