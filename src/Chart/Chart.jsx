@@ -129,6 +129,8 @@ export default (ChartElement) => class ChartComponent extends Component {
   }
 
   drilldown (newData) {
+    this.getChart().data.datasets = []
+    
     this.setState({
       data: this.parseObjectsFromData({...newData}),
       inDrillDown: true
@@ -137,6 +139,8 @@ export default (ChartElement) => class ChartComponent extends Component {
 
   returnFromDrilldown () {
     const {data} = this.props
+    
+    this.getChart().data.datasets = []
 
     this.setState({
       data: this.parseObjectsFromData({...data}),
