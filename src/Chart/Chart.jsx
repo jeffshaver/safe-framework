@@ -77,6 +77,29 @@ export default (ChartElement) => class ChartComponent extends Component {
     this.onClick = ::this.onClick
     this.onMouseMove = ::this.onMouseMove
   }
+  
+  componentWillReceiveProps (nextProps) {
+    const {data: newData = {}, options} = nextProps
+    const {data = {}} = this.props
+    
+    if (data.data === newData.data) {
+      return
+    }
+    
+    this.setState({
+      data: this.parseObjectsFromData({...newData}, options.scales)
+    })
+  }
+  
+  shouldComponentUpdate (nextProps, nextState) {
+    const {data: newData = {}} = nextProps
+    const {data = {}} = this.props
+    const {data: stateData = {}} = this.state
+    const {data: newStateData = {}} = nextState
+    
+    return data.data !== newData.data ||
+      stateData.data !== newStateData.data
+  }
 
   getChart () {
     const {chart} = this.refs
@@ -234,7 +257,7 @@ export default (ChartElement) => class ChartComponent extends Component {
 
       // If ySeriesField was not found in the data and
       // no datasets were provided, create a datset.
-      if (ySeriesField && !datasetYSeries && data.datasets === 0) {
+      if (ySeriesField && !datasetYSeries && data.datasets.length === 0) {
         data.datasets.push({
           data: [],
           dataProperty: ySeriesFieldValue,
