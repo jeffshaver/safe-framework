@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {Card, CardTitle, Paper} from 'material-ui'
 import {DefaultMap} from 'safe-framework'
 import {
-  mapCenter,
   mapData,
   mapTitle,
   tableColumns,
@@ -32,7 +31,6 @@ class Map extends Component {
             title='Map + Table'
           />
           <DefaultMap
-            center={mapCenter}
             columns={tableColumns}
             data={tableData}
             mapDataOptions={mapDataOptions}

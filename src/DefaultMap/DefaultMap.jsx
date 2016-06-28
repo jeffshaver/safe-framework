@@ -18,7 +18,6 @@ export class DefaultMap extends Component {
   }
 
   static defaultProps = {
-    center: null,
     mapDataOptions: {},
     size: 'col-xs-12 col-sm-12',
     tileLayerOptions: {},

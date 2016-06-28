@@ -32,7 +32,6 @@ export class Map extends Component {
   }
   
   static defaultProps = {
-    center: null,
     dataOptions: {},
     mapOptions: {
       minZoom: 3,
@@ -224,20 +223,20 @@ export class Map extends Component {
   createElementFromDataItem (dataItem, dataOptions, color, key, index) {
     // TODO: Extract these names and make them configurable to the Map.
     const {
-      label = 'Label',
-      latField = 'Latitude',
-      longField = 'Longitude',
-      sourcePrefix,
-      destinationPrefix
-    } = dataOptions
-    const labelFields = Array.isArray(label) ? label : [label]
-    
-    const latTitle = titleCase(latField)
-    const longTitle = titleCase(longField)
+      destinationLat,
+      destinationLong,
+      destinationPrefix,
+      labelFields,
+      latField,
+      longField,
+      sourceLat,
+      sourceLong,
+      sourcePrefix
+    } = this.parseDataOptions(dataOptions)
     
     // If contains source prefix value in data,
     // assume we are creating a line.
-    if (dataItem[sourcePrefix + latTitle]) {
+    if (sourcePrefix && dataItem[sourceLat]) {
       const labels = labelFields.reduce((prev, labelField) => {
         const labelTitle = titleCase(labelField)
         
@@ -250,8 +249,8 @@ export class Map extends Component {
       return this.createLine({
         labels,
         positions: [
-          [dataItem[sourcePrefix + latTitle], dataItem[sourcePrefix + longTitle]],
-          [dataItem[destinationPrefix + latTitle], dataItem[destinationPrefix + longTitle]]
+          [dataItem[sourceLat], dataItem[sourceLong]],
+          [dataItem[destinationLat], dataItem[destinationLong]]
         ]
       }, color, key, index)
     } else {
@@ -271,8 +270,48 @@ export class Map extends Component {
     }
   }
   
-  constructLabelData () {
+  parseDataOptions (dataOptions) {
+    let {
+      latField = 'Latitude',
+      longField = 'Longitude'
+    } = dataOptions
+    const {
+      label = 'Label',
+      sourcePrefix,
+      destinationPrefix
+    } = dataOptions
+    const latTitle = titleCase(latField)
+    const longTitle = titleCase(longField)
+    const labelFields = Array.isArray(label) ? label : [label]
     
+    return {
+      ...dataOptions,
+      destinationLat: `${destinationPrefix}${latTitle}`,
+      destinationLong: `${destinationPrefix}${longTitle}`,
+      labelFields,
+      latField,
+      longField,
+      sourceLat: `${sourcePrefix}${latTitle}`,
+      sourceLong: `${sourcePrefix}${longTitle}`
+    }
+  }
+  
+  defaultCenter () {
+    const {baseLayer, dataOptions} = this.props
+    const [firstItem = {}] = baseLayer.data
+    const {
+      latField,
+      longField,
+      sourceLat,
+      sourceLong,
+      sourcePrefix
+    } = this.parseDataOptions(dataOptions)
+    
+    if (sourcePrefix && firstItem[sourceLat]) {
+      [firstItem[sourceLat], firstItem[sourceLong]]
+    }
+    
+    return [firstItem[latField], firstItem[longField]]
   }
   
   createLabels (labels) {
@@ -290,7 +329,13 @@ export class Map extends Component {
   }
 
   render () {
-    const {center, mapOptions, tileLayerOptions, wms, zoomControlPosition} = this.props
+    const {
+      center = this.defaultCenter(),
+      mapOptions,
+      tileLayerOptions,
+      wms,
+      zoomControlPosition
+    } = this.props
     let TileLayerComponent = wms ? WMSTileLayer : TileLayer
     const layers = this.createLayers()
     
