@@ -7,3 +7,9 @@ export const wrapper = {
     width: '75%'
   }
 }
+
+export const clearfix = {
+  clear: 'both',
+  display: 'block',
+  overflow: 'hidden'
+}

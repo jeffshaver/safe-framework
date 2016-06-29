@@ -1,14 +1,18 @@
 import {AgGridReact} from 'ag-grid-react'
+import {clearfix} from '../styles/general'
 import debounce from 'lodash.debounce'
 import {getSvgIcon} from '../utilities'
 import Plus from 'material-ui/svg-icons/content/add'
 import Minus from 'material-ui/svg-icons/content/remove'
+import TextField from 'material-ui/TextField'
 import titleCase from 'title-case'
 import React, {Component, PropTypes} from 'react'
 
-/* global document */
-/* global window */
-
+const style = {
+  textField: {
+    float: 'right'
+  }
+}
 const csvDefaults = {
   skipHeader: false,
   skipFooters: false,
@@ -25,6 +29,9 @@ export class DataTable extends Component {
     childProp: PropTypes.string,
     columns: PropTypes.array,
     data: PropTypes.array.isRequired,
+    enableColResize: PropTypes.string,
+    enableFilter: PropTypes.string,
+    enableSorting: PropTypes.string,
     exportFileName: PropTypes.string,
     getNodeChildDetails: PropTypes.func,
     resizeDelay: PropTypes.number,
@@ -37,15 +44,23 @@ export class DataTable extends Component {
     checkboxColumnConfig: {},
     childProp: null,
     columns: null,
+    enableColResize: 'true',
+    enableFilter: 'true',
+    enableSorting: 'true',
     exportFileName: 'table_export.csv',
     resizeDelay: 100,
     stripeRows: true
   }
-  
+
   constructor (props) {
     super(props)
-    
+
+    this.state = {
+      quickFilterText: ''
+    }
+
     this.defaultGroupingFn = ::this.defaultGroupingFn
+    this.onQuickFilterChange = ::this.onQuickFilterChange
   }
 
   handleResize (grid) {
@@ -56,18 +71,10 @@ export class DataTable extends Component {
     grid.api.sizeColumnsToFit()
   }
 
-  shouldComponentUpdate (nextProps) {
-    let shouldUpdate = false
+  shouldComponentUpdate (nextProps, nextState) {
+    if (this.state !== nextState) return true
 
-    Object.keys(this.props).forEach((key) => {
-      if (this.props[key] === nextProps[key]) {
-        return
-      }
-
-      shouldUpdate = true
-    })
-
-    return shouldUpdate
+    return this.getChangedProps(this.props, nextProps).length !== 0
   }
 
   componentDidMount () {
@@ -76,36 +83,36 @@ export class DataTable extends Component {
 
     this.handleResize(grid)
 
-    this.handleResize = debounce(this.handleResize.bind(this, grid), resizeDelay)
+    this.handleDebouncedResize = debounce(this.handleResize.bind(this, grid), resizeDelay)
 
-    window.addEventListener('resize', this.handleResize)
+    window.addEventListener('resize', this.handleDebouncedResize)
   }
 
-  componentDidUpdate () {
+  componentDidUpdate (prevProps) {
     this.handleResize(this.refs.grid)
   }
 
   componentWillUnmount () {
     const {grid} = this.refs
 
-    window.removeEventListener('resize', this.handleResize)
+    window.removeEventListener('resize', this.handleDebouncedResize)
     grid.api.destroy()
   }
-  
+
   createColumns (data) {
     const {childProp} = this.props
     const [firstItem = {}] = data
-    
+
     const dataColumnKeys =
       Object.keys(firstItem).filter((field) => (
         !field.startsWith('_') && field !== childProp
       ))
-    
+
     const drilldownColumnKeys =
       Object.keys((firstItem[childProp] || [])[0] || {}).filter((field) => (
         !field.startsWith('_')
       ))
-    
+
     // Combine the columns names from both top level and child level fields.
     // Create a Set to eliminate duplicates.
     return [
@@ -119,26 +126,32 @@ export class DataTable extends Component {
       }))
   }
 
+  getChangedProps (oldProps, newProps) {
+    return Object.keys(newProps).filter((key) => {
+      return newProps[key] !== oldProps[key]
+    })
+  }
+
   exportToCSV (exportParams = {}) {
     const {exportFileName} = this.props
     const {grid} = this.refs
-    
+
     grid.api.exportDataAsCsv({
       fileName: exportFileName,
       ...csvDefaults,
       ...exportParams
     })
   }
-  
+
   getCSV (copyParams = {}) {
     const {grid} = this.refs
-    
+
     return grid.api.getDataAsCsv({
       ...csvDefaults,
       ...copyParams
     })
   }
-  
+
   checkboxHeaderRendererFunc (params) {
     const {api} = params
     const cb = document.createElement('input')
@@ -166,7 +179,7 @@ export class DataTable extends Component {
 
     return label
   }
-  
+
   tooltipRenderer (params) {
     let renderedValue = params.value
 
@@ -185,18 +198,28 @@ export class DataTable extends Component {
       }
     })
   }
-  
+
   defaultGroupingFn (rowItem) {
     const {childProp} = this.props
-    
+
     if (!rowItem[childProp]) {
       return null
     }
-    
+
     return {
       children: rowItem[childProp],
       group: true
     }
+  }
+
+  onQuickFilterChange (ev, value) {
+    const {enableFilter} = this.props
+
+    if (enableFilter !== 'true') return
+
+    this.setState({
+      quickFilterText: value
+    })
   }
 
   render () {
@@ -208,7 +231,7 @@ export class DataTable extends Component {
       data,
       stripeRows
     } = this.props
-
+    const {quickFilterText} = this.state
     let columnDefs = columns || this.createColumns(data)
     let gridProps = {
       headerHeight: '48',
@@ -225,7 +248,7 @@ export class DataTable extends Component {
 
       return column
     })
-    
+
     // Add the row striping class to every other row
     if (stripeRows === true) {
       gridProps.getRowClass = (params) => {
@@ -257,10 +280,10 @@ export class DataTable extends Component {
         suppressRowClickSelection: true
       }
     }
-    
+
     if (childProp) {
       gridProps.getNodeChildDetails = this.defaultGroupingFn
-      
+
       // Add the cell renderer to the first column to show children.
       if (columnDefs.length > 0) {
         columnDefs = [{
@@ -272,7 +295,7 @@ export class DataTable extends Component {
           suppressSorting: true,
           width: 100
         }, ...columnDefs]
-        
+
         gridProps.icons = {
           groupContracted: function () {
             return this.getGroupIcon(Plus)
@@ -287,12 +310,20 @@ export class DataTable extends Component {
     gridProps = {
       ...gridProps,
       ...this.props,
+      quickFilterText,
       columnDefs,
       rowData: data
     }
 
     return (
       <div className='ag-material'>
+        <TextField
+          floatingLabelText='Filter'
+          name='quickFilter'
+          style={style.textField}
+          onChange={this.onQuickFilterChange}
+        />
+        <div style={clearfix} />
         <AgGridReact
           ref='grid'
           {...gridProps}
