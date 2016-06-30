@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import Chart, {DefaultChart} from '../Chart'
 import {Line} from 'safe-framework-react-chartjs'
+import Chart, {DefaultChart} from '../Chart'
+import React, {Component} from 'react'
 
 @Chart
 export default class AreaChart extends Component {

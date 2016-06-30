@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react'
-import Chart, {DefaultChart} from '../Chart'
 import {Pie} from 'safe-framework-react-chartjs'
+import Chart, {DefaultChart} from '../Chart'
+import React, {Component, PropTypes} from 'react'
 
 @Chart
 export default class PieChart extends Component {

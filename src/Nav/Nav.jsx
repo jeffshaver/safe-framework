@@ -1,10 +1,9 @@
-import React, {Component, PropTypes} from 'react'
-import Radium from 'radium'
-// import NavItem from '../NavItem'
-import {accentColor, fadedBody} from '../styles/colors'
 import {large} from '../styles/media-queries'
+import Radium from 'radium'
+import {accentColor, fadedBody} from '../styles/colors'
+import React, {Component, PropTypes} from 'react'
 
-let style = {
+const style = {
   button: {
     base: {
       borderBottom: `1px solid ${accentColor}`,

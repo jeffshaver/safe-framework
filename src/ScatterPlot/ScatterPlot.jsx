@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react'
-import Chart, {DefaultChart} from '../Chart'
 import {Scatter} from 'safe-framework-react-chartjs'
+import Chart, {DefaultChart} from '../Chart'
+import React, {Component, PropTypes} from 'react'
 
 @Chart
 export default class ScatterPlot extends Component {

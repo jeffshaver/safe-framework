@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {Card, CardTitle, Paper} from 'material-ui'
 import {DefaultLineChart} from 'safe-framework'
+import {Card, CardTitle, Paper} from 'material-ui'
 import {lineSeries, tableColumns, tableData} from '../fixtures'
+import React, {Component} from 'react'
 
 const chartConfig = {
   scales: {

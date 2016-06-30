@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
 import Radium from 'radium'
+import React, {Component} from 'react'
 
-let style = {
+const style = {
   display: 'flex',
   flexDirection: 'column'
 }

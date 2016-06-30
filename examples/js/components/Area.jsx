@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {Card, CardTitle, Paper} from 'material-ui'
 import {DefaultAreaChart} from 'safe-framework'
 import {areaSeries, tableColumns, tableData} from '../fixtures'
+import {Card, CardTitle, Paper} from 'material-ui'
+import React, {Component} from 'react'
 
 const chartConfig = {
   scales: {
@@ -27,7 +27,7 @@ const chartConfig = {
     callbacks: {
       afterLabel: (tooltipItem, data) => {
         const dataLabel = data.datasets[tooltipItem.datasetIndex].label
-        
+
         return `${dataLabel} produced ${tooltipItem.yLabel} warheads`
       }
     }
@@ -42,7 +42,7 @@ const chartConfig = {
     mode: 'xy'
   }
 }
-  
+
 class Area extends Component {
   render () {
     return (

@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react'
-import {Tabs, Tab} from 'material-ui'
 import DataTable from '../DataTable'
+import React, {Component, PropTypes} from 'react'
+import {Tab, Tabs} from 'material-ui'
 
 export default (ChartElement) => class DefaultChart extends Component {
   static propTypes = {
@@ -13,7 +13,7 @@ export default (ChartElement) => class DefaultChart extends Component {
     tableData: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired
   }
-  
+
   static defaultProps = {
     chartProperties: {},
     chartStyle: {
@@ -25,7 +25,7 @@ export default (ChartElement) => class DefaultChart extends Component {
 
   getChart () {
     const {chart} = this.refs
-    
+
     return chart
   }
 

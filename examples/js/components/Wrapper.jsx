@@ -1,5 +1,5 @@
-import React, {PropTypes} from 'react'
 import Radium from 'radium'
+import React, {PropTypes} from 'react'
 
 const style = {
   padding: '0 0 0 256px'

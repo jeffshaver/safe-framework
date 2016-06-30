@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
 import Radium from 'radium'
+import React, {Component} from 'react'
 
-let style = {
+const style = {
   fontSize: '1.2rem',
   padding: '1em'
 }

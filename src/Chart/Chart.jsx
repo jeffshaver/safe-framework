@@ -1,11 +1,10 @@
-import React, {Component, PropTypes} from 'react'
+/* global Chart */
 import 'chart.js'
 import 'Chart.Zoom.js'
 import chroma from 'chroma-js'
 import {RaisedButton} from 'material-ui'
 import titleCase from 'title-case'
-
-/* global Chart */
+import React, {Component, PropTypes} from 'react'
 
 Chart.defaults.global.defaultFontFamily = 'Roboto'
 
@@ -77,26 +76,26 @@ export default (ChartElement) => class ChartComponent extends Component {
     this.onClick = ::this.onClick
     this.onMouseMove = ::this.onMouseMove
   }
-  
+
   componentWillReceiveProps (nextProps) {
     const {data: newData = {}, options} = nextProps
     const {data = {}} = this.props
-    
+
     if (data.data === newData.data) {
       return
     }
-    
+
     this.setState({
       data: this.parseObjectsFromData({...newData}, options.scales)
     })
   }
-  
+
   shouldComponentUpdate (nextProps, nextState) {
     const {data: newData = {}} = nextProps
     const {data = {}} = this.props
     const {data: stateData = {}} = this.state
     const {data: newStateData = {}} = nextState
-    
+
     return data.data !== newData.data ||
       stateData.data !== newStateData.data
   }
@@ -153,7 +152,7 @@ export default (ChartElement) => class ChartComponent extends Component {
 
   drilldown (newData) {
     this.getChart().data.datasets = []
-    
+
     this.setState({
       data: this.parseObjectsFromData({...newData}),
       inDrillDown: true
@@ -162,7 +161,7 @@ export default (ChartElement) => class ChartComponent extends Component {
 
   returnFromDrilldown () {
     const {data} = this.props
-    
+
     this.getChart().data.datasets = []
 
     this.setState({
@@ -269,7 +268,7 @@ export default (ChartElement) => class ChartComponent extends Component {
       // to conform to the chartjs framework.
       data.labels.push(dataObject[firstXAxis.dataProperty])
 
-      for (let [index, dataset] of data.datasets.entries()) {
+      for (const [index, dataset] of data.datasets.entries()) {
         // If data is in array format, add to corresponding
         // dataset in order of x-axes first then y-axes.
         if (isArrayOfArrays) {
@@ -398,5 +397,4 @@ export default (ChartElement) => class ChartComponent extends Component {
       </div>
     )
   }
-
 }

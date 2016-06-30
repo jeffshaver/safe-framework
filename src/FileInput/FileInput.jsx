@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react'
 import {TextField} from 'material-ui'
+import React, {Component, PropTypes} from 'react'
 
 export class FileInput extends Component {
   static propTypes = {
@@ -58,6 +58,7 @@ export class FileInput extends Component {
 
   render () {
     const {accept, disabled} = this.props
+
     return (
       <span>
         <TextField

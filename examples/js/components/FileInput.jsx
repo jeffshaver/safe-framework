@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import {Card, CardText, CardTitle, Paper, RaisedButton} from 'material-ui'
 import {FileInput as SafeFileInput} from 'safe-framework'
+import {Card, CardText, CardTitle, Paper, RaisedButton} from 'material-ui'
+import React, {Component} from 'react'
 
 class FileInput extends Component {
   constructor () {
@@ -17,11 +17,11 @@ class FileInput extends Component {
   onButtonClick () {
     this.setState({disabled: !this.state.disabled})
   }
-  
+
   onChange (file) {
     let alertText = ''
 
-    for (let key in file) {
+    for (const key in file) {
       alertText += `${key}: ${file[key]}\n`
     }
     window.alert(alertText)

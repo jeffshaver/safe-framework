@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import {Card, CardActions, CardTitle, Dialog, Paper} from 'material-ui'
 import {DataTable} from 'safe-framework'
 import FlatButton from 'material-ui/FlatButton'
 import {tableData} from '../fixtures'
+import {Card, CardActions, CardTitle, Dialog, Paper} from 'material-ui'
+import React, {Component} from 'react'
 
 class Table extends Component {
   constructor (props) {
@@ -13,14 +13,14 @@ class Table extends Component {
       open: false
     }
   }
-  
+
   handleGetCSV () {
     this.setState({
       copiedText: this.dataTable.getCSV(),
       open: true
     })
   }
-  
+
   handleExport () {
     this.dataTable.exportToCSV()
   }
@@ -28,7 +28,7 @@ class Table extends Component {
   handleClose = () => {
     this.setState({open: false})
   };
-  
+
   render () {
     const {copiedText = '', open} = this.state
     const actions = [
@@ -39,7 +39,7 @@ class Table extends Component {
         onTouchTap={this.handleClose}
       />
     ]
-    
+
     return (
       <Paper zDepth={1}>
         <Card>

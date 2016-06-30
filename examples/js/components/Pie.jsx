@@ -1,10 +1,9 @@
-import React, {Component} from 'react'
-import {Card, CardTitle, Paper} from 'material-ui'
 import {DefaultPieChart} from 'safe-framework'
+import {Card, CardTitle, Paper} from 'material-ui'
 import {pieDrilldown, pieSeries, tableColumns, tableData} from '../fixtures'
+import React, {Component} from 'react'
 
-const chartConfig = {
-}
+const chartConfig = {}
 
 class Pie extends Component {
   render () {

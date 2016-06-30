@@ -1,12 +1,12 @@
-import React, {Component} from 'react'
-import {Card, CardTitle, Paper} from 'material-ui'
 import {DefaultMap} from 'safe-framework'
+import {Card, CardTitle, Paper} from 'material-ui'
 import {
   mapData,
   mapTitle,
   tableColumns,
   tableData
 } from '../fixtures'
+import React, {Component} from 'react'
 
 const mapDataOptions = {
   latField: 'latitude',

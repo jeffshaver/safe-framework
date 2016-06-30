@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react'
 import Radium from 'radium'
 import {accentColor, body} from '../styles/colors'
+import React, {Component, PropTypes} from 'react'
 
-let style = {
+const style = {
   base: {
     overflow: 'hidden',
     padding: '15vh 25px',

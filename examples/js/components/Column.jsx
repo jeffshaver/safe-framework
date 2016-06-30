@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {Card, CardTitle, Paper} from 'material-ui'
 import {DefaultColumnChart} from 'safe-framework'
-import {columnSeriesFromData, columnSeries, tableColumns, tableData} from '../fixtures'
+import {Card, CardTitle, Paper} from 'material-ui'
+import {columnSeries, columnSeriesFromData, tableColumns, tableData} from '../fixtures'
+import React, {Component} from 'react'
 
 const chartConfig = {
   legend: {
@@ -21,10 +21,10 @@ const chartConfig = {
 class Column extends Component {
   onClick (dataItem, seriesItem) {
     const {chart} = this.refs
-    
+
     chart.getChart().drilldown(columnSeries)
   }
-  
+
   render () {
     return (
       <Paper zDepth={1}>

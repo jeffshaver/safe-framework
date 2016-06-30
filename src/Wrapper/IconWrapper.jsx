@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import React, {Component, PropTypes} from 'react'
 
 export class IconWrapper extends Component {
   static propTypes = {
@@ -15,7 +15,7 @@ export class IconWrapper extends Component {
       muiTheme: getMuiTheme()
     }
   }
-  
+
   render () {
     const {children} = this.props
 

@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {Card, CardTitle, Paper} from 'material-ui'
 import {BarChart} from 'safe-framework'
+import {Card, CardTitle, Paper} from 'material-ui'
 import {columnSeries, columnSeriesUpdateData} from '../fixtures'
+import React, {Component} from 'react'
 
 const chartConfig = {
   legend: {
@@ -21,10 +21,10 @@ const chartConfig = {
 class Bar extends Component {
   onClick (dataItem, seriesItem) {
     const {chart} = this.refs
-    
+
     chart.drilldown(columnSeriesUpdateData)
   }
-  
+
   render () {
     return (
       <Paper zDepth={1}>

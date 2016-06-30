@@ -1,9 +1,9 @@
-import React, {Component, PropTypes} from 'react'
-import Radium from 'radium'
-import Nav from '../Nav'
 import {fadedBody} from '../styles/colors'
+import Nav from '../Nav'
+import Radium from 'radium'
+import React, {Component, PropTypes} from 'react'
 
-let style = {
+const style = {
   nav: {
     base: {
       position: 'fixed',

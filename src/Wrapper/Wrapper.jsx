@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react'
 import Radium from 'radium'
 import {wrapper} from '../styles/general'
+import React, {Component, PropTypes} from 'react'
 
 @Radium
 export class Wrapper extends Component {

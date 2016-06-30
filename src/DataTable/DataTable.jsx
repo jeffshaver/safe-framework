@@ -2,8 +2,8 @@ import {AgGridReact} from 'ag-grid-react'
 import {clearfix} from '../styles/general'
 import debounce from 'lodash.debounce'
 import {getSvgIcon} from '../utilities'
-import Plus from 'material-ui/svg-icons/content/add'
 import Minus from 'material-ui/svg-icons/content/remove'
+import Plus from 'material-ui/svg-icons/content/add'
 import TextField from 'material-ui/TextField'
 import titleCase from 'title-case'
 import React, {Component, PropTypes} from 'react'
@@ -274,6 +274,7 @@ export class DataTable extends Component {
         ...gridProps,
         onRowClicked: (event) => {
           const rowNode = event.node
+
           rowNode.setSelected(!rowNode.isSelected())
         },
         rowSelection: 'multiple',

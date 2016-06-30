@@ -284,8 +284,8 @@ export const basicTableColumns = [{
   data: 'e'
 }]
 
-export let basicTableData = []
-export let tableData = []
+export const basicTableData = []
+export const tableData = []
 
 for (let i = 0; i < 100; i++) {
   basicTableData.push({
@@ -588,11 +588,12 @@ export const pieSeries = {
 // SCATTER
 function getRandomInt (min, max) {
   // Generate random number n, where min <= n <= max
-  let range = max - min + 1
+  const range = max - min + 1
+
   return Math.floor(Math.random() * range) + min
 }
 
-let femaleData = Array.from({
+const femaleData = Array.from({
   length: 500
 }, () => {
   return {
@@ -600,7 +601,7 @@ let femaleData = Array.from({
     y: getRandomInt(45, 80)
   }
 })
-let maleData = Array.from({
+const maleData = Array.from({
   length: 500
 }, () => {
   return {

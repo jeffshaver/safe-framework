@@ -5,10 +5,10 @@ import Drawer from 'material-ui/Drawer'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import ListItem from 'material-ui/List/ListItem'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import {pascalToSnakeCase} from '../utils'
+import {Wrapper} from './Wrapper'
 import Radium, {Style, StyleRoot} from 'radium'
 import React, {Component, PropTypes} from 'react'
-import {Wrapper} from './Wrapper'
-import {pascalToSnakeCase} from '../utils'
 
 const style = {
   appBar: {

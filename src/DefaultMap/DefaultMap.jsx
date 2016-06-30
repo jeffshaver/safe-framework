@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from 'react'
-import {Tabs, Tab} from 'material-ui'
 import DataTable from '../DataTable'
 import Map from '../Map'
+import React, {Component, PropTypes} from 'react'
+import {Tab, Tabs} from 'material-ui'
 
 export class DefaultMap extends Component {
   static propTypes = {

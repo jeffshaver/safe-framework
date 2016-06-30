@@ -1,11 +1,14 @@
 import {getSvgIcon} from '../utilities'
 import Leaflet from 'leaflet'
-import titleCase from 'title-case'
-import React, {Component, PropTypes} from 'react'
+/* eslint-disable sort-imports */
+import 'drmonty-leaflet-awesome-markers'
+/* eslint-enable sort-imports */
+import MapsPlace from 'material-ui/svg-icons/maps/place'
 import ReactDOM from 'react-dom'
+import titleCase from 'title-case'
 import {
-  LayersControl,
   LayerGroup,
+  LayersControl,
   Map as LeafletMap,
   Marker,
   Polyline,
@@ -13,8 +16,7 @@ import {
   TileLayer,
   WMSTileLayer
 } from 'react-leaflet'
-import 'drmonty-leaflet-awesome-markers'
-import MapsPlace from 'material-ui/svg-icons/maps/place'
+import React, {Component, PropTypes} from 'react'
 
 const {Overlay} = LayersControl
 
@@ -30,7 +32,7 @@ export class Map extends Component {
     wms: PropTypes.bool,
     zoomControlPosition: PropTypes.string
   }
-  
+
   static defaultProps = {
     dataOptions: {},
     mapOptions: {
@@ -45,7 +47,7 @@ export class Map extends Component {
 
   constructor (props) {
     super(props)
-    
+
     this.loaded = ::this.loaded
   }
 
@@ -55,12 +57,12 @@ export class Map extends Component {
     // material ui theming.
     const checkboxLabels =
       domNode.querySelectorAll('.leaflet-control-layers-selector + span')
-      
+
     for (const [index, checkboxLabel] of checkboxLabels.entries()) {
       if (checkboxLabel.innerHTML.length === 0) {
         break
       }
-      
+
       checkboxLabel.insertAdjacentHTML('afterend', checkboxLabel.innerHTML)
       checkboxLabel.insertAdjacentHTML('afterend', getSvgIcon(MapsPlace, {
         color: this.getColor(index + 1),
@@ -69,20 +71,20 @@ export class Map extends Component {
           width: '16px'
         }
       }))
-      
+
       checkboxLabel.innerHTML = ''
     }
-    
+
     this.forceUpdate()
   }
-  
+
   getColor (index) {
     return allColors[index]
   }
 
   createBaseLayer () {
     const {baseLayer} = this.props
-    
+
     return this.createLayerData({
       ...baseLayer,
       name: 'baseLayer'
@@ -91,7 +93,7 @@ export class Map extends Component {
 
   createLayers () {
     const {layers = []} = this.props
-    
+
     return layers.map((layer, index) => (
       this.createLayer(layer, this.getColor(index + 1))
     ))
@@ -99,7 +101,7 @@ export class Map extends Component {
 
   createLayer (layer, overrideColor) {
     const {name: key} = layer
-    
+
     return (
       <Overlay
         key={key}
@@ -116,7 +118,7 @@ export class Map extends Component {
     const {dataOptions} = this.props
     const {layerParams = {}} = dataOptions
     const {color = overrideColor, name: key} = layer
-    
+
     // Create Layer from data provided.
     if (layer.data) {
       return this.createElementsFromData(
@@ -126,7 +128,7 @@ export class Map extends Component {
         key
       )
     }
-    
+
     // Create layer from markers/lines.
     return [
       ...this.createMarkers(layer.markers, key, color),
@@ -142,20 +144,20 @@ export class Map extends Component {
       }, key + index)
     ))
   }
-  
+
   createMarker (marker, key) {
     const {color, label, labels = []} = marker
-    
+
     if (label) {
       labels.push(label)
     }
-    
+
     const icon = Leaflet.AwesomeMarkers.icon({
       icon: 'circle',
       markerColor: color,
       prefix: 'material-icons'
     })
-    
+
     return (
       <Marker
         icon={icon}
@@ -166,19 +168,20 @@ export class Map extends Component {
       </Marker>
     )
   }
-  
+
   createLines (lines = [], key, color) {
     return lines.reduce((prev, line, index, array) => (
       prev.concat(this.createLine(line, color, key, index))
     ), [])
   }
-  
+
   createLine (line, color, key, index) {
     const {labels = [], positions = []} = line
     const [start, end] = positions
     const [startLabel, endLabel] = labels
+
     key = `${key}line${index}`
-      
+
     return [
       <Polyline
         color={line.color || color}
@@ -200,10 +203,10 @@ export class Map extends Component {
       }, `end${key}`)
     ]
   }
-  
+
   createPopupLabel (labels) {
     const popupLabels = this.createLabels(labels)
-    
+
     return popupLabels.length > 0
       ? <Popup>
           <div>
@@ -212,14 +215,14 @@ export class Map extends Component {
         </Popup>
       : null
   }
-  
+
   createElementsFromData (data = [], dataOptions, color, key) {
     return data.reduce((prev, dataItem, index, array) => (
       prev.concat(
         this.createElementFromDataItem(dataItem, dataOptions, color, key, index))
     ), [])
   }
-  
+
   createElementFromDataItem (dataItem, dataOptions, color, key, index) {
     // TODO: Extract these names and make them configurable to the Map.
     const {
@@ -233,19 +236,19 @@ export class Map extends Component {
       sourceLong,
       sourcePrefix
     } = this.parseDataOptions(dataOptions)
-    
+
     // If contains source prefix value in data,
     // assume we are creating a line.
     if (sourcePrefix && dataItem[sourceLat]) {
       const labels = labelFields.reduce((prev, labelField) => {
         const labelTitle = titleCase(labelField)
-        
+
         return prev.concat([
           dataItem[sourcePrefix + labelTitle],
           dataItem[destinationPrefix + labelTitle]
         ])
       }, [])
-      
+
       return this.createLine({
         labels,
         positions: [
@@ -257,11 +260,11 @@ export class Map extends Component {
       const labels = labelFields.map((labelField) => (
         dataItem[labelField]
       ))
-      
+
       if (typeof dataItem[latField] === 'string') {
         return null
       }
-      
+
       return this.createMarker({
         position: [dataItem[latField], dataItem[longField]],
         labels,
@@ -269,9 +272,9 @@ export class Map extends Component {
       }, index)
     }
   }
-  
+
   parseDataOptions (dataOptions) {
-    let {
+    const {
       latField = 'Latitude',
       longField = 'Longitude'
     } = dataOptions
@@ -283,7 +286,7 @@ export class Map extends Component {
     const latTitle = titleCase(latField)
     const longTitle = titleCase(longField)
     const labelFields = Array.isArray(label) ? label : [label]
-    
+
     return {
       ...dataOptions,
       destinationLat: `${destinationPrefix}${latTitle}`,
@@ -295,7 +298,7 @@ export class Map extends Component {
       sourceLong: `${sourcePrefix}${longTitle}`
     }
   }
-  
+
   defaultCenter () {
     const {baseLayer, dataOptions} = this.props
     const [firstItem = {}] = baseLayer.data
@@ -306,14 +309,14 @@ export class Map extends Component {
       sourceLong,
       sourcePrefix
     } = this.parseDataOptions(dataOptions)
-    
+
     if (sourcePrefix && firstItem[sourceLat]) {
       [firstItem[sourceLat], firstItem[sourceLong]]
     }
-    
+
     return [firstItem[latField], firstItem[longField]]
   }
-  
+
   createLabels (labels) {
     return labels.filter((label) => label)
       .map((label, index) => (
@@ -336,9 +339,9 @@ export class Map extends Component {
       wms,
       zoomControlPosition
     } = this.props
-    let TileLayerComponent = wms ? WMSTileLayer : TileLayer
+    const TileLayerComponent = wms ? WMSTileLayer : TileLayer
     const layers = this.createLayers()
-    
+
     return (
       <LeafletMap
         center={center}

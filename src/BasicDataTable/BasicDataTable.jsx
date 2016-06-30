@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react'
 import {
   Table,
+  TableBody,
   TableHeader,
   TableHeaderColumn,
-  TableBody,
   TableRow,
   TableRowColumn
 } from 'material-ui'

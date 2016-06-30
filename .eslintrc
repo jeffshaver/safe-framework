@@ -1,39 +1,84 @@
-{
-  "parser": "babel-eslint",
-  "globals": {
-    "$": false,
-  },
-  "ecmaFeatures": {
-    "jsx": true
-  },
-  "extends": "standard",
-  "plugins": [
-    "react"
-  ],
-  "rules": {
-    "array-bracket-spacing": [2, "never"],
-    "no-trailing-spaces": [2, {"skipBlankLines": true}],
-    "object-curly-spacing": [2, "never"],
-    "padded-blocks": [2, "never"],
-    "eol-last": 0,
-    "react/jsx-curly-spacing": 2,
-    "react/jsx-indent-props": [2, 2],
-    "react/jsx-key": 2,
-    "react/jsx-max-props-per-line": [2, {"maximum": 1}],
-    "react/jsx-no-duplicate-props": [2, {"ignoreCase": true}],
-    "react/jsx-no-undef": 2,
-    "react/jsx-pascal-case": 2,
-    "react/jsx-sort-props": [2, {"ignoreCase": true, "callbacksLast": true}],
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
-    "react/no-did-mount-set-state": 2,
-    "react/no-did-update-set-state": 2,
-    "react/no-direct-mutation-state": 2,
-    "react/no-multi-comp": 2,
-    "react/prefer-es6-class": 2,
-    "react/prop-types": 2,
-    "react/self-closing-comp": 2,
-    "react/sort-prop-types": [2, {"ignoreCase": true, "callbacksLast": true}],
-    "react/wrap-multilines": 2
-  }
-}
+parser: babel-eslint
+globals:
+  $: false
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+extends: standard
+plugins:
+  - react
+rules:
+  array-bracket-spacing:
+    - 2
+    - "never"
+  block-spacing:
+    - 2
+    - "never"
+  eol-last: 0
+  newline-before-return: 2
+  newline-after-var:
+    - 2
+    - "always"
+  no-console:
+    - 1
+    - allow:
+      - "error"
+  no-lonely-if: 2
+  no-trailing-spaces:
+    - 2
+    - skipBlankLines: true
+  no-var: 2
+  object-curly-spacing:
+    - 2
+    - "never"
+  padded-blocks:
+    - 2
+    - blocks: "never"
+      switches: "never"
+      classes: "never"
+  prefer-const:
+    - 2
+    - destructuring: "any"
+  prefer-rest-params: 2
+  sort-imports:
+    - 2
+    - ignoreCase: true
+      memberSyntaxSortOrder:
+        - "none"
+        - "all"
+        - "single"
+        - "multiple"
+  sort-vars:
+    - 2
+    - ignoreCase: true
+  react/jsx-curly-spacing: 2
+  react/jsx-indent-props:
+    - 2
+    - 2
+  react/jsx-key: 2
+  react/jsx-max-props-per-line:
+    - 2
+    - maximum: 1
+  react/jsx-no-duplicate-props:
+    - 2
+    - ignoreCase: true
+  react/jsx-no-undef: 2
+  react/jsx-pascal-case: 2
+  react/jsx-sort-props:
+    - 2
+    - ignoreCase: true
+      callbacksLast: true
+  react/jsx-uses-react: 2
+  react/jsx-uses-vars: 2
+  react/no-did-mount-set-state: 2
+  react/no-did-update-set-state: 2
+  react/no-direct-mutation-state: 2
+  react/no-multi-comp: 2
+  react/prefer-es6-class: 2
+  react/prop-types: 2
+  react/self-closing-comp: 2
+  react/sort-prop-types:
+    - 2
+    - ignoreCase: true
+      callbacksLast: true
+  react/wrap-multilines: 2

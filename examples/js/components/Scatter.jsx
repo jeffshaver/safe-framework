@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import {Card, CardTitle, Paper} from 'material-ui'
 import {DefaultScatterPlot} from 'safe-framework'
+import {Card, CardTitle, Paper} from 'material-ui'
+import React, {Component} from 'react'
 import {scatterSeries, tableColumns, tableData} from '../fixtures'
 
 const chartOptions = {

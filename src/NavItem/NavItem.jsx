@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react'
-import Radium from 'radium'
 import {large} from '../styles/media-queries'
+import Radium from 'radium'
+import React, {Component, PropTypes} from 'react'
 
-let style = {
+const style = {
   base: {
     display: 'block',
     fontSize: '1.2rem',

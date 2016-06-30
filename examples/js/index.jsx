@@ -1,19 +1,19 @@
 import 'babel-polyfill'
-import React from 'react'
-import ReactDOM from 'react-dom'
-import {Router, Route, hashHistory} from 'react-router'
-import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './components/App'
 import Area from './components/Area'
 import Bar from './components/Bar'
 import BasicTable from './components/BasicTable'
 import Column from './components/Column'
 import FileInput from './components/FileInput'
+import injectTapEventPlugin from 'react-tap-event-plugin'
 import Line from './components/Line'
 import Map from './components/Map'
 import Pie from './components/Pie'
+import React from 'react'
+import ReactDOM from 'react-dom'
 import Scatter from './components/Scatter'
 import Table from './components/Table'
+import {hashHistory, Route, Router} from 'react-router'
 
 injectTapEventPlugin()
 
