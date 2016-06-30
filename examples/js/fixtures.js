@@ -396,6 +396,7 @@ export const mapTitle = 'Cities'
 
 export const mapData = {
   baseLayer: {
+    cluster: true,
     data: [{
       latitude: 29.97,
       longitude: -95.35,

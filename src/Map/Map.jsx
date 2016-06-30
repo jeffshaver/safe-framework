@@ -4,6 +4,7 @@ import Leaflet from 'leaflet'
 import 'drmonty-leaflet-awesome-markers'
 /* eslint-enable sort-imports */
 import MapsPlace from 'material-ui/svg-icons/maps/place'
+import {MarkerCluster} from './'
 import ReactDOM from 'react-dom'
 import titleCase from 'title-case'
 import {
@@ -36,7 +37,6 @@ export class Map extends Component {
   static defaultProps = {
     dataOptions: {},
     mapOptions: {
-      minZoom: 3,
       zoom: 5,
       zoomControl: true
     },
@@ -84,8 +84,8 @@ export class Map extends Component {
 
   createBaseLayer () {
     const {baseLayer} = this.props
-
-    return this.createLayerData({
+    
+    return this.createLayerGroup({
       ...baseLayer,
       name: 'baseLayer'
     }, this.getColor(0))
@@ -107,10 +107,26 @@ export class Map extends Component {
         key={key}
         name={key}
       >
-        <LayerGroup>
-          {this.createLayerData(layer, overrideColor)}
-        </LayerGroup>
+        {this.createLayerGroup(layer, overrideColor)}
       </Overlay>
+    )
+  }
+  
+  createLayerGroup (layer, overrideColor) {
+    const {cluster} = layer
+    
+    if (cluster) {
+      return (
+        <MarkerCluster>
+          {this.createLayerData(layer, overrideColor)}
+        </MarkerCluster>
+      )
+    }
+   
+    return (
+      <LayerGroup>
+        {this.createLayerData(layer, overrideColor)}
+      </LayerGroup>
     )
   }
 
@@ -279,14 +295,16 @@ export class Map extends Component {
       longField = 'Longitude'
     } = dataOptions
     const {
-      label = 'Label',
+      label,
       sourcePrefix,
       destinationPrefix
     } = dataOptions
     const latTitle = titleCase(latField)
     const longTitle = titleCase(longField)
-    const labelFields = Array.isArray(label) ? label : [label]
-
+    const labelFields = Array.isArray(label)
+      ? label
+      : (label ? [label] : [])
+    
     return {
       ...dataOptions,
       destinationLat: `${destinationPrefix}${latTitle}`,
@@ -353,9 +371,7 @@ export class Map extends Component {
           onLoad={this.loaded}
           {...tileLayerOptions}
         />
-        <LayerGroup>
-          {this.createBaseLayer()}
-        </LayerGroup>
+        {this.createBaseLayer()}
         {layers.length > 0
         ? <LayersControl position={zoomControlPosition}>
             {this.createLayers()}
