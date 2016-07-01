@@ -311,7 +311,7 @@ export class Map extends Component {
     } = this.parseDataOptions(dataOptions)
 
     if (sourcePrefix && firstItem[sourceLat]) {
-      [firstItem[sourceLat], firstItem[sourceLong]]
+      return [firstItem[sourceLat], firstItem[sourceLong]]
     }
 
     return [firstItem[latField], firstItem[longField]]
