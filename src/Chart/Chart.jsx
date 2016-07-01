@@ -8,7 +8,7 @@ import React, {Component, PropTypes} from 'react'
 
 Chart.defaults.global.defaultFontFamily = 'Roboto'
 
-const styles = {
+const style = {
   container: {
     position: 'relative',
     height: '100%'
@@ -26,6 +26,7 @@ export default (ChartElement) => class ChartComponent extends Component {
     backgroundColorAlpha: PropTypes.number,
     colorPalette: PropTypes.func,
     colorScale: PropTypes.string,
+    containerStyle: PropTypes.object,
     data: PropTypes.object.isRequired,
     drilldown: PropTypes.bool,
     options: PropTypes.object,
@@ -41,6 +42,7 @@ export default (ChartElement) => class ChartComponent extends Component {
         .colors(Math.max(numDataSets, 2))
     },
     colorScale: 'Paired',
+    containerStyle: {},
     drilldown: false,
     options: {},
     style: {},
@@ -356,7 +358,12 @@ export default (ChartElement) => class ChartComponent extends Component {
 
   render () {
     const {
-      colorPalette, colorScale, options, style: canvasStyle, title
+      colorPalette,
+      colorScale,
+      containerStyle,
+      options,
+      style: canvasStyle,
+      title
     } = this.props
     const {inDrillDown, data} = this.state
 
@@ -374,7 +381,7 @@ export default (ChartElement) => class ChartComponent extends Component {
     }
 
     return (
-      <div style={styles.container}>
+      <div style={{...style.container, ...containerStyle}}>
         <ChartElement
           colorPalette={colorPalette}
           colorScale={colorScale}
@@ -389,7 +396,7 @@ export default (ChartElement) => class ChartComponent extends Component {
           label='Return'
           primary={true}
           style={{
-            ...styles.drillDownButton,
+            ...style.drillDownButton,
             display: inDrillDown ? 'block' : 'none'
           }}
           onMouseUp={::this.returnFromDrilldown}
