@@ -1,6 +1,6 @@
 {
   "name": "safe-framework",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "Safe Framework",
   "repository": "https://github.com/jeffshaver/safe-framework",
   "main": "./lib",
