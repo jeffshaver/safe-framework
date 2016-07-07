@@ -2,6 +2,7 @@ import {getSvgIcon} from '../utilities'
 import Leaflet from 'leaflet'
 /* eslint-disable sort-imports */
 import 'drmonty-leaflet-awesome-markers'
+import 'leaflet-fullscreen'
 /* eslint-enable sort-imports */
 import MapsPlace from 'material-ui/svg-icons/maps/place'
 import {MarkerCluster} from './'
@@ -37,6 +38,7 @@ export class Map extends Component {
   static defaultProps = {
     dataOptions: {},
     mapOptions: {
+      fullscreenControl: true,
       zoom: 5,
       zoomControl: true
     },
