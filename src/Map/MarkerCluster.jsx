@@ -26,17 +26,6 @@ export class MarkerCluster extends MapLayer {
   }
   
   render () {
-    const {children = [], map} = this.props
-    
-    return (
-      <div style={{display: 'none'}}>
-        {children.map((child) => (
-          React.cloneElement(child, {
-            layerContainer: this.leafletElement,
-            map
-          })
-        ))}
-      </div>
-    )
+    return <div style={{display: 'none'}}>{this.props.children}</div>
   }
 }
