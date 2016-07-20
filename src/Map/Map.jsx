@@ -76,8 +76,6 @@ export class Map extends Component {
 
       checkboxLabel.innerHTML = ''
     }
-
-    this.forceUpdate()
   }
 
   getColor (index) {
@@ -86,7 +84,7 @@ export class Map extends Component {
 
   createBaseLayer () {
     const {baseLayer} = this.props
-    
+
     return this.createLayerGroup({
       ...baseLayer,
       name: 'baseLayer'
@@ -113,10 +111,10 @@ export class Map extends Component {
       </Overlay>
     )
   }
-  
+
   createLayerGroup (layer, overrideColor) {
     const {cluster} = layer
-    
+
     if (cluster) {
       return (
         <MarkerCluster>
@@ -124,7 +122,7 @@ export class Map extends Component {
         </MarkerCluster>
       )
     }
-   
+
     return (
       <LayerGroup>
         {this.createLayerData(layer, overrideColor)}
@@ -306,7 +304,7 @@ export class Map extends Component {
     const labelFields = Array.isArray(label)
       ? label
       : (label ? [label] : [])
-    
+
     return {
       ...dataOptions,
       destinationLat: `${destinationPrefix}${latTitle}`,
@@ -349,6 +347,10 @@ export class Map extends Component {
           {label}
         </div>
       ))
+  }
+
+  shouldComponentUpdate (nextProps) {
+    return nextProps !== this.props
   }
 
   render () {
