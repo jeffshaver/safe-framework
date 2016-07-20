@@ -9,9 +9,11 @@ import Nav from './nav'
 import NavItem from './nav-item'
 import Section from './section'
 import Sections from './sections'
+import SelectField from './SelectField'
 import AreaChart, {DefaultAreaChart} from './AreaChart'
 import BarChart, {DefaultBarChart} from './BarChart'
 import ColumnChart, {DefaultColumnChart} from './ColumnChart'
+import Dashboard, {Visualization} from './Dashboard'
 import LineChart, {DefaultLineChart} from './LineChart'
 import PieChart, {DefaultPieChart} from './PieChart'
 import ScatterPlot, {DefaultScatterPlot} from './ScatterPlot'
@@ -21,6 +23,7 @@ export {AreaChart}
 export {BarChart}
 export {BasicDataTable}
 export {ColumnChart}
+export {Dashboard}
 export {DataTable}
 export {DefaultAreaChart}
 export {DefaultBarChart}
@@ -41,6 +44,8 @@ export {PieChart}
 export {ScatterPlot}
 export {Section}
 export {Sections}
+export {SelectField}
+export {Visualization}
 export {Wrapper}
 
 export default {
@@ -48,6 +53,7 @@ export default {
   BarChart,
   BasicDataTable,
   ColumnChart,
+  Dashboard,
   DataTable,
   DefaultAreaChart,
   DefaultColumnChart,
@@ -67,5 +73,6 @@ export default {
   ScatterPlot,
   Section,
   Sections,
+  SelectField,
   Wrapper
 }

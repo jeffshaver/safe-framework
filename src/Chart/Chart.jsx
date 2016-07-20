@@ -1,9 +1,9 @@
 /* global Chart */
 import 'chart.js'
 import 'Chart.Zoom.js'
+import changeCase from 'change-case'
 import chroma from 'chroma-js'
 import {RaisedButton} from 'material-ui'
-import titleCase from 'title-case'
 import React, {Component, PropTypes} from 'react'
 
 Chart.defaults.global.defaultFontFamily = 'Roboto'
@@ -262,7 +262,7 @@ export default (ChartElement) => class ChartComponent extends Component {
         data.datasets.push({
           data: [],
           dataProperty: ySeriesFieldValue,
-          label: titleCase(ySeriesFieldName)
+          label: changeCase.titleCase(ySeriesFieldName)
         })
       }
 
@@ -322,7 +322,7 @@ export default (ChartElement) => class ChartComponent extends Component {
 
     if (!ySeriesDataset) {
       ySeriesDataset = {
-        label: titleCase(seriesName),
+        label: changeCase.titleCase(seriesName),
         data: Array(dataIndex).fill(0)
       }
 

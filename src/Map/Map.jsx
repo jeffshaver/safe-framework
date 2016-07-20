@@ -1,3 +1,4 @@
+import changeCase from 'change-case'
 import {getSvgIcon} from '../utilities'
 import Leaflet from 'leaflet'
 /* eslint-disable sort-imports */
@@ -7,7 +8,6 @@ import 'leaflet-fullscreen'
 import MapsPlace from 'material-ui/svg-icons/maps/place'
 import {MarkerCluster} from './'
 import ReactDOM from 'react-dom'
-import titleCase from 'title-case'
 import {
   LayerGroup,
   LayersControl,
@@ -257,7 +257,7 @@ export class Map extends Component {
     // assume we are creating a line.
     if (sourcePrefix && dataItem[sourceLat]) {
       const labels = labelFields.reduce((prev, labelField) => {
-        const labelTitle = titleCase(labelField)
+        const labelTitle = changeCase.titleCase(labelField)
 
         return prev.concat([
           dataItem[sourcePrefix + labelTitle],
@@ -299,8 +299,8 @@ export class Map extends Component {
       sourcePrefix,
       destinationPrefix
     } = dataOptions
-    const latTitle = titleCase(latField)
-    const longTitle = titleCase(longField)
+    const latTitle = changeCase.titleCase(latField)
+    const longTitle = changeCase.titleCase(longField)
     const labelFields = Array.isArray(label)
       ? label
       : (label ? [label] : [])

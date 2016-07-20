@@ -1,11 +1,11 @@
 import {AgGridReact} from 'ag-grid-react'
+import changeCase from 'change-case'
 import {clearfix} from '../styles/general'
 import debounce from 'lodash.debounce'
 import {getSvgIcon} from '../utilities'
 import Minus from 'material-ui/svg-icons/content/remove'
 import Plus from 'material-ui/svg-icons/content/add'
 import TextField from 'material-ui/TextField'
-import titleCase from 'title-case'
 import React, {Component, PropTypes} from 'react'
 
 const style = {
@@ -121,7 +121,7 @@ export class DataTable extends Component {
         ...drilldownColumnKeys
       ])]
       .map((field) => ({
-        headerName: titleCase(field),
+        headerName: changeCase.titleCase(field),
         field
       }))
   }
