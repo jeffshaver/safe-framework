@@ -7,11 +7,16 @@ export default class PieChart extends Component {
   static propTypes = {
     colorPalette: PropTypes.func,
     colorScale: PropTypes.string,
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    options: PropTypes.object
+  }
+  
+  static defaultProps = {
+    options: {}
   }
 
   render () {
-    const {colorPalette, colorScale, data} = this.props
+    const {colorPalette, colorScale, data, options} = this.props
     const [dataset] = data.datasets
 
     if (!dataset) {
@@ -22,6 +27,12 @@ export default class PieChart extends Component {
 
     dataset.backgroundColor = colorPalette(length, colorScale)
     delete dataset.borderColor
+    
+    options.legend = {
+      ...options.legend,
+      display: true
+    }
+    delete options.scales
 
     return (
       <Pie

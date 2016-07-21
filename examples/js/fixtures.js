@@ -553,12 +553,8 @@ export const pieDrilldown = {
 export const pieSeries = {
   label: 'Brands',
   colorByPoint: true,
-  xAxis: [{
-    dataProperty: 'name'
-  }],
-  yAxis: [{
-    dataProperty: 'y'
-  }],
+  xAxis: ['name'],
+  yAxis: ['y'],
   data: [{
     name: 'Microsoft Internet Explorer',
     y: 56.33,

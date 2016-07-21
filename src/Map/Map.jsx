@@ -192,9 +192,17 @@ export class Map extends Component {
   }
 
   createLine (line, color, key, index) {
-    const {labels = [], positions = []} = line
+    const {labels = [], positions = [], source, destination} = line
     const [start, end] = positions
     const [startLabel, endLabel] = labels
+    let lineLabel = [startLabel, endLabel]
+    
+    if (source) {
+      lineLabel = [
+        `${changeCase.titleCase(source)}: ${startLabel}`,
+        `${changeCase.titleCase(destination)}: ${endLabel}`
+      ]
+    }
 
     key = `${key}line${index}`
 
@@ -205,7 +213,7 @@ export class Map extends Component {
         positions={[start, end]}
         weight={2}
       >
-        {this.createPopupLabel(labels)}
+        {this.createPopupLabel(lineLabel, false)}
       </Polyline>,
       this.createMarker({
         color,
@@ -220,8 +228,8 @@ export class Map extends Component {
     ]
   }
 
-  createPopupLabel (labels) {
-    const popupLabels = this.createLabels(labels)
+  createPopupLabel (labels, boldFirst = true) {
+    const popupLabels = this.createLabels(labels, boldFirst)
 
     return popupLabels.length > 0
       ? <Popup>
@@ -260,8 +268,8 @@ export class Map extends Component {
         const labelTitle = changeCase.titleCase(labelField)
 
         return prev.concat([
-          dataItem[sourcePrefix + labelTitle],
-          dataItem[destinationPrefix + labelTitle]
+          `${dataItem[sourcePrefix + labelTitle]}`,
+          `${dataItem[destinationPrefix + labelTitle]}`
         ])
       }, [])
 
@@ -270,7 +278,9 @@ export class Map extends Component {
         positions: [
           [dataItem[sourceLat], dataItem[sourceLong]],
           [dataItem[destinationLat], dataItem[destinationLong]]
-        ]
+        ],
+        source: sourcePrefix,
+        destination: destinationPrefix
       }, color, key, index)
     } else {
       const labels = labelFields.map((labelField) => (
@@ -335,13 +345,13 @@ export class Map extends Component {
     return [firstItem[latField], firstItem[longField]]
   }
 
-  createLabels (labels) {
+  createLabels (labels, boldFirst) {
     return labels.filter((label) => label)
       .map((label, index) => (
         <div
           key={index}
           style={{
-            fontWeight: index === 0 ? 'bold' : 'normal'
+            fontWeight: boldFirst && index === 0 ? 'bold' : 'normal'
           }}
         >
           {label}

@@ -3,7 +3,12 @@ import {Card, CardTitle, Paper} from 'material-ui'
 import {pieDrilldown, pieSeries, tableColumns, tableData} from '../fixtures'
 import React, {Component} from 'react'
 
-const chartConfig = {}
+const chartConfig = {
+  legend: {
+    display: true,
+    position: 'right'
+  }
+}
 
 class Pie extends Component {
   render () {
