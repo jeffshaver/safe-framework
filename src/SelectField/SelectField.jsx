@@ -1,4 +1,4 @@
-import CircularProgress from 'material-ui/CircularProgress'
+import CircularProgress from '../CircularProgress'
 import MaterialSelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import React, {PropTypes} from 'react'
@@ -21,6 +21,7 @@ const progress = (
   <CircularProgress
     size={0.2}
     style={style.progress}
+    text={''}
   />
 )
 

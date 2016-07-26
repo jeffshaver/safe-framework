@@ -1,4 +1,5 @@
 import BasicDataTable from './basic-data-table'
+import CircularProgress from './CircularProgress'
 import DataTable from './data-table'
 import DefaultMap from './default-map'
 import FileInput from './file-input'
@@ -21,6 +22,7 @@ import Wrapper, {IconWrapper} from './wrapper'
 export {AreaChart}
 export {BarChart}
 export {BasicDataTable}
+export {CircularProgress}
 export {ColumnChart}
 export {DataTable}
 export {DefaultAreaChart}
@@ -49,6 +51,7 @@ export default {
   AreaChart,
   BarChart,
   BasicDataTable,
+  CircularProgress,
   ColumnChart,
   DataTable,
   DefaultAreaChart,
