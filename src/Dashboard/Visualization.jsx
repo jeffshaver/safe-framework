@@ -1,4 +1,5 @@
 import CircularProgress from 'material-ui/CircularProgress'
+import {generateMenuItems} from '../utilities'
 import {VisualizationToolbar} from './VisualizationToolbar'
 import React, {Component, PropTypes} from 'react'
 
@@ -11,7 +12,7 @@ const style = {
 export class Visualization extends Component {
   static propTypes = {
     componentType: PropTypes.func.isRequired,
-    menuType: PropTypes.func,
+    menuItemDefs: PropTypes.array.isRequired,
     results: PropTypes.object,
     visualization: PropTypes.object.isRequired,
     onMount: PropTypes.func
@@ -22,16 +23,29 @@ export class Visualization extends Component {
     onMount: () => {}
   }
 
+  componentWillMount () {
+    const {componentType, menuItemDefs, visualization} = this.props
+
+    this._menuItems = generateMenuItems(
+      componentType,
+      [visualization, this],
+      menuItemDefs
+    )
+  }
+
   componentDidMount () {
     const {onMount, visualization} = this.props
 
     onMount(visualization)
   }
 
+  componentWillUnmount () {
+    this._menuItems = null
+  }
+
   render () {
     const {
       componentType: Component,
-      menuType: Menu,
       results,
       visualization
     } = this.props
@@ -69,15 +83,10 @@ export class Visualization extends Component {
 
     return (
       <div style={style.container}>
-        <VisualizationToolbar title={name}>
-          {Menu
-            ? <Menu
-              metadata={visualization}
-              visualization={this}
-            />
-            : null
-          }
-        </VisualizationToolbar>
+        <VisualizationToolbar
+          menuItems={this._menuItems}
+          title={name}
+        />
         <Component
           data={data}
           metadata={visualization}

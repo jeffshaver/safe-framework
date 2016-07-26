@@ -22,8 +22,9 @@ export class Dashboard extends Component {
   static propTypes = {
     dashboard: PropTypes.object.isRequired,
     getComponentType: PropTypes.func,
-    getMenuType: PropTypes.func,
+    getTypeGroup: PropTypes.func,
     header: PropTypes.array,
+    menuItemDefs: PropTypes.object,
     visualizationIdProp: PropTypes.string,
     visualizationResults: PropTypes.object.isRequired,
     onVisualizationMount: PropTypes.func,
@@ -31,10 +32,11 @@ export class Dashboard extends Component {
   }
 
   static defaultProps = {
-    visualizationIdProp: '_id',
     getComponentType: () => {},
-    getMenuType: () => {},
+    getTypeGroup: () => {},
     header: [],
+    menuItemDefs: {Chart: [], Map: [], Table: []},
+    visualizationIdProp: '_id',
     onVisualizationMount: () => {},
     onWillMount: () => {}
   }
@@ -54,8 +56,9 @@ export class Dashboard extends Component {
 
     const {
       getComponentType,
-      getMenuType,
+      getTypeGroup,
       header,
+      menuItemDefs,
       visualizationIdProp,
       visualizationResults = {},
       onVisualizationMount
@@ -86,6 +89,8 @@ export class Dashboard extends Component {
               const size = visualizationSizes[visualizationId]
               const results = visualizationResults[visualizationId]
               let padding = '10px'
+              const componentType = getComponentType(typeName, visualization)
+              const typeGroup = getTypeGroup(typeName)
 
               if (isFirst && size === 2 || isFirstTwo && size === 1) {
                 padding = '0px 10px 10px 10px'
@@ -105,8 +110,8 @@ export class Dashboard extends Component {
                   }}
                 >
                   <Visualization
-                    componentType={getComponentType(typeName, visualization)}
-                    menuType={getMenuType(typeName, visualization)}
+                    componentType={componentType}
+                    menuItemDefs={menuItemDefs[typeGroup]}
                     results={results}
                     visualization={visualization}
                     onMount={onVisualizationMount}

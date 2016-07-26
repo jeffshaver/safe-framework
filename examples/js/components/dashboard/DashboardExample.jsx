@@ -1,25 +1,20 @@
 import * as FrameworkTypes from 'safe-framework'
 import {ChartComponent} from './ChartComponent'
 import {MapComponent} from './MapComponent'
+import {menuItemDefs} from '../../utils'
 import {TableComponent} from './TableComponent'
-import {TableMenu} from './TableMenu'
 import {Card, CardTitle, Paper} from 'material-ui'
 import {columnSeriesFromData, dashboardData, mapData, tableData} from '../../fixtures'
 import React, {Component} from 'react'
 
 const componentTypes = {ChartComponent, MapComponent, TableComponent}
-const menuTypes = {TableMenu}
 
 export default class DashboardExample extends Component {
   getComponentType (type, visualization) {
-    return componentTypes[`${this.getTypeName(type)}Component`]
+    return componentTypes[`${this.getTypeGroup(type)}Component`]
   }
 
-  getMenuType (type, visualization) {
-    return menuTypes[`${this.getTypeName(type)}Menu`]
-  }
-
-  getTypeName (type) {
+  getTypeGroup (type) {
     if (FrameworkTypes[`${type}Chart`]) {
       return 'Chart'
     }
@@ -39,7 +34,7 @@ export default class DashboardExample extends Component {
           <Dashboard
             dashboard={dashboardData}
             getComponentType={::this.getComponentType}
-            getMenuType={::this.getMenuType}
+            getTypeGroup={::this.getTypeGroup}
             header={[(
               <SelectField
                 items={[{primaryText: 'a', value: 'a'}, {primaryText: 'b', value: 'b'}, {primaryText: 'c', value: 'c'}]}
@@ -52,6 +47,7 @@ export default class DashboardExample extends Component {
                 onChange={() => {}}
               />
             )]}
+            menuItemDefs={menuItemDefs}
             visualizationResults={{
               columnViz: columnSeriesFromData,
               mapViz: {

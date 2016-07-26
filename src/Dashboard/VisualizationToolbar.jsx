@@ -14,16 +14,16 @@ const style = {
 
 export class VisualizationToolbar extends Component {
   static propTypes = {
-    children: React.PropTypes.element,
+    menuItems: PropTypes.node,
     title: PropTypes.string.isRequired
   }
 
   static defaultProps = {
-    children: null
+    menuItems: []
   }
 
   render () {
-    const {children, title} = this.props
+    const {menuItems, title} = this.props
 
     return (
       <Toolbar>
@@ -32,7 +32,7 @@ export class VisualizationToolbar extends Component {
         </ToolbarGroup>
         <ToolbarGroup float='right'>
           {/* Icons to float to right */}
-          {children
+          {menuItems.length > 0
             ? <IconMenu
               anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
               iconButtonElement={
@@ -45,7 +45,7 @@ export class VisualizationToolbar extends Component {
               }
               targetOrigin={{vertical: 'top', horizontal: 'right'}}
             >
-              {children}
+              {menuItems}
             </IconMenu>
           : null
         }

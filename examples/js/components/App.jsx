@@ -1,11 +1,11 @@
 import ActionAssessment from 'material-ui/svg-icons/action/assessment'
 import AppBar from 'material-ui/AppBar'
 import Avatar from 'material-ui/Avatar'
+import changeCase from 'change-case'
 import Drawer from 'material-ui/Drawer'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import ListItem from 'material-ui/List/ListItem'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import {pascalToSnakeCase} from '../utils'
 import {Wrapper} from './Wrapper'
 import Radium, {Style, StyleRoot} from 'radium'
 import React, {Component, PropTypes} from 'react'
@@ -77,7 +77,7 @@ class App extends Component {
                       key={i}
                       leftAvatar={<Avatar>{visualization[0]}</Avatar>}
                       primaryText={visualization}
-                      onTouchTap={() => (window.location = `#/components/${pascalToSnakeCase(visualization)}`)}
+                      onTouchTap={() => (window.location = `#/components/${changeCase.paramCase(visualization)}`)}
                     />
                   ))
                 }
@@ -97,7 +97,7 @@ class App extends Component {
                       key={i}
                       leftAvatar={<Avatar>{component[0]}</Avatar>}
                       primaryText={component}
-                      onTouchTap={() => (window.location = `#/components/${pascalToSnakeCase(component)}`)}
+                      onTouchTap={() => (window.location = `#/components/${changeCase.paramCase(component)}`)}
                     />
                   ))
                 }
