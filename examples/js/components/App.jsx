@@ -21,7 +21,6 @@ const visualizations = [
   'Bar',
   'BasicTable',
   'Column',
-  'Dashboard',
   'Line',
   'Map',
   'Pie',

@@ -4,7 +4,6 @@ import Area from './components/Area'
 import Bar from './components/Bar'
 import BasicTable from './components/BasicTable'
 import Column from './components/Column'
-import Dashboard from './components/dashboard/DashboardExample'
 import FileInput from './components/FileInput'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import Line from './components/Line'
@@ -39,10 +38,6 @@ ReactDOM.render((
       <Route
         component={Column}
         path='components/column'
-      />
-      <Route
-        component={Dashboard}
-        path='components/dashboard'
       />
       <Route
         component={FileInput}
