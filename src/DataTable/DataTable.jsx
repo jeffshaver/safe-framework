@@ -28,6 +28,7 @@ export class DataTable extends Component {
     checkboxColumnConfig: PropTypes.object,
     childProp: PropTypes.string,
     columns: PropTypes.array,
+    containerStyle: PropTypes.object,
     data: PropTypes.array.isRequired,
     enableColResize: PropTypes.string,
     enableFilter: PropTypes.string,
@@ -44,6 +45,7 @@ export class DataTable extends Component {
     checkboxColumnConfig: {},
     childProp: null,
     columns: null,
+    containerStyle: {},
     enableColResize: 'true',
     enableFilter: 'true',
     enableSorting: 'true',
@@ -228,12 +230,14 @@ export class DataTable extends Component {
       checkboxColumnConfig,
       childProp,
       columns,
+      containerStyle,
       data,
       stripeRows
     } = this.props
     const {quickFilterText} = this.state
     let columnDefs = columns || this.createColumns(data)
     let gridProps = {
+      containerStyle,
       headerHeight: '48',
       rowHeight: '48'
     }

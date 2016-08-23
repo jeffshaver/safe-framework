@@ -10,9 +10,7 @@ const style = {
 export class Sections extends Component {
   render () {
     return (
-      <div style={[style]}>
-
-      </div>
+      <div style={[style]} />
     )
   }
 }

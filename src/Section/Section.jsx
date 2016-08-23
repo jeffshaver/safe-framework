@@ -66,17 +66,17 @@ export class Section extends Component {
   getOverlay () {
     const {overlay} = this.props
 
-    return overlay ? <div style={[style.overlay]}></div> : undefined
+    return overlay ? <div style={[style.overlay]} /> : undefined
   }
   getBefore () {
     const {skewTop} = this.props
 
-    return skewTop ? <div style={[style.before]}></div> : undefined
+    return skewTop ? <div style={[style.before]} /> : undefined
   }
   getAfter () {
     const {skewBottom} = this.props
 
-    return skewBottom ? <div style={[style.after]}></div> : undefined
+    return skewBottom ? <div style={[style.after]} /> : undefined
   }
   render () {
     const {children, className, isOdd, styles} = this.props

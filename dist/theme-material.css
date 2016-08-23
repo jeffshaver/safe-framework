@@ -22,7 +22,6 @@
 
 .ag-material .ag-root .ag-header .ag-header-cell {
   padding: 20px 24px;
-  position: relative;
   cursor: pointer;
   font-weight: 500;
   text-align: left;
@@ -149,12 +148,13 @@
   background: #D9FFFF;
 }
 
-.ag-material .ag-root .ag-selection-checkbox:checked + .ag-cell-value:before {
+.ag-material .ag-root .ag-selection-checkbox:checked + .ag-cell-value:before,
+.ag-material .ag-root .ag-row-selected .ag-selection-checkbox + .ag-cell-value:before{
   background: #00BCD4;
   border-color: #00BCD4;
 }
-
-.ag-material .ag-root .ag-selection-checkbox:checked + .ag-cell-value:after {
+.ag-material .ag-root .ag-selection-checkbox:checked + .ag-cell-value:after,
+.ag-material .ag-root .ag-row-selected .ag-selection-checkbox + .ag-cell-value:after {
   border-bottom: 2px solid #fff;
   border-left: 2px solid #fff;
   border-bottom-left-radius: 1px;

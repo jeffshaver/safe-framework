@@ -55,6 +55,7 @@ class Table extends Component {
           <DataTable
             checkboxColumn={true}
             childProp='children'
+            containerStyle={{height: '400px'}}
             data={tableData}
             enableColResize='true'
             enableSorting='true'
