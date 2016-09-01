@@ -15,8 +15,8 @@ const style = {
   },
   drillDownButton: {
     position: 'absolute',
-    right: '32px',
-    top: 0,
+    right: '24px',
+    top: '18px',
     width: '64px'
   }
 }
