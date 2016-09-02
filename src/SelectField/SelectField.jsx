@@ -27,6 +27,7 @@ const progress = (
 
 export const SelectField = (props) => {
   const {
+    disabled,
     errorText,
     hintText,
     isFetching,
@@ -45,7 +46,7 @@ export const SelectField = (props) => {
 
   return (
     <MaterialSelectField
-      disabled={isFetching}
+      disabled={disabled || isFetching}
       errorText={errorText}
       floatingLabelText={text}
       items={items}
@@ -69,6 +70,7 @@ export const SelectField = (props) => {
 }
 
 SelectField.propTypes = {
+  disabled: PropTypes.boolean,
   errorText: PropTypes.node,
   floatingLabelText: PropTypes.string,
   hintText: PropTypes.string,
