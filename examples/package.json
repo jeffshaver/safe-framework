@@ -66,7 +66,7 @@
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
-    "safe-framework": "0.0.37",
+    "safe-framework": "0.0.38",
     "safe-framework-react-chartjs": "^2.0.3"
   }
 }
