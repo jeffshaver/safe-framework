@@ -70,7 +70,7 @@ export const SelectField = (props) => {
 }
 
 SelectField.propTypes = {
-  disabled: PropTypes.boolean,
+  disabled: PropTypes.bool,
   errorText: PropTypes.node,
   floatingLabelText: PropTypes.string,
   hintText: PropTypes.string,
