@@ -12,6 +12,13 @@ import React, {Component, PropTypes} from 'react'
 const style = {
   textField: {
     float: 'right'
+  },
+  rowCount: {
+    fontWeight: 'normal',
+    fontSize: '14px',
+    margin: 0,
+    padding: '.25em',
+    textAlign: 'left'
   }
 }
 const csvDefaults = {
@@ -355,6 +362,9 @@ export class DataTable extends Component {
           ref='grid'
           {...gridProps}
         />
+        <p style={style.rowCount}>
+           Total rows: {data.length}
+        </p>
       </div>
     )
   }
