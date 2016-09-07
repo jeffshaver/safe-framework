@@ -102,6 +102,14 @@ export default (ChartElement) => class ChartComponent extends Component {
       stateData.data !== newStateData.data
   }
 
+  resize = () => {
+    const chart = this.getChart()
+
+    if (!chart.resize) return
+
+    chart.resize()
+  }
+
   getChart () {
     const {chart} = this.refs
     const {chart: internalChart} = chart.refs
