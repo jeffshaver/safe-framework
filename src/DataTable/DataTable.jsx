@@ -1,3 +1,4 @@
+import 'matches-selector-polyfill/dist/matches-selector-polyfill.js'
 import {AgGridReact} from 'ag-grid-react'
 import changeCase from 'change-case'
 import {clearfix} from '../styles/general'
@@ -239,7 +240,23 @@ export class DataTable extends Component {
     let gridProps = {
       containerStyle,
       headerHeight: '48',
-      rowHeight: '48'
+      rowHeight: '48',
+      suppressRowClickSelection: true,
+      onCellClicked: ({event}) => {
+        const {target} = event
+        const range = document.createRange()
+
+        if (!target.matches('.ag-cell')) {
+          return
+        }
+
+        range.selectNodeContents(target)
+
+        const selection = window.getSelection()
+
+        selection.removeAllRanges()
+        selection.addRange(range)
+      }
     }
 
     // Go through each  column and change the tooltip
@@ -270,19 +287,16 @@ export class DataTable extends Component {
         suppressMovable: true,
         suppressResize: true,
         suppressSorting: true,
-        width: 60
+        width: 60,
+        onCellClicked: ({node}) => {
+          node.setSelected(!node.isSelected())
+        }
       }, ...columnDefs]
 
       // Setup the grid so that it properly checks/unchecks
       gridProps = {
         ...gridProps,
-        onRowClicked: (event) => {
-          const rowNode = event.node
-
-          rowNode.setSelected(!rowNode.isSelected())
-        },
-        rowSelection: 'multiple',
-        suppressRowClickSelection: true
+        rowSelection: 'multiple'
       }
     }
 

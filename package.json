@@ -44,17 +44,18 @@
     "rimraf": "^2.5.4"
   },
   "dependencies": {
+    "Chart.Zoom.js": "^0.1.2",
     "ag-grid": "^5.2.0",
     "ag-grid-react": "^5.2.0",
     "change-case": "^3.0.0",
     "chart.js": "^2.2.1",
-    "Chart.Zoom.js": "^0.1.2",
     "chroma-js": "^1.2.1",
     "color": "^0.11.1",
     "drmonty-leaflet-awesome-markers": "^2.0.2",
     "flexboxgrid": "^6.3.1",
     "leaflet.markercluster": "^0.5.0",
     "lodash.debounce": "^4.0.8",
+    "matches-selector-polyfill": "^1.0.0",
     "numeral": "^1.5.3",
     "react-grid-layout": "^0.13.1",
     "safe-framework-react-chartjs": "^2.0.0"

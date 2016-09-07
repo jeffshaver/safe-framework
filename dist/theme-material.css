@@ -6,6 +6,15 @@
   font-family: "Roboto";
 }
 
+.ag-material .ag-font-style {
+  cursor: auto;
+  /* enable user mouse selection */
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
 .ag-material .ag-root .ag-header {
   color: rgba(0, 0, 0, 0.54);
   font-size: 12px;
