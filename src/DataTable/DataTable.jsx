@@ -66,12 +66,26 @@ export class DataTable extends Component {
     this.onQuickFilterChange = ::this.onQuickFilterChange
   }
 
-  handleResize (grid) {
+  handleReady = (params) => {
+    this.api = params.api
+    this.columnApi = params.columnApi
+
+    const gridWidth = params.api.gridPanel.eBody.clientWidth
+    const columnWidth = 200 * params.api.gridPanel.columnController.primaryColumns.length
+
+    if (columnWidth > gridWidth) {
+      return
+    }
+
+    this.handleResize()
+  }
+
+  handleResize () {
     if (!this.props.autoResize) {
       return
     }
 
-    grid.api.sizeColumnsToFit()
+    this.api.sizeColumnsToFit()
   }
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -84,8 +98,6 @@ export class DataTable extends Component {
     const {grid} = this.refs
     const {resizeDelay} = this.props
 
-    this.handleResize(grid)
-
     this.handleDebouncedResize = debounce(this.handleResize.bind(this, grid), resizeDelay)
 
     window.addEventListener('resize', this.handleDebouncedResize)
@@ -96,10 +108,8 @@ export class DataTable extends Component {
   }
 
   componentWillUnmount () {
-    const {grid} = this.refs
-
     window.removeEventListener('resize', this.handleDebouncedResize)
-    grid.api.destroy()
+    this.api.destroy()
   }
 
   createColumns (data) {
@@ -137,9 +147,8 @@ export class DataTable extends Component {
 
   exportToCSV (exportParams = {}) {
     const {exportFileName} = this.props
-    const {grid} = this.refs
 
-    grid.api.exportDataAsCsv({
+    this.api.exportDataAsCsv({
       fileName: exportFileName,
       ...csvDefaults,
       ...exportParams
@@ -147,9 +156,7 @@ export class DataTable extends Component {
   }
 
   getCSV (copyParams = {}) {
-    const {grid} = this.refs
-
-    return grid.api.getDataAsCsv({
+    return this.api.getDataAsCsv({
       ...csvDefaults,
       ...copyParams
     })
@@ -256,7 +263,8 @@ export class DataTable extends Component {
 
         selection.removeAllRanges()
         selection.addRange(range)
-      }
+      },
+      onGridReady: this.handleReady
     }
 
     // Go through each  column and change the tooltip
