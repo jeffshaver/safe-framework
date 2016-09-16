@@ -8,6 +8,18 @@ import React, {Component, PropTypes} from 'react'
 
 Chart.defaults.global.defaultFontFamily = 'Roboto'
 
+const defaultColorScale = [
+  '#5da5da',
+  '#faa43a',
+  '#60bd68',
+  '#f17cb0',
+  '#b276b2',
+  '#decf3f',
+  '#f15854',
+  '#4d4d4d',
+  '#b2912f'
+]
+
 const style = {
   container: {
     position: 'relative',
@@ -41,7 +53,7 @@ export default (ChartElement) => class ChartComponent extends Component {
       return chroma.scale(scale)
         .colors(Math.max(numDataSets, 2))
     },
-    colorScale: 'Paired',
+    colorScale: defaultColorScale,
     containerStyle: {},
     drilldown: false,
     options: {},
