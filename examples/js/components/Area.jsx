@@ -33,13 +33,10 @@ const chartConfig = {
     }
   },
  // Container for pan options
-  pan: {
-    enabled: true,
-    mode: 'xy'
-  },
   zoom: {
     enabled: true,
-    mode: 'xy'
+    drag: true,
+    mode: 'x'
   }
 }
 
