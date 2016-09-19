@@ -1,6 +1,6 @@
 /* global Chart */
 import 'chart.js'
-import 'Chart.Zoom.js'
+import 'Chart.Zoom.drag.js'
 import changeCase from 'change-case'
 import chroma from 'chroma-js'
 import {RaisedButton} from 'material-ui'
@@ -30,6 +30,12 @@ const style = {
     right: '24px',
     top: '18px',
     width: '64px'
+  },
+  resetButton: {
+    position: 'absolute',
+    left: '64px',
+    top: '18px',
+    width: '124px'
   }
 }
 
@@ -84,6 +90,7 @@ export default (ChartElement) => class ChartComponent extends Component {
 
     this.state = {
       inDrillDown: false,
+      inZoom: false,
       data: parsedData
     }
 
@@ -107,11 +114,12 @@ export default (ChartElement) => class ChartComponent extends Component {
   shouldComponentUpdate (nextProps, nextState) {
     const {data: newData = {}} = nextProps
     const {data = {}} = this.props
-    const {data: stateData = {}} = this.state
-    const {data: newStateData = {}} = nextState
+    const {data: stateData = {}, inZoom} = this.state
+    const {data: newStateData = {}, nextInZoom} = nextState
 
     return data.data !== newData.data ||
-      stateData.data !== newStateData.data
+      stateData.data !== newStateData.data ||
+      inZoom !== nextInZoom
   }
 
   resize = () => {
@@ -178,6 +186,20 @@ export default (ChartElement) => class ChartComponent extends Component {
     this.setState({
       data: this.parseObjectsFromData({...newData}),
       inDrillDown: true
+    })
+  }
+
+  onZoom () {
+    this.setState({
+      inZoom: true
+    })
+  }
+
+  resetZoom () {
+    this.getChart().resetZoom()
+    
+    this.setState({
+      inZoom: false
     })
   }
 
@@ -385,7 +407,7 @@ export default (ChartElement) => class ChartComponent extends Component {
       style: canvasStyle,
       title
     } = this.props
-    const {inDrillDown, data} = this.state
+    const {inDrillDown, inZoom, data} = this.state
 
     if (title) {
       this.baseConfig.title = {
@@ -397,7 +419,11 @@ export default (ChartElement) => class ChartComponent extends Component {
 
     const combinedOptions = {
       ...this.baseConfig,
-      ...options
+      ...options,
+      zoom: {
+        ...options.zoom,
+        onZoom: ::this.onZoom
+      }
     }
 
     return (
@@ -420,6 +446,15 @@ export default (ChartElement) => class ChartComponent extends Component {
             display: inDrillDown ? 'block' : 'none'
           }}
           onMouseUp={::this.returnFromDrilldown}
+        />
+        <RaisedButton
+          label='Reset Zoom'
+          primary={true}
+          style={{
+            ...style.resetButton,
+            display: inZoom ? 'block' : 'none'
+          }}
+          onMouseUp={::this.resetZoom}
         />
       </div>
     )

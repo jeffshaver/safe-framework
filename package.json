@@ -44,7 +44,7 @@
     "rimraf": "^2.5.4"
   },
   "dependencies": {
-    "Chart.Zoom.js": "^0.2.0",
+    "Chart.Zoom.drag.js": "^0.2.0",
     "ag-grid": "^5.2.0",
     "ag-grid-react": "^5.2.0",
     "change-case": "^3.0.0",

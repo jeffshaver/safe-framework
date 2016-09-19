@@ -9,7 +9,8 @@ const chartConfig = {
       scaleLabel: {
         display: false,
         labelString: ''
-      }
+      },
+      type: 'time'
     }],
     yAxes: [{
       scaleLabel: {
