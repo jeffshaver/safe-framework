@@ -87,6 +87,12 @@ export class DataTable extends Component {
     this.handleResize()
   }
 
+  redraw = () => {
+    this._container.style.display = 'none'
+    this._container.offsetHeight
+    this._container.style.display = 'block'
+  }
+
   handleResize () {
     if (!this.props.autoResize) {
       return
@@ -350,7 +356,10 @@ export class DataTable extends Component {
     }
 
     return (
-      <div className='ag-material'>
+      <div
+        className='ag-material'
+        ref={(ref) => (this._container = ref)}
+      >
         <TextField
           floatingLabelText='Filter'
           name='quickFilter'

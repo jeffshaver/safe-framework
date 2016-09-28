@@ -50,7 +50,6 @@ export const SelectField = (props) => {
       disabled={isFetching}
       errorText={errorText}
       floatingLabelText={text}
-      items={items}
       labelStyle={style.label}
       style={selectStyle}
       value={value}

@@ -122,7 +122,7 @@ export default (ChartElement) => class ChartComponent extends Component {
       inZoom !== nextInZoom
   }
 
-  resize = () => {
+  redraw = () => {
     const chart = this.getChart()
 
     if (!chart.resize) return
