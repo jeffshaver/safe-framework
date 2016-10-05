@@ -272,6 +272,12 @@ export class Map extends Component {
           `${dataItem[destinationPrefix + labelTitle]}`
         ])
       }, [])
+      const validSourceLatLong = this.isValidLatLong(dataItem[sourceLat], dataItem[sourceLong])
+      const validDestinationLatLong = this.isValidLatLong(dataItem[destinationLat], dataItem[destinationLong])
+      
+      if (!validSourceLatLong || !validDestinationLatLong) {
+        return null
+      }
 
       return this.createLine({
         labels,
@@ -286,8 +292,8 @@ export class Map extends Component {
       const labels = labelFields.map((labelField) => (
         dataItem[labelField]
       ))
-
-      if (typeof dataItem[latField] === 'string') {
+      
+      if (!this.isValidLatLong(dataItem[latField], dataItem[longField])) {
         return null
       }
 
@@ -297,6 +303,12 @@ export class Map extends Component {
         color
       }, index)
     }
+  }
+  
+  isValidLatLong (latitude, longitude) {
+    return latitude && longitude &&
+        typeof latitude !== 'string' &&
+        typeof longitude !== 'string'
   }
 
   parseDataOptions (dataOptions) {
@@ -388,7 +400,7 @@ export class Map extends Component {
         {this.createBaseLayer()}
         {layers.length > 0
         ? <LayersControl position={zoomControlPosition}>
-            {this.createLayers()}
+            {layers}
           </LayersControl>
         : null}
       </LeafletMap>
