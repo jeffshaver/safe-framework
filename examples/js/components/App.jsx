@@ -29,6 +29,7 @@ const visualizations = [
 ]
 
 const components = [
+  'CircularProgress',
   'FileInput'
 ]
 

@@ -57,7 +57,7 @@
     "leaflet-fullscreen": "^1.0.1",
     "leaflet.markercluster": "^0.5.0",
     "lodash.debounce": "^4.0.8",
-    "material-ui": "^0.15.4",
+    "material-ui": "^0.16.0",
     "radium": "^0.18.1",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",

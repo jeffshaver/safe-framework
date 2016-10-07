@@ -1,14 +1,29 @@
 import MaterialCircularProgress from 'material-ui/CircularProgress'
 import React, {PropTypes} from 'react'
 
-export const CircularProgress = ({size, spanStyle, style, text}) => (
-  <span style={spanStyle}>
-    <MaterialCircularProgress
-      size={size}
-      style={style}
-    /> {text}
-  </span>
-)
+const baseSize = 59.5
+const baseThickness = 3.5
+
+export const CircularProgress = ({size, spanStyle, style, text}) => {
+  const realMargin = (size < 0.71)
+    ? ((50 - 59.5 * size) / 2)
+    : (5.25 * size)
+  const realSize = size * baseSize
+  const realThickness = size * baseThickness
+
+  return (
+    <span style={spanStyle}>
+      <MaterialCircularProgress
+        size={realSize}
+        style={{
+          margin: realMargin,
+          ...style
+        }}
+        thickness={realThickness}
+      /> {text}
+    </span>
+  )
+}
 
 CircularProgress.propTypes = {
   size: PropTypes.number,

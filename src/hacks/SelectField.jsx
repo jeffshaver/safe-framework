@@ -14,8 +14,7 @@ const style = {
     cursor: 'default'
   },
   progress: {
-    left: '-15px',
-    top: '-15px'
+    top: '35px'
   }
 }
 const progress = (

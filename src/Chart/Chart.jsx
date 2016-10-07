@@ -43,7 +43,10 @@ export default (ChartElement) => class ChartComponent extends Component {
   static propTypes = {
     backgroundColorAlpha: PropTypes.number,
     colorPalette: PropTypes.func,
-    colorScale: PropTypes.string,
+    colorScale: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.string
+    ]),
     containerStyle: PropTypes.object,
     data: PropTypes.object.isRequired,
     drilldown: PropTypes.bool,
@@ -197,7 +200,7 @@ export default (ChartElement) => class ChartComponent extends Component {
 
   resetZoom () {
     this.getChart().resetZoom()
-    
+
     this.setState({
       inZoom: false
     })

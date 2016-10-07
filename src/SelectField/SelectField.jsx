@@ -13,8 +13,7 @@ const style = {
     cursor: 'default'
   },
   progress: {
-    left: '-15px',
-    top: '-15px'
+    top: '35px'
   }
 }
 const progress = (
@@ -49,7 +48,6 @@ export const SelectField = (props) => {
       disabled={disabled || isFetching}
       errorText={errorText}
       floatingLabelText={text}
-      items={items}
       labelStyle={style.label}
       style={selectStyle}
       value={value}

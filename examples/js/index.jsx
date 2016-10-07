@@ -3,6 +3,7 @@ import App from './components/App'
 import Area from './components/Area'
 import Bar from './components/Bar'
 import BasicTable from './components/BasicTable'
+import CircularProgress from './components/CircularProgress'
 import Column from './components/Column'
 import FileInput from './components/FileInput'
 import injectTapEventPlugin from 'react-tap-event-plugin'
@@ -34,6 +35,10 @@ ReactDOM.render((
       <Route
         component={BasicTable}
         path='components/basic-table'
+      />
+      <Route
+        component={CircularProgress}
+        path='components/circular-progress'
       />
       <Route
         component={Column}
